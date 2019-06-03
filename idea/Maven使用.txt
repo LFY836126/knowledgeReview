@@ -1,0 +1,54 @@
+不是完全对的，只是个大概，有不对的再补充！
+
+首先创建Maven项目：quickstart：
+
+然后GAV坐标
+G：组织名：一般命名为com.qf.service
+A：项目名：可以命名为java1811
+V：版本，一般设置为1.0
+
+然后利用系统默认的setting.xml，关联仓库，也就是D:\Program Files\repository
+
+然后最后直接自动倒包（setting-BuildTools-Maven-Importing-勾选Import Maven...）就行，表现为有java文件，有junit几点几版本的包，颜色也是特殊颜色的！
+以后做项目，公司做开发，不再需要拷贝jar包，只需要拷贝坐标就可以
+通过组织找到项目，定位版本，唯一定位一个jar包，就是将pom.xml（在D:\pom.xml）模板中需要什么拷什么过来，就完成了倒包。
+
+在创建webapp时候有点特殊就是：
+首先没有java这个文件需要自己创建java，main目录右键Directory，然后java就完事，然后倒包，目录颜色什么的也就会改变为正常了
+然后关联web容器：
+点击有右上角的Add Configuration...  然后点击Template下的Tomcat Server下的Local
+然后再Application server中找到apache-tomcat的位置（D:\apache-tomcat-8.5.35）,然后看端口号是不是8080，然后确定，
+然后找到Deployment +找到.war选中，然后确定，就可以直接运行在webapp目录下的index.jsp
+
+我默认的用的setting.xml是在C:\Users\83612\.m2\,指向的仓库是D:\Program Files\repository
+然后我把apache-tomcat放在了D盘根目录下，这个会在建立webapp时候用到
+
+我配置的:
+环境变量maven_home：C:\Program Files\JetBrains\IntelliJ IDEA 2018.2.3\plugins\maven\lib\maven3
+path：C:\Program Files\JetBrains\IntelliJ IDEA 2018.2.3\plugins\maven\lib\maven3\bin
+
+创建父项目子项目：
+java1801：bookdao和bookview（webapp）
+先选择maven下的  尾是site-simple的项目，然后正常倒包就行，然后在java1801右键新建module，然后就也都正常创建就行
+新创建的目录必须看颜色（绿色表示测试），可以通过右键bookview找到maven然后import就可以了，或者直接在java上右键Mark Directory as就出来了
+
+模块之间调用
+java：
+1.bookdao
+2.bookservice
+3.bookview（web文件）
+2调用1中的方法，将1install打包，让本地仓库中也存在1,
+然后在2的pom.xml文件中添加1的GAV坐标，就像这样：
+        <dependency>
+            <groupId>com.qf.service</groupId>
+            <artifactId>bookdao</artifactId>
+            <version>1.0</version>
+        </dependency>
+然后就能在屏幕右侧看见bookserveice下的Dependencies目录中看见依赖关系
+最后注意两点：
+一个是右上角点开的modules--language level，要变为8版本的，
+还有就是setting编译那，都要换为1.8，点击Apply之后点OK
+核心部分就是依赖配置，也就是pom.xml部分
+
+
+创建项目第二种方法，先创建一个空项目，然后在file中不断创建module，或者普通项目，或者webapp项目，然后依赖管理，然后就没有然后了

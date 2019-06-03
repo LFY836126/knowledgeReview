@@ -1,0 +1,954 @@
+CSS：cascading style sheet 层叠样式表
+钻石 晶核 色阶（晶核杂质越少色阶越高）d(最贵) e f ......z
+css速查文档：http://www.css88.com/book/css/
+
+##引入css
+1. 行间样式（css代码可以放在style中）
+2. 页面级css
+3. 外部css文件：当页面中出现这行时，会同时开启一个新线程去下载css文件，然后同时继续下载html
+```
+例：
+ <link rel="stylesheet" href="">
+```
+4. css中引入css文件：@import url('   .css');
+
+##选择器
+1. id选择器：一个元素只能有一个id值，
+2. class选择器：一个class值对应多个元素，一个元素拥有好多class
+```
+例1：
+<div class="demo demo1"></div>
+```
+3. 标签选择器：一选就是全部的，不管在哪
+4. 通配符选择器*{} （任意的，所有的） 
+```
+例：
+div{
+    height:100px;
+    background-color:red!important;
+}
+```
+5. 属性选择器：选出有某个属性名的标签
+```
+例1：
+[id="only"]{
+    height:100px;
+    background-color:red;
+}
+```
+6. !important
+```
+例1：
+div{
+    height:100px;
+    background-color:red!important;
+}
+```
+7. 优先级：!important > 行间样式 > id > class|属性 >标签 >通配符选择器
+8. 父子选择器（派生选择器）：成一个父子结构,而且，只在意父子选择器，不在意非要写成什么标签什么的。浏览器底层真正的遍历父子选择器的顺序是自右向左。
+```
+例1：
+.wrapper span {
+    background-color: red;
+}
+```
+9. 直接子元素选择器：父元素下直接子元素（也就是第一层子元素）
+```
+例1：
+div > span {
+    background-color: red;
+}
+```
+10. 并列选择器：用多个限制条件选中一个元素，并且不加空格写在一起。
+```
+例1：
+CSS：
+div.demo{
+    background-color:red;
+}
+```
+11. 属性选择器：[id="only"]
+```
+例2：为了选出最里面的em
+CSS
+#only{
+
+}
+.box{
+
+}
+.content.em{
+
+}
+.wrapper > .content > .box{
+
+}
+div.wrapper > div[class="content"] > div#only.box{
+
+}
+em.box{
+
+}
+HTML部分：
+<div class="wrapper">
+    <div class="content">
+        <em class="box" id="only">1</em>
+    </div>
+</div>
+```
+12. 分组选择器：会将选择器分组，分开的那些组会共用一块代码块
+```
+例1：
+em,/*这个选择器不固定，可以写em>span 等都行*/
+strong,
+span{
+    background-color:red;
+}
+```
+13. 伪类选择器：
+:hover    当鼠标移入到他的范围内，就会实现一些css样式
+```
+例1：当鼠标移入到a标签内容中，背景就会变为红色，还有hover前面是什么都可以，不只是a，啥都行
+a:hover{background-color:red;}
+```
+```
+例2：
+a:hover{
+	text-decoration:none;
+	background-color:#f40;
+	border-radius:10px;
+	font-size:16px;
+	font-weight:bold;
+	font-family:arial;
+	color:#fff;
+}
+```
+##css权重
+1. 只要写在同一行的选择器，把他们的权重值相加就好了，谁的权重值大就选哪个。权重一样的话，后面的代码要是 值一样的 会覆盖前面的。
+```
+!important          -->Infinity（Infinity+1就大于Infinity）
+行间样式             -->1000
+id                  -->100
+class|属性|伪类      -->10
+标签|伪元素           -->1
+通配符选择器          -->0
+这个1000和10等数 是256进制数
+```
+
+    ```
+    例1：显示粉色背景，因为权重大
+    <div class="classDiv" id="idDiv">
+        <p class="classP" id="idP">
+            1
+        </p>
+    </div>
+
+    (100   1）           -->权重101
+    #idDiv p{
+        background-color:red;
+    }
+
+    (1   10    100）     -->权重111
+    div .classP#idP{
+        background-color:pink;
+    }
+    ```
+
+##其他属性
+1. font-size:16px;默认的浏览器字体大小是16px,但是互联网一些页面的字体大小一般是12px或者14px的,设置字体大小设置的是高
+2. font-weight有四个属性值：lighter   normal bold bolder （从左向右依次变粗）或100-900px都行（依次变粗）
+strong中本身就带css样式：font-weight:bold;
+3. font-style:italic
+em中本身就带css样式：font-style:italic;
+4. font-family:arial  互联网通用字体 除了arial还有很多字体(像cursive：楷体)
+5. 设置字体颜色：color
+```
+三种：
+1. 土鳖式（纯英文单词，开发时严禁这样，自己测试时可以用）
+2. 颜色代码：
+   光学三原色：    r              g              b
+                00-ff          00-ff          00-ff
+    每两位代码代表一个颜色，而且都是16进制数
+    也就是
+    第一个00-ff代表红色饱和程度
+    第二个00-ff代表绿色饱和程度
+    第三个00-ff代表蓝色饱和程度
+    当颜色代码每两位都是重复的，那就可以简写为三位
+        像#ff4400 -->#f40(淘宝红)
+        像#ff4432  不能简写
+3. 颜色函数rgb(, ,)
+    像rgb(255,255,255) -->  白色
+```
+6. border:
+表示盒子边框的问题.border每一个边都可以单独设置，每一个边还可以拆解开
+border:border-width,border-style,border-color
+border-width:
+border-style:solid（实体）dotted（点状虚线）dashed（条状虚线）
+border-color:
+```
+例1：border:1px solid red;
+例2：画三角形利用border。因为border边框和边框交接的地方是个斜线，当盒子没有高度，没有宽度的话，这些斜线就会交接在一起，形成四个三角形。
+div{
+    width:0;
+    height:0px;
+    border:50px solid pink;
+    border-left-color:transparent;
+    border-right-color:transparent;
+    border-top-color:transparent;
+}
+```
+7. text-align:center | right | left
+8. CSS注释只有一种：/**/
+9. 文本的行高line-height:
+```
+例1:单行文本水平垂直居中：text-align:center line-height:height
+```
+9. 空格在每一个操作系统或者输入法的全角和半角上都不一样的所以利用text-indent来实现
+```
+例1：代表 我空了两个相对于文字（2em就是相对于文字大小）的大小的空格
+text-indent:2em;
+em:1* fontsize（16px）
+分辨率px：每英寸所能容纳的垂直像素点数，是一种相对单位
+```
+```
+例2：
+像line-height:2em就是相对文字大小，1.2倍行高
+```
+10. text-decoration:none | line-through | underline | overline
+11. cursor:pointer  | help |  e-resize | w-resize | copy | move
+```
+例1：当光标移动 到span标签的内容上就会出现小手了
+<span>www.baidu.com</span>
+span{
+    text-decoration:underline;
+    color:rgb(0,0,238);
+    cursor:pointer;
+}
+```
+##元素
+1. 行级元素（inline）：
+feature：
+内容决定元素所占位置
+不可以通过CSS改变宽高
+span  a em del strong
+2. 块级元素（block）
+feature：
+独占一行
+可以通过CSS改变宽高
+div p ul li ol form address
+3. 行级块元素（inline-block）
+feature
+内容决定大小
+可以改变宽高
+img（img元素不用都设置宽个高，只设置宽或者高，另一个就会等比例缩放）
+4. 凡是带有inline（inline-block也算）的元素都有文字特性，有文字特性就应该被分割
+例如四张图片放在一行内两两之间就会有空隙（4px），那就是文字特性，要是将img标签都挨着写那就不会出现这种问题了
+```
+例如：这样就会有空格
+<img src="">
+<img src="">
+<img src="">
+但是这样就不会有空格了
+<img src=""><img src=""><img src="">
+```
+5. 编程手法：先定义功能，后选配
+一般的编程手法是先html后css但是另一种编程手法就是先css后html，这样的手法就是先定义功能后选配功能
+```
+例如：
+先写css
+.pink{
+    background-color:pink;
+}
+.red{
+    background-color:red;
+}
+.aqua{
+    background-color:aqua;
+}
+.size1{
+    height:100px;
+    width:100px;
+}
+.size2{
+    height:200px;
+    width:200px;
+}
+.size3{
+    height:300px;
+    width:300px;
+}
+再由div选配功能：
+html部分：
+<div class="pink size1"></div>
+<div class="red size2"></div>
+<div class="aqua size3"></div>
+```
+6. 标签选择器最重要的用途就是初始化这些元素，刚刚出生时候默认样式变成自己设定好的
+例如通配符选择器：*{} 就可以初始化所有标签，然后还影响后续的更改
+```
+例1：没有padding和margin了
+<ul>
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+</ul>
+<h1>4</h1>
+*{
+    margin:0;
+    padding:0;
+}
+```
+```
+例2:更改em默认样式
+em{
+	font-style:normal;
+	color:#f40;
+}
+```
+##盒子模型：
+1. 盒子的三大部分：盒子的组成部分：
+盒子壁：border
+内边距：padding
+盒子内容：width height
+2. padding和margin都可以设置四个之代表上右下左，也可以设置三个值，两个值，一个值，或者padding-top，padding-left等等
+3. border也可以：border-width也可以像padding或者margin什么的设置四个值，或者单独设置等等都行
+4. 盒模型的实际宽高不算margin，只算padding和border和width和height
+5. body的margin天生有个8像素（8px），所以初始化*{}也会将body的8像素也给去了
+```
+例1：
+<div>
+    小仙女小仙女小仙女小仙女小仙女小仙女小仙女小仙女
+</div>
+div{
+    height:100px;
+    width:100px;
+    background-color:red;
+    padding:50px;
+    margin:50px;
+    border:10px solid blueviolet;
+}
+```
+```
+例2：若让里面的盒子在外面盒子居中显示，那么就让里面宽高和外面一样大，再通过大盒子的padding来调节距离。
+<div class="wrapper">
+    <div class="content"></div>
+</div>
+.wrapper{
+    height:100px;
+    width:100px;
+    background-color:red;
+    padding:50px;
+    border:10px solid aqua;
+}
+.content{
+    height:100px;
+    width:100px;
+    background-color:blue;
+}
+```
+```
+例3:远视图：中间涉及盒模型计算的问题就是子元素在父元素居中，那么子元素大小等于父元素内容区
+<div class="wrapper">
+    <div class="box">
+        <div class="content1">
+            <div class="content2"></div>
+        </div>
+    </div>
+</div>
+.content2{
+    height:10px;
+    width:10px;
+    background-color:#fff;
+}
+.content1{
+    height:10px;
+    width:10px;
+    background-color:#0f0;
+    padding:10px;
+}
+.box{
+    height:30px;
+    width:30px;
+    padding:10px;
+    background-color:#fff;
+}
+.wrapper{
+    height:50px;
+    width:50px;
+    padding:10px;
+    background-color:#0f0;
+}
+```
+```
+例4：将两个span分开一段距离
+<span class="demo1">123</span>
+<span class="demo2">345</span>
+.demo1{
+    margin-right:20px;
+}
+.demo2{
+    margin-left:30px;
+}
+```
+##定位（层模型absolute和relative）：positon
+1. 绝对定位：absolute配合left，top，right，bottom一起使用，但是一样左上或者右上或者左下，或者右下，一般都不是上下，或者左右，但是一般很少用bottom因为网页浏览器没有底
+特点：
+（1）脱离原来位置进行定位，当一个元素成为absolute定位的时候，它就脱离了原来的层跑到了上一个层面上去了，所以在原来的层面上，它的那一块真空了，
+真空了之后别人就可以使用那块空间了，每一个absolute元素都是一个新的层。
+（2）absolute是相对于最近的有定位的父级进行定位，如果没有这样父级，那么就相对于文档定位
+```
+例1：上边线距离浏览器上边框100px，下边线距离浏览器下边框100px（或者说坐标为100,100，因为浏览器y轴坐标是相反的）
+position:absolute;
+left:100px;
+top:100px;
+```
+```
+例2：蓝色的部分会覆盖红色的部分
+<div class="demo"></div>
+<div class="box"></div>
+.demo{
+    position:absolute;
+    width:100px;
+    height:100px;
+    background-color:red;
+    opacity:0.5;
+}
+.box{
+    width:150px;
+    height:150px;
+    background-color:blue;
+}
+```
+```
+例3：相对于content定位，因为content有position:relative定位
+<div class="wrapper">
+    <div class="content">
+        <div class="box"></div>
+    </div>
+</div>
+*{
+    margin:0;
+    padding:0;
+}
+.wrapper{
+    margin-left:100px;
+    width:200px;
+    height:200px;
+    background-color:red;
+}
+.content{
+    position:relative;
+    margin-left:100px;
+    width:100px;
+    height:100px;
+    background-color:blue;
+}
+.box{
+    position:absolute;
+    left:50px;
+    width:50px;
+    height:50px;
+    background-color:pink;
+}
+```
+
+2.相对定位：relative（和上面一样可以和left和top什么的一起使用）
+    特点：
+    （1）保留原来位置进行定位
+    （2）相对于自己原来的位置进行定位
+```
+例1：
+<div class="demo"></div>
+<div class="box"></div>
+.demo{
+    position:relative;
+    left:100px;
+    top:100px;
+    width:100px;
+    height:100px;
+    background-color:red;
+    opacity:0.5;
+}
+.box{
+    width:150px;
+    height:150px;
+    background-color:blue;
+}
+```
+3.fixed：让元素固定在页面
+```
+例1：
+<div>图片图片</div>
+br*100
+div{
+    width:100px;
+    height:100px;
+    background-color:red;
+    position:fixed;
+}
+```
+```
+例2：实现页面居中，不管放大还是缩小都是居中，利用left和top 50%还有就是自身margin-left和top为-1/2自己的宽高
+<div>图片图片</div>
+div{
+    position:absolute;
+    left:50%;
+    top:50%;
+    width:100px;
+    height:100px;
+    background-color:red;
+    margin-left:-50px;
+    margin-top:-50px;
+}
+```
+4.一般用法：用relative做参照物，用absolute进行定位，这样可以减少对后续元素的破坏
+
+##练习题：五环
+1.z-index:1 就是以页面为xy轴，z轴向自己延伸，z-index越大，位置越靠前
+2.圆：border-radius:50%
+
+##两栏布局：
+（三栏布局注意）
+```
+例1：粉色的部分在右边，剩下的部分在左边，相互不能压到，还有注意一点就是必须是先粉色，后
+红色的写
+要是显示<div class="right"></div>在前，那么粉色是不会在第一行的，因为虽说粉色是absolute，但是出生的位置就是第二行，那么粉色区域也只能在第二行
+<div class="left"></div>
+<div class="right"></div>
+*{
+    margin:0
+    padding:0;
+}
+.left{
+    position:absolute;
+    height:100px;
+    width:100px;
+    background-color:pink;
+    right:0;
+    opacity:0.5;
+}
+.right{
+    margin-right:100px;
+    height:100px;
+    background-color:red;
+}
+```
+##margin塌陷：
+
+自己相对于父级就好像它的父级没有了一样，垂直方向的margin，父子是会结合到一起
+
+解决方法1（但是从来不用，但是能解决问题）:在父元素上加上border-top:1px solid red;
+解决方法2：bfc（block formal context）（块级结构化上下文）
+
+正常每个html标签都可以看作是一个盒子，有特定的渲染规则，但是要是在父元素加上bfc的话，那么就会按照另一套规则去渲染，解决了margin塌陷的问题
+
+触发一个盒子的bfc：针对需求，选择方法
+（1）overflow：溢出盒子部分隐藏
+（2）display:inline-block、table-cell、table-caption;
+（3）float:left/right
+（4）position:absolute/fixed;
+```
+例1：利用overflow改变父级渲染规则，让父级变为bfc，然后子级父级产生的margin塌陷问题就解决了
+<div class="wrapper">
+    <div class="content"></div>
+</div>
+*{
+    margin:0;
+    padding:0;
+}
+.wrapper{
+    margin-left:100px;
+    margin-top:100px;
+    width:100px;
+    height:100px;
+    background-color:red;
+    overflow:hidden;                  /*让父级变为了bfc*/
+}
+.content{
+    width:50px;
+    height:50px;
+    margin-left:50px;
+    margin-top:50px;
+    background-color:pink;
+}
+```
+补充：
+margin合并是指块级元素的上外边距与下外边距有时会合并为单个外边距，有两点需要理解。 
+1. 在块级元素中，不包括浮动和绝对定位元素 
+2. 只发生在和当前文档流方向的相垂直的方向上
+
+##margin合并（我们采用的方法是不解决）
+1. 正常左右区域不能共用
+```
+例1：两个span之间是200px
+<span class="box1">123</span>
+<span class="box2">324</span>	
+.box1{
+    background-color:red;
+    margin-right:100px;
+}
+.box2{
+    background-color:pink;
+    margin-left:100px;
+}
+```
+2. margin合并
+```
+例1：产生margin合并，解决方法之一就是，将其中一个或者两个放进一个大div中，大的div设置overflow:hidden;
+但是这种方法一般不用，因为绝对不能更改结构（html）
+<div class="demo1">1</div>
+/*将下面这个div放进一个div中，然后大的div设置overflow:hidden*/
+<div class="demo2">2</div>
+.box1{
+    background-color:red;
+    margin-right:100px;
+}
+.box2{
+    background-color:pink;
+    margin-left:100px;
+}
+.demo1{
+    background-color:red;
+    margin-bottom:100px;
+}
+.demo2{
+    background-color:pink;
+    margin-top:100px;
+}
+```
+##float模型：float:left/right;
+1. 特点：
+能使元素站队，不管原来是什么样的陈列方式，block也好，inline也好，
+而且每个元素不仅可以浮动站队，而且在浮动的基础上，还可以加什么margin-left，margintop啥的都行
+还有这些元素站队的边界就是父级的边界，不够了就往下站
+```
+例1：像站队一样，从右往左站
+<div class="wrapper">
+    <div class="content">1</div>
+    <div class="content">2</div>
+    <div class="content">3</div>
+</div>
+*{
+    margin:0;
+    padding:0;
+}
+.wrapper{
+    width:330px;
+    height:330px;
+    border:1px solid black;
+}
+.content{
+    float:right;
+    margin-left:10px;
+    color:#fff;
+    background-color:black;
+    width:100px;
+    height:100px;
+}
+```
+2. 探究单独的float元素
+float元素产生了浮动流，所有产生了浮动流的元素，块级元素看不到他们
+产生了bfc的元素和文本类（凡是带有inline属性的）属性的元素以及文本都能看到浮动元素，inline-block的也看得见
+或者说只有块级元素看不见浮动元素
+
+##当子级元素是浮动元素时，父级元素div怎么才能包住子级元素
+
+只有一种最佳方法就是例2，以后也只能那么写，用伪元素。
+
+解决：利用clear，它的作用就是清除浮动流，值可以为left，right，both等，
+但是clear:both生效的条件是加这个属性的元素必须是块级元素才可以，就是能清除浮动的必须是块级元素。
+
+具体解决方法1：在p中加个clear:both就清除了p左右的浮动流，p的border不需要设置多大,什么1px,10px等，只要p逻辑上在这里了border设置为0都行，就能将div父元素撑开，包裹住浮动的子元素,但是例1这种结解决方法不好，因为还需要新添一个块级元素p，填上clear:both属性才可以
+```
+<div class="wrapper">
+    <div class="content">1</div>
+    <div class="content">2</div>
+    <div class="content">3</div>
+</div>
+<p></p>
+*{
+    margin:0;
+    padding:0;
+}
+.wrapper{
+    border:1px solid black;
+}
+.content{
+    float:left;
+    color:#fff;
+    background-color:black;
+    width:100px;
+    height:100px;
+}
+p{
+    border-top:10px solid pink;
+    clear:both;
+}
+```
+
+具体解决方法2：利用父级元素的伪元素
+```
+<div class="wrapper">
+    <div class="content">1</div>
+    <div class="content">2</div>
+    <div class="content">3</div>
+</div>
+*{
+    margin:0;
+    padding:0;
+}
+
+.wrapper{
+    border:1px solid black;
+}
+.wrapper::after{
+    content:"";
+    display:block;
+    clear:both;
+}
+.content{
+    float:left;
+    color:#fff;
+    background-color:black;
+    width:100px;
+    height:100px;
+}
+```
+
+具体解决方法3：
+```
+当然也有很多方法可以让父元素包住浮动的子元素，让父级div触发dfc
+或者设置为文本类元素等，都可以，不过这样的实现方法出现的问题就是父级元素变小了
+只有包住子元素的大小,原因是什么呢？
+
+凡是设置了position:absolute 和float:left/right;这两个。会打系统内部把元素转换为inline-block，
+所以要是变行几块元素的话，宽高就由内容撑起了，所以父级元素就那么大
+```
+
+##伪元素
+存在于任意一个元素里面，任意一个元素里面有两个最特殊的伪元素，一个叫before和after，伪元素和正常的元素差不多可以一起来使用，但是它没有正常的元素结构
+
+一个标签从单身开始，逻辑最前面的位置和逻辑最后面的位置就已经有了两个伪元素了，就是着元素存在，但是没有写在html中。可以正常操作，但是没有html结构
+
+注意一点就是伪元素天生就存在，只不过我们只不过通过css把它选中并且进行修改。不写content，它也存在，而且我们是写的是css选择器，是选中，不是创造
+
+还有content只能用在伪元素中，即使没有内容也要写上等于""，因为这样伪元素才会生效
+伪元素可以当作元素一样，可以进行浮动啊，定位啊什么的，还有它天生是行级元素
+```
+例1：
+<span>
+    我是
+</span>
+*{
+    margin:0;
+    padding:0;
+}
+span::before{
+    display:inline-block;
+    height:100px;
+    width:100px;
+    background-color:red;
+    content:"小仙女";
+}
+span::after{
+    content:"是滴 ";
+}
+```
+##实现图片环绕文字（报纸布局）
+```
+例1：只要给图片添加一个float属性就行
+<img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000
+&sec=1537714631082&di=f4fa57797691ebcd76616ae63d11299e&imgtype=0&s
+rc=http%3A%2F%2Fpic.58pic.com%2F58pic%2F13%2F05%2F17%2F16M58PIC5Gw_1024.jpg" alt="">
+全球最大的中文搜索引擎、致力于让网民更便捷地获取信息，找到所求。百度超过千亿的中文网页数据库，可以瞬间找到相关的搜索结果。
+*{
+    margin:0;
+    padding:0;
+}
+img{
+    float:left;
+    width:200px;
+    height:200px;
+}
+```
+##导航栏
+```
+ul class="nav">
+    <li class="list-item">
+        <a href="#">天猫</a>
+    </li>
+    <li class="list-item">
+        <a href="#">聚划算</a>
+    </li>
+    <li class="list-item">
+        <a href="#">天猫超市</a>
+    </li>
+</ul>
+*{
+    margin:0;
+    padding:0;
+    color:#424242;
+    font-family:arial;
+}
+a{
+    text-decoration:none;
+}
+.nav{
+    list-style:none;
+}
+.nav::after{
+    content:"";
+    display:block;
+    clear:both;
+}
+.nav .list-item{
+    float:left;
+    margin:0 10px;
+    height:30px;
+    text-align:center;
+    line-height:30px;
+}
+.nav .list-item a{
+    padding:0 5px;
+    color:#f40;
+    font-weight:bold;
+    display:inline-block;
+    height:30px;
+    border-radius:15%;
+}
+.nav .list-item a:hover{
+    background-color:#f40;
+    color:#fff;
+}
+```
+##文字溢出处理：溢出容器，要打点展示
+1. 单行文本
+```
+    三件套：
+        white-space:nowrap;   /*让文本失去换行功能*/
+        oerflow:hidden;         /* 溢出部分不展示，隐藏*/
+        text-overflow:ellipsis; /*溢出部分用 "..."  展示*/
+```
+2. 多行文本
+(1)
+```
+PC端是自己算的，但是移动端可以实现
+但是多行文本一般都是截断不做打点，想让显示几行，就计算好了，高度等于行高的多少倍，然后多出部分截断。
+    height:40px;
+    line-height:20px;
+    overflow:hidden;
+```
+(2)溢出打点
+```
+overflow: hidden;
+text-overflow: ellipsis;
+display: -webkit-box;
+-webkit-line-clamp: 3;
+-webkit-box-orient: vertical;
+```
+##背景图片处理
+1. 背景图片：background-image:url();           /*url中放地址*/
+2. 背景图 片大小：background-size:100px 100px;   /*宽高为100px*/
+3. 重复图片处理：background-repeat:no-repeat |  repeat-x  |  repear-y  | repeat; /*可以选择四个值*/
+4. 图片位置：background-position:100px 100px; 或者background-position:left center; left  bottom right center top 随便填
+```
+可以填三种
+（1）数字像素：100px 100px（宽高）
+（2）位置：center center等xy轴随便组合
+（3）百分数：50% 50% 但是这50%有点特殊，就是图片居中，不是左顶点居中
+```
+
+##图片代替文字
+1. 大型网站实现一个功能：一旦浏览器采取了默认的加载策略的话，我们还得让这个网页好使，就是当你网站识别网速不高的时候，我们这个网站是要屏蔽css和javascript的
+2. 解决方法：
+```
+（1）设置text-indent缩进值比容器大，就是让文字出去，然后再设置white-space，让溢出部分在一行上，然后溢出部分隐藏
+    text-indent:200px;
+    white-space:nowrap;
+    overflow:hidden;
+```
+```
+（2）让内容区为0，然后利用padding-top值为90px将a标签撑开，然后将padding的部分放上图片，这样文字就会被挤到下面，然后利用overflow将文字隐藏
+    height:0;
+    padding-top:90px;
+    overflow:hidden;
+```
+##行级元素只能嵌套行级元素，块级元素可以嵌套任何元素
+特殊：
+```
+p标签就是不能套块级元素，会被块级元素砍成两个p标签
+a标签里不能套a标签
+```
+##补充要点：
+
+1. 居中：淘宝上边栏居中显示：margin:0 auto;  意思就是上下为0，左右自适应。
+div居中两种情况：
+```
+1.页面(在父元素中)居中：
+（1）position.... left50% ....top%50.... margin-left:1/2.....margin-top:1/2....
+（2）position:absolute;  top:0;  right:0;  left:0;  buttom:0;  margin:auto;
+```
+```
+2.左右居中：auto （上下居中不能用margin，不好使）
+   图片居中：background-position:50% 50%
+   文本居中：
+            text-align:center;
+            line-height:height;
+```
+2. inline 和 inline-block都叫文本类元素：凡是带有inline属性的元素，它都有文本的特点，所以我们叫它文本类元素
+文本的特点：能被文本分隔符分割
+```
+例1：
+<span>123</span><span>235</span>
+显示结果：123235
+<span>123</span>
+<span>235</span>
+显示结果123 235
+```
+```
+例2：img
+<img src="" alt="">
+<img src="" alt="">
+<img src="" alt="">
+实际显示效果就是中间有空隙，因为img的display是inline-block
+```
+3. 凡是设置了position:absolute 和float:left/right;这两个。会打系统内部把元素转换为inline-block。并且变成浮动元素，会浮在页面上
+4. 对齐
+一行文本中，底对齐不管哪个字体是设置多大，都是底对齐。
+一个图片和一行文字，还是底对齐
+但是，一旦一个行级块元素或者文本类元素里面包含文字了，那外面的文字就会和它里面的文字底对齐，如果里面的文字很大的话，依然会和它里面的文字底对齐。
+```
+例1：
+<span>123</span>呵呵
+span{
+    display:inline-block;
+    width:100px;
+    height:100px;
+    background-color:red;
+    font-size:50px;
+/*    vertical-align:-5px | middle;  可以通过这个属性来调节对齐位置*/ 
+}
+```
+5. 像淘宝最上面的导航栏就是利用一个div包裹两个ul一个向左浮动，一个向右浮动，图标自己截图
+
+6. 当块级元素设置了absolute后，就会变为行级元素，并且类似于浮动在页面上，不影响其他块元素，因为它类似是浮动着的，也就是脱离文档流，
+
+7. 当块级元素设置了float之后，因为设置这个属性对元素没有具体坐标的定位，所以不会覆盖,反正差不多就这么理解吧，实在不懂再看：
+http://www.w3school.com.cn/tiy/t.asp?f=csse_position_absolute
+8. div若是只设置height的话，宽会默认为父元素的宽，若是只设置width的话，不设置height,是不会显示div的
+
+##发现问题：
+
+为什么在正常的p标签，在设置了宽高属性后margin就改变不了它的位置了呢，但是不设置宽高就可以？
+
+为什么在设置了position后，buttom属性不好用
+
+
+
+
+
+
+
+
+
+

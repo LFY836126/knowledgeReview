@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        .comment {
+            font-size: 40px;
+            color: red;
+        }
+
+        .comment li {
+            float: left;
+        }
+
+        ul {
+            list-style: none;
+        }
+    </style>
+</head>
+<body>
+<ul class="comment">
+    <li>☆</li>
+    <li>☆</li>
+    <li>☆</li>
+    <li>☆</li>
+    <li>☆</li>
+</ul>
+<script src="jquery-1.12.4.js"></script>
+<script>
+    $(function(){
+        var wjx_k = "☆";
+        var wjx_s = "★";
+        $(".comment>li").on("mouseenter",function(){
+            $(this).text(wjx_s).prevAll().text(wjx_s).end().nextAll().text(wjx_k);  /*这里这句不能直接和前一句放在一起，因为上一句经过prevAll后内部的1jquery对象已经不是this了，是this前面的两个*/
+        })
+        $(".comment>li").on("click" , function(){
+            $(this).addClass("current").siblings().removeClass("current");
+        })
+        $(".comment").on("mouseleave" , function(){
+            $(this).children().text(wjx_k);
+            $("li.current").text(wjx_s).prevAll().text(wjx_s);
+        })
+    })
+</script>
+</body>
+</html>

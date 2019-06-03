@@ -1,0 +1,1214 @@
+逻辑结构：
+物理结构：
+抽象数据类型：数据和对数据进行的操作，仅与逻辑结构有关
+数据长度：最多保存多少个
+线性表长度:保存了的数据的个数
+typedef:起别名
+结构体指针：传递地址，可以将原数据进行修改，
+结构体变量：不可以将原数据进行修改，反正少用结构体变量，因为即使查看的时候，返回地址也不是对的，所以少用
+
+判断线性表是否为空
+在线性表指定位置插入元素：
+判断元素是否在线性表中
+删除线性表某个位置的元素
+将两个线性表合并
+将线性表倒置
+线性表的遍历
+
+
+*p表示的是p变量指向的别的空间的内容
+其实*p就是建立了一个连接关系
+&p表示的是存放p变量的地址
+node->data 指的是node中存放的内容（具体的值）
+node->next指的是node中地址域 指向的地址（别的，存的不是自己的地址），这个地址指向的是别的内容（具体的值）
+
+单链表的插入和删除，需要用到指针的指针，而不是单纯的指针
+*p = *head指的是指针p和指针head指向同一个地方
+
+指针的指针和指针的区别就是在头指针调用这个方法的时候，头指针的改变希不希望传回主程序中，希望的话，就用指针的指针
+也就是head要发生改变了，那就用指针的指针
+
+单循环链表的节点个数
+
+
+栈：特殊的线性表，只能够在一端进行插入和删除
+分类：顺序栈，链栈
+
+04-顺序存储结构 栈
+
+初始化栈
+判断栈空
+判断栈满
+压栈
+出栈
+查看栈顶元素
+获取栈中元素个数
+
+#include<cstdio>
+#include<cstring>
+#include<iostream>
+#define STACKSIZE 100
+using namespace std;
+
+//栈里存放数据的类型
+typedef int DataType;
+typedef struct SeqStack
+{
+    DataType data[STACKSIZE];
+    int top;
+} SeqStack;
+//初始化一个栈
+void initStack(SeqStack *s)
+{
+    s->top=-1;
+}
+
+//判断栈是否满了
+bool StackFull(SeqStack *s)
+{
+
+    return s->top == STACKSIZE -1;
+}
+
+//判断栈是否为空
+bool StackEmpty(SeqStack *s){
+    return s->top == -1;
+}
+
+//压栈
+string push(SeqStack *s, DataType e)
+{
+
+    if (StackFull(s))
+        return "ERROR";
+    ++s->top;
+    s->data[s->top]=e;
+    return "OK";
+}
+
+//得到栈顶元素
+string getTop(SeqStack *s, DataType *e){
+    if(StackEmpty(s)){
+        return "ERROR";
+    }
+    *e = s->data[s->top];
+    return "OK";
+}
+
+//出栈
+string pop(SeqStack *s, DataType *e){
+    if(StackEmpty(s)){
+        return "ERROR";
+    }
+    *e = s->data[s->top--];
+    return "OK";
+}
+
+//获取栈中的元素个数
+int stackLength(SeqStack *s){
+    return s->top + 1;
+}
+
+int main()
+{
+    SeqStack ss;
+    initStack(&ss);
+    cout << push(&ss, 10);
+    cout << push(&ss, 3);
+    cout << push(&ss, 7);
+    cout << push(&ss, 8) << endl;
+    DataType r;
+    pop(&ss, &r);
+    getTop(&ss, &r);
+    cout << r << endl;
+    int len = stackLength(&ss);
+    cout << len << endl;
+}
+
+
+04-链式存储结构 栈
+
+初始化栈
+判断栈空
+压栈
+出栈
+查看栈顶元素
+获取栈中元素个数
+删除栈中所有元素
+
+#include<cstdio>
+#include<iostream>
+//#define STACKSIZE 100
+using namespace std;
+typedef int DataType;
+typedef struct StackNode
+{
+    DataType data;
+    struct StackNode *next;
+} StackNode;
+
+typedef struct LinkStack
+{
+    StackNode*top;
+    int count;
+} LinkStack;
+
+//初始化栈，一共两个变量，一个top指针，一个栈里元素的长度
+void initStack(LinkStack *s)
+{
+    s->top=NULL;
+    s->count = 0;
+}
+
+//判断栈是否为空
+bool stackEmpty(LinkStack *s)
+{
+    return s->count == 0;
+}
+
+//压栈，在栈里添加一个元素
+string push(LinkStack*s, DataType e){
+    StackNode *n = (StackNode*)malloc(sizeof(StackNode));
+    n->data = e;
+    n->next = s->top;
+    s->top = n;
+    s->count ++;
+    return "OK";
+}
+
+//将栈中所有元素删除
+void clearStack(LinkStack*s){
+    StackNode *p = s->top;
+    while(p){
+        StackNode *q = p;
+        p = p->next;
+        free(q);
+    }
+    s->count = 0;
+    s->top = NULL;
+}
+
+//获取栈顶元素
+string getTop(LinkStack * s,DataType *e){
+    if(stackEmpty(s)){
+        return "ERROR";
+    }
+    *e = s->top ->data;
+    return "OK";
+}
+
+//出栈
+
+//注意：在这里所有的string函数，正常都是Status类型的，因为那个会比较方便，因为它是单独的类型，可以避免返回值和栈中元素重复，但是我暂时不会写
+string pop(LinkStack *s, DataType *e){
+//    这里有个小知识点，就是要是在函数中定义一个静态的变量，在声明后面要加额外一个赋值的操作，例如static a = s->top->data;应该改为static a; a = s->top->data;因为，静态的变量在这个函数在第一次执行时，会将变量进行赋值，第二次调用函数的话，就不会对变量再重新进行赋值了
+    if(stackEmpty(s)){
+        return "ERROR";
+    }
+    *e = s->top->data;
+    StackNode*p = s->top;
+    s->top = p->next;
+    free(p);
+    s->count--;
+    return "OK";
+}
+//获取栈中的元素的个数
+int stackLength(LinkStack *s){
+    return s->count;
+}
+
+int main()
+{
+    LinkStack ls;
+    initStack(&ls);
+    push(&ls , 10);
+    push(&ls , 3);
+    push(&ls , 8);
+
+//    if(stackEmpty(&ls))
+//    {
+//        cout << "empty";
+//    }
+//    else
+//        cout << "not empty";
+
+//    clearStack(&ls);
+    DataType r;
+    getTop(&ls, &r);
+    pop(&ls, &r);
+//    pop(&ls, &r);
+//    pop(&ls, &r);
+//    cout << r;
+//    cout << pop(&ls, &r);
+    int len = stackLength(&ls);
+    cout << len;
+}
+//其实链式的栈在内部的连接是,我们在分析这些操作的时候，最好的方法就是画图，那个图也叫逻辑结构
+//top
+//8|-> 3|-> 10|^(空的意思)
+
+05-顺序存储结构 循环队列
+初始化
+判断队空
+判断队满
+入队
+出队
+得到队首元素
+得到队的长度
+清空队列
+
+//循环队列
+#include<cstdio>
+#include<cstring>
+#include<iostream>
+using namespace std;
+#define QUEUESIZE 100
+typedef int DataType;
+typedef struct SeqQueue
+{
+    DataType data[QUEUESIZE];
+    int front;
+    int rear;
+//    rear指向的是可以进行放入元素的位置
+} SeqQueue;
+
+//判断队列是否为空
+bool queueEmpty(SeqQueue *q)
+{
+    return q->front == q->rear;
+}
+
+//判断队列是否满了·
+bool queueFull(SeqQueue *q)
+{
+    return q->front == (q->rear + 1)%QUEUESIZE;
+}
+
+//初始化一个队列
+void initQueue(SeqQueue *q)
+{
+    q->front = 0;
+    q->rear= 0;
+}
+
+//从队中取出一个元素
+string deQueue(SeqQueue *q, DataType *e)
+{
+    if(queueEmpty(q))
+    {
+        return "ERROR";
+    }
+    *e = q->data[q->front];
+    q->front = (q->front + 1)%QUEUESIZE;//为了形成循环队列
+    return "OK";
+}
+
+//入队
+string enQueue(SeqQueue *q, DataType e)
+{
+    if(queueFull(q))
+    {
+        return "ERROR";
+    }
+    q->data[q->rear] = e; //data的队尾指针 = e
+    q->rear = (q->rear + 1)% QUEUESIZE;
+    return "OK";
+}
+
+//清空队列
+void clearQueue(SeqQueue *q)
+{
+    q->front = 0;
+    q->rear = 0;
+}
+
+//得到队首元素，不出队，只是得到队首元素
+string getHead(SeqQueue *q, DataType *e)
+{
+    if (queueEmpty(q))
+    {
+        return "ERROR";
+    }
+    *e = q->data[q->front];
+    return "OK";
+}
+
+//求队的长度
+int queueLength(SeqQueue *q){
+    return (q->rear - q->front + QUEUESIZE)%QUEUESIZE;
+}
+
+int main()
+{
+    SeqQueue sq;
+    initQueue(&sq);
+    enQueue(&sq, 10);
+    enQueue(&sq, 3);
+    enQueue(&sq, 8);
+//    clearQueue(&sq);
+//    if(queueEmpty(&sq) == true)
+//    {
+//        printf(" queue is empty");
+//    }
+//    else
+//    {
+//        printf(" queue is not empty");
+//    }
+//    if(queueFull(&sq) == true)
+//    {
+//        printf(" queue is full");
+//    }
+//    else
+//    {
+//        printf(" queue is not full");
+//    }
+    DataType r;
+    deQueue(&sq, &r);
+    deQueue(&sq, &r);
+    int len = queueLength(&sq);
+    cout << len;
+}
+
+
+05-链式存储结构 队列
+
+初始化
+入队
+出队
+判断队空
+得到队首元素
+获取队的长度
+清除队中的元素
+
+//链式存储结构-队列
+#include<cstdio>
+#include<cstring>
+#include<iostream>
+using namespace std;
+typedef int DataType;
+//定义队中节点包括data和next
+typedef struct QNode
+{
+    DataType data;
+    struct QNode *next;
+} QNode;
+//定义队包含头指针，尾指针，队长度
+typedef struct LinkQueue
+{
+    QNode *front, *rear;
+    int count;
+} LinkQueue;
+
+//如何判断队是否为空
+bool queueEmpty(LinkQueue *q)
+{
+    return q->front == NULL;
+}
+
+//将队中所有所有元素都删掉
+void clearQueue(LinkQueue *q)
+{
+    QNode *p = q->front;
+    while(p)
+    {
+        QNode *p1 = p;
+        p = p->next;
+        free(p1);
+    }
+    q->front = q->rear = NULL;
+    q->count = 0;
+}
+
+//初始化操作，不仅要新建一个队列，要是想要这个队做别的事那就需要将原本队列的东西都清除掉，所以要进行一个队是否为空的判断
+void initQueue(LinkQueue *q)
+{
+    if (!queueEmpty(q))  //这个if和下面的lq.front = NULL;相配合使用，要不然可能导致崩溃
+    {
+        clearQueue(q);
+    }
+    else
+    {
+        q->front= q->rear = NULL;
+        q->count= 0;
+
+    }
+}
+
+//入队
+void enQueue(LinkQueue *q, DataType e)
+{
+//    就是先申请一个节点p，然后节点的p->next为空，节点的p->data为e，然后将p和原来的队尾连接起来，队尾指针在改指向p
+
+    QNode *p = (QNode*)malloc(sizeof(QNode));
+    p->data = e;
+    p->next = NULL;
+    if(queueEmpty(q))
+    {
+        q->front = q->rear = p;
+    }
+    else
+    {
+        q->rear->next = p;
+        q->rear = p;
+    }
+    q->count ++;
+}
+
+//求队的长度
+int queueLength(LinkQueue *q)
+{
+    return q->count;
+}
+
+//得到队首元素
+string getHead(LinkQueue *q, DataType *e)
+{
+    if(queueEmpty(q))
+    {
+        return "ERROR";
+    }
+    *e = q->front ->data;//其实就是给r赋值
+    return "OK";
+}
+
+//出队
+string deQueue (LinkQueue *q, DataType *e)
+{
+
+    if (queueEmpty(q)){
+        return "ERROR";
+    }
+    QNode *p = q->front;
+    *e = q->front->data;
+    q->front = q->front->next;
+    free(p);
+    q->count--;
+    return "OK";
+}
+int main()
+{
+    LinkQueue lq;
+    lq.front = NULL;
+    initQueue(&lq);
+//    上面的三句话等价于LinkQueue lq = {} <==>q->front =^,q->rear = ^, q->count = 0;
+    enQueue(&lq, 10);
+    enQueue(&lq, 3);
+    enQueue(&lq, 8);
+    DataType r;
+    DataType d;
+    deQueue(&lq, &r);
+    getHead(&lq, &d);
+    int len = queueLength(&lq);
+    cout << d << len;
+}
+
+队的总结：
+队还是一个线性表，这个线性表像栈一样，是个受限的线性表，它和栈的区别在于
+它的限制是往队里添加一个元素的时候在一端，而删除元素的时候在另一端（先进先出）
+栈是删除和插入都在同一端（后进先出）
+队的抽象数据类型包括：入队，出队，清除队中元素等等
+
+06-串
+空串：不含任何字符的串
+空格串：只包含空格的串
+主串：包含子串的串
+子串：主串中任意个数的连续字符组成的有限序列
+串的抽象数据类型：
+初始化（创建串）：
+销毁串：
+清除串：
+测试串是否为空：
+求串的长度：
+拷贝字符串：
+对比字符串：
+获取指定字符串的长度：
+拼接字符串：
+截取子字符串：
+定位字符串：
+插入子串：
+删除子字符串：
+替换字串：
+length:实际存的字符的个数
+maxlength：实际存储的最多的字符的个数
+
+
+#include<cstdio>
+#include<cstring>
+#include<iostream>
+#include<cmath>
+using namespace std;
+typedef struct String
+{
+
+    char* data;
+    int length;
+    int maxLength;
+} String;
+
+//销毁串，就是先把data指向的空间释放，然后将data，length，maxlength都"销毁"
+//S->data 代表已经串已销毁或者串没有初始化
+void destroystring(String* S)
+{
+    if(S->data == NULL)
+    {
+        return ;
+    }
+    free(S->data);
+    S->data = NULL;
+    S->length = 0;
+    S->maxLength = 0;
+}
+
+//清除串，仅让length变为0，也就是让data空间里的字符串都变为无效的
+void clearString(String* S)
+{
+    if(S->data == NULL)
+    {
+        return;
+    }
+    S->length = 0;
+}
+
+//当传入是字符型变量时，求串的长度
+//这个char* 就代表在调用这个函数的时候，可以在主函数中直接length("hello")这样调用
+//这个函数因为传入的是字符型变量，所以要用str[length]来求字符长度，要是传入的是String* 类型的，那么直接S->length变量里就存了字符串的长度
+int length1(char* str)
+{
+    int length = 0;
+    while(str[length] != '\0')
+    {
+        length ++;
+    }
+    return length;
+}
+
+//当传入的是字符串的结构体类型变量时，求字符串长度， 等价于下面的getStringLength，传入变量类型都是字符串结构体类型变量
+int length2(String *s)
+{
+    return s->length;
+}
+
+//初始化串，其实就是初始是初始三个部分，data，length，maxlength，然后把data申请一块空间，填上字符串；
+void initString(String* S, char* str)
+{
+
+    int len = length1(str);
+    S->data = (char*)malloc((len+ 1)* sizeof(char));
+    S->length = len;
+    S->maxLength = len;
+    int i;
+    for(i = 0; i< len; i++)
+    {
+        S->data[i] = str[i];
+    }
+    S->data[i] = '\0';
+}
+
+//判断串是否为空，S->data != NULL是排除串不存在或者串已经被清除了的情况，我判断它是不是空，能不能放东西，首先我得确保它得存在
+//串为空就是，串里面有空间，但是所有字符都不是被保护的。
+bool stringEmpty(String* S)
+{
+    return S->data != NULL && S->length == 0;
+}
+
+//拷贝字符串，就是先判断data空间够不够，不够就重新申请空间，然后再一个一个赋值，结尾放置字符串的结束标志"\0"，然后更改S->length的值
+void copyString(String* S, char* str)
+{
+    if(S->data == NULL)
+    {
+        return;
+    }
+    int length = length1(str);
+    if(length > S->maxLength)
+    {
+        S->data = (char* )realloc(S->data, (length + 1) *sizeof(char));
+        S->maxLength = length;
+    }
+    for(int i = 0; i < length; i++)
+    {
+//        S->data[i]是表示字符串结构体类型变量时的单个字符的表示形式，str[i]就是字符类型变量中单个字符的表示形式
+        S->data[i] = str[i];
+    }
+    S->data[length] = '\0';
+    S->length = length;
+}
+
+//字符串对比,小于返回-1,大于返回1，相等返回0
+//先判断字符串是不是存在，在判断字符串是不是空，然后再进行字符串比较的操作（每个字符，相等则继续判断直到结尾，不想等直接返回值）
+int compareString(String* S1, String* S2)
+{
+
+    if(S1->data == NULL && S2->data == NULL)
+        return 0;
+    if(S1->data == NULL && S2->data != NULL)
+        return -1;
+    if(S1->data != NULL && S2->data == NULL)
+        return 1;
+    if(S1->length == 0)
+        return (S2->length == 0) ? 0 : -1;
+    if(S2->length == 0)
+        return (S1->length == 0) ? 0 : 1;
+    int i=0;
+    while (true)
+    {
+        if(S1->data[i] > S2->data[i])
+            return 1;
+        else if(S1->data[i] < S2->data[i])
+            return -1 ;
+        else if(S1->data[i] == '\0' && S1->data[i] == S2->data[i])
+            return 0;
+        i++;
+    }
+}
+
+//获取字符串长度
+int getStringLength(String* S)
+{
+    return S->length;
+}
+
+//拼接字符串，就是先判断两个字符串是否都有 有效空间，然后分配空间，然后拼接，然后字符串结束标志，然后length改变
+void concatString(String* S1, String* S2)
+{
+    if(S1->data == NULL || S2->data == NULL)
+        return;
+    int len1 = length2(S1); // length1(S1->data)也能求字符串长度
+    int len2 = length2(S2);
+    if(S1->maxLength < len1 + len2)
+    {
+        S1->data = (char*)realloc(S1->data, (len1 + len2 + 1) * sizeof(char));
+        S1->maxLength = len1 + len2;
+    }
+    for(int i = 0; i < len2; i++)
+    {
+        S1->data[len1 + i] = S2->data[i];
+    }
+    S1->data[len1 + len2] = '\0';
+    S1->length = len1 + len2;
+}
+
+//截取子串,先判断字符串是否存在有效空间，是否截取位置正确，是否截取长度正确
+char* subString(String* S, int pos, int len)
+{
+    if(S->data == NULL)
+        return  NULL;
+    if(pos < 0 || pos >= S->length)
+        return NULL;
+    if(len > S->length - pos)
+        return NULL ;
+    char* result = (char*)malloc((len + 1) * sizeof(char));
+    for(int i = 0; i< len; i++)
+    {
+        result[i] = S->data[pos + i];
+    }
+    result[len] = '\0';
+    return result;
+}
+
+//定位子串,先判断字符串时候存在有效空间，再判断开始查找的位置越没越界，再判断从查找的位置开始加上查询字符串的个数，越没越界，然后开始查找
+//从pos的位置开始往后数，每个字符算上自己，往后都进行比对
+int locate(String* S, char* str, int pos)
+{
+
+    if(S->data == NULL)
+        return -1 ;
+    if(pos < 0 || pos >= S->length)
+        return -1;
+    int len = length1(str);
+    if(len + pos > S->length)
+        return -1 ;
+    for(int i = pos; i <= S->length - len; i++)
+    {
+
+        int j;
+        for(j = 0; j < len; j++)
+        {
+            if(S->data[i + j] != str[j])
+                break;
+        }
+        if(j == len)
+            return i;
+    }
+    return-1;
+}
+
+//插入子串，首先还是先判断，字符串是否存在有效空间，然后再判断插入位置是否为合法位置，是否越界等，然后再判断最大空间够不够存放所有字符串的，不能就重新分配空间，并改变最大空间的值
+//所有条件都判断完了，就进行插入，也就是从插入位置(算上自己，也包括'\0')都往下移动len个字符长度，然后从pos位置开始插入str，最后再改变length的长度
+string insertStr(String* S, int pos, char* str)
+{
+    if(S->data == NULL)
+        return "ERROR";
+    if(pos < 0 || pos >= S->length)
+        return "ERROR";
+    int len = length1(str);
+    if(S->length + len > S->maxLength)
+    {
+        S->data = (char*)realloc(S->data, (S->length + len + 1) * sizeof(char));
+        S->maxLength = S->length + len;
+    }
+//              2     4
+//    cout << pos << len << S->length;
+//                    2         0
+    for(int i = S->length - 1; i >= pos; i --)
+    {
+        S->data[i + len] = S->data[i];
+    }
+    for(int i = 0; i < len; i++)
+    {
+        S->data[pos + i] = str[i];
+    }
+
+    S->length += len;
+//    for(int i = 0; i < S->length; i ++){
+//        cout << S->data[i];
+//    }
+    return "SUCCESS";
+}
+
+//删除子串
+string deleteStr(String*S, int pos, int len)
+{
+    if(S->data == NULL)
+        return "ERROR";
+    if(pos < 0 || pos >= S->length)
+        return "ERROR";
+    if(len + pos > S->length)
+        return "ERROR";
+    for(int i = pos + len; i < S->length; i++)
+    {
+        S->data[i - len] = S->data[i];
+    }
+    S->length -= len;
+    return "SUCCESS";
+}
+
+//子串替换，首先判断是否存在有效空间，找到要替换字符串的位置（确保位置有效），然后删除，插入，然后再次寻找
+string replaceString(String* S, char* oldStr, char* newStr)
+{
+
+    if(S->data == NULL)
+        return "ERROR";
+    int index = locate(S, oldStr, 0);
+    int oldLen = length1(oldStr);
+    int newLen = length1(newStr);
+    while(index >= 0)
+    {
+        deleteStr(S, index, oldLen);
+        insertStr(S, index, newStr);
+        index = locate(S, oldStr, index + newLen);
+    }
+    return "SUCCESS";
+}
+
+int main()
+{
+    String s;
+    initString(&s, "hello");
+//    cout << stringEmpty(&s);
+//    clearString(&s);
+//    cout << stringEmpty(&s);
+//    copyString(&s, "string");
+
+//    int len1 = length1("Hello"); //传入字符类型变量
+//    int len2 = getStringLength(&s);      //传入字符串结构体类型变量
+//        cout << len2 << len1;
+
+//    String str1,str2;
+//    initString(&str1,"Hello");
+//    initString(&str2," World!");
+//    cout << compareString(&str1, &str2);
+
+//    concatString(&str1, &str2);
+//    cout << getStringLength(&str1);
+
+//    char* s1 = subString(&s, 1, 3); //s是hello，想要ell这三个字符串
+//    cout << s1;  //*s1 是e，s1就是ell，微微不懂
+
+//    int loc = locate(&s, "lo", 0);
+//    cout << loc;
+
+//    insertStr(&s, 2, "ABCD");
+//    int len = length2(&s);
+//    cout << len;
+
+//    deleteStr(&s, 1, 1);
+//    int len = length2(&s);
+//    cout << len;
+//    cout << replaceString(&s, "hel", "abc");
+}
+
+07-树
+一对多的数据结构
+是n个结点的有序集
+
+顺序存储结构：
+数组存储：
+data：child
+
+链式存储结构：
+孩子表示法（可以改进）：
+数据域|孩子的指针
+缺点：指针的浪费
+改进1：增加一块空间用来存储结点的度，
+数据域|结点的度|孩子的指针（一共有结点的度 个空间）
+改进2：
+数据域|最左孩子的指针域|兄弟指针
+
+顺序链式存储结构：
+组合表示法：
+data|child(右兄弟->右兄弟->右兄弟....)
+缺点：没有办法找到双亲指针
+
+改进：增加一个双亲结点
+data|parent|child(右兄弟->右兄弟->右兄弟....)
+
+
+08-二叉树
+
+左斜二叉树：只有左子树
+右斜二叉树：只有右子树
+枝结点，叶子结点
+
+满二叉树（左右都有），完全二叉树（只能从左到右，满了才能往下排，（这是我自己总结的大致意思））
+满二叉树是完全二叉树的一个特例
+若完全二叉树的深度为k，那么叶子结点只能出现在k层或者k-1层
+对于完全二叉树任一结点，如果右子树的最大层次要是为l，左子树的最大层次为l或者l+1
+对于任何一颗二叉树，若其叶子结点数位n0,度为2的结点数为n2,则n0 = n2 + 1;
+具有n个结点的完全二叉树，其深度为(logn) + 1;
+
+如果对一棵有n个结点的完全二叉树,其结点按层编号,对任-结点i(1<=i<=n)有
+如果i=1 ,则结点i是二叉树的根如果i>1 ,则其双亲结点为i/2
+如果2i>n ,则结点i无左孩子,即为叶子结点,否则其左孩子结点为2i
+如果2i+1>n ,则结点i无右孩子，否则其右孩子结点为2i+1
+
+顺序存储结构（数组）：
+完全二叉树：依次存储
+满二叉树：依次存储
+一般二叉树：不存在的位置 置为空
+
+链式存储结构：
+1.数据域|左孩子指针|右孩子指针
+二叉树链式结构定义
+typedef int DataType;
+typedef struct BiTNode{
+DataType  data;
+struct BiTNode *left, *right;
+}BiTNode; 
+2：改进->数据域|双亲指针|左孩子指针|右孩子指针
+typedef int DataType;
+typedef struct BiTNode{
+DataType  data;
+struct BiTNode *left, *right, *parent;
+}BiTNode; 
+
+遍历二叉树：非线性转化为线性
+方式：
+DLR：先序遍历（（从上往下找）根（自己）左右）
+LDR：中序遍历（（从下往上找）左根（自己）右）
+RDR：后序遍历（（从下往上），左右根（自己））
+
+#include<cstdio>
+#include<cstring>
+#include<iostream>
+using namespace std;
+
+typedef int DataType;
+typedef struct BiTNode
+{
+    DataType  data;
+    struct BiTNode *left, *right, *parent;
+} BiTNode;
+
+//DLR：先序遍历（（从上往下找）根（自己）左右）
+void preOrderTraverse(BiTNode* root)
+{
+
+    if (root == NULL )
+        return;
+    cout << root->data;
+    preOrderTraverse(root->left);
+    preOrderTraverse(root->right);
+}
+
+//LDR：中序遍历（（从下往上找）左根（自己）右）
+void inOrderTraverse(BiTNode *root)
+{
+    if  (root  ==  NULL )
+        return;
+    inOrderTraverse(root->left);
+    cout << root->data;
+    inOrderTraverse(root->right);
+}
+
+//RDR：后序遍历（（从下往上），左右根（自己））
+void postOrderTraverse(BiTNode *root)
+{
+
+    if (root == NULL)
+        return;
+    postOrderTraverse(root->left);
+    postOrderTraverse(root->right);
+    cout << root->data;
+
+}
+int main()
+{
+
+}
+
+
+09-图
+图
+多对多的数据结构
+由顶点的非空集合和顶点之间边的集合组成
+表示为G(V,E) , G表示图, V表示图中顶点集合, E表示边的集合
+
+一：
+图的概念
+数据元素
+在线性表中,称为元素
+在树中,称为结点
+在图中,称为顶点
+
+数据元素集合
+在线性表中,可以没有元素,称为空表
+在树中,可以没有结点,称为空树
+在图中,不能没有顶点,即顶点集合不能为空
+
+数据元素之间的关系
+在线性表中,称为线性关系
+在树中,称为层次关系
+在图中,称为边的关系,边的集合可以为空
+
+图的种类：
+无向图：（无向边，(V1, V3)）
+有向图：（有向边，<V1, V3>箭头指向谁，谁是弧头，出发点是弧尾）
+
+图的种类：
+简单图，没有重复边，也没有弧头弧尾为同一顶点的边，
+无向完全图：任意两个顶点之间均有边的无向图，边数 m = n*(n - 1)/2，n为顶点数
+有向完全图：任意两个顶点之间均方向相反弧的有向图，边数 m = n*(n - 1)/，n为顶点数
+
+稀疏图：图中边或弧的的数量很少的图
+稠密图：图中边或弧的的数量很多的图
+
+图的概念：
+权：图中边或弧上的数
+网：带权的图
+子图：一个图是另一个图的一部分
+顶点的度（无向图）：
+顶点的入度（有向图）：
+顶点的出度（有向图）：
+路径：
+路径的长度：
+回路（环）：
+简单回路：除了出发点，没有重复顶点
+非简单回路：除了出发点，还有重复顶点
+连通（无向图）：有路径
+连通图（无向图）：任意的两个顶点之间都有路径
+连通分量（无向图）：
+强连通（无向图）：两点之间相互有路径
+强连通图（无向图）：任意的两个顶点之间都为强连通关系
+强连通分量（无向图）：
+连通图生成树：极小的连通子图，图中有n个节点且n-1条边
+有向树：有向图中有且仅有一个顶点入度为0，其余所有顶点入度均为1
+有向森林：若干颗有向树构成的集合
+有向图的生成森林：由有向图中的若干个有向树子图构成
+
+二：
+图的抽象数据类型：
+创建图：
+销毁图：
+取V中的值：
+给V赋值：
+获取V的邻接顶点：
+获取V相对于W的下一个邻接顶点：
+G中插入顶点：
+G中删除顶点：
+插入一个弧（有向边）：
+删除一个弧：
+图的先深搜索：
+图的先广搜索：
+
+三：
+图的存储结构：
+
+邻接矩阵：（顶点数组，二维数组）
+无向图邻接矩阵：有边就为1            
+有向图邻接矩阵：是纵向指向横向有弧，那就是1，竖着看出度，横着看入度
+网的邻接矩阵：（也就是带权值的有向图），不同顶点之间有弧就写上权值，没有弧就为无穷，同一顶点之间没有弧就为0
+
+邻接表：
+无向邻接表：
+有向邻接表：数组里放的是弧尾
+有向逆邻接表：数组里放的是弧头
+网的邻接表：
+
+十字链表：
+链表结点：弧头|弧尾|入边结点指针（第二个以自己为弧头的弧）|出边结点指针（第二个以自己为弧尾的弧）
+
+邻接多重表：
+数组存储顶点：
+链表结点：顶点1|顶点1的下一条边|顶点2的下一条边|顶点2的下一条边
+
+边集数组：
+顶点数组：V1 V2 V3 V4
+弧数组：弧尾|弧头|权
+
+
+深搜和广搜
+矩阵是数组
+表差不多就是指针
+
+
+
+无向图的邻接矩阵：
+
+//这个代码出现过一个问题：就是为什么利用define VSIZE不能直接定义数组长度?只能用数字100
+//答：因为define后面不能跟;号！！！
+#include<cstdio>
+#include<cstring>
+#include<iostream>
+#include<cmath>
+using namespace std;
+#define VSIZE 100 //最大顶点数
+typedef int VType; //点的数据类型
+typedef int EType; //边的数据类型
+typedef struct AdjMGraph
+{
+    VType vexs[VSIZE];//顶点数组
+    EType arc[VSIZE][VSIZE]; //边弧数组
+    int VNum;
+    int ENum;
+} AdjMGraph;
+
+void createAdjMGraph(AdjMGraph *g)
+{
+    cout << "输入顶点个数";
+    cin  >> g->VNum;
+
+    cout << "输入顶点间的边数";
+    cin >> g->ENum;
+
+    for (int i = 0; i< g->VNum; i++)
+    {
+        cin >> g->vexs[i];//顶点值
+    }
+    for (int i = 0; i< g->VNum; i++)
+    {
+
+        for (int j = 0; j < g->VNum; j++)
+        {
+
+            g->arc[i][j] = 0;//邻接矩阵，初始化都为0，表示一条边都没有
+        }
+    }
+    for (int k = 0; k < g->ENum; k++)
+    {
+
+        cout << "输入边(vi,vj)的下标i,j";
+        int i, j;
+        cin >> i >> j; //将有边的两个点依次输入，将有边的位置置为1，因为一条边牵连两个点，所以都要置为1
+        g->arc[i - 1][j - 1] = g->arc[j - 1][i - 1] = 1;
+    }
+}
+
+int visited[VSIZE];
+void (*visitFunc)(VType t);
+
+void print(VType t)
+{
+    cout << t;
+}
+
+void DFS (AdjMGraph g, int i)
+{
+    visited[i] = 1;  //开始深搜，现将开始的点置为1，代表访问过了，之后从此点开始进行深搜，并且输出这点存储的数据的值
+    visitFunc(g.vexs[i]); //print函数也可以
+    for (int j = 0; j < g.VNum; j++)  //将邻接矩阵中的第i都遍历一遍，已发现1，并且对应顶点未被访问过，则递归深搜
+    {
+        if (g.arc[i][j] == 1 && visited[j] == 0)
+        {
+            DFS(g, j);
+        }
+    }
+}
+
+void DFSTraverse(AdjMGraph g, void (*vf)(VType t))
+{
+    visitFunc = vf;
+//    我传入一个函数的时候，需要用一个函数型变量来接收它，在DFSTraverse中，调用别的函数也可以直接调用visitFunc，因为在这里"声明函数visitfunc"，相当于这个DFSTraverse函数中的全局函数
+    for (int i = 0; i < g.VNum; i++)
+    {
+        visited[i] = 0;        //将所有点都置为0,代表从来没访问过
+    }
+    for (int i = 0; i< g.VNum; i++)
+    {
+        if (visited[i] == 0)
+            DFS(g, i);
+    }
+}
+
+int main()
+{
+//定义邻接矩阵图
+    AdjMGraph g;
+//创建邻接矩阵图
+    createAdjMGraph(&g) ;
+//遍历邻接矩阵图
+    DFSTraverse(g, print);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

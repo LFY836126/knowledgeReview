@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>扫雷</title>
+    <style type="text/css">
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        ul {
+            list-style: none;
+            height: 400px;
+            width: 400px;
+            background-color: rgb(191, 191, 191);
+        }
+
+        li {
+            box-sizing: border-box;
+            float: left;
+            width: 20px;
+            height: 20px;
+            border-left: 1px solid white;
+            border-right: 1px solid black;
+            border-top: 1px solid white;
+            border-bottom: 1px solid black;
+            text-align: center;
+        }
+
+        .mark {
+            background-image: url(lei.png);
+            background-size: 18px 18px;
+            background-repeat: no-repeat;
+            background-position: 50% 50%;
+        }
+
+        .peng {
+            background-image: url(reallei.png);
+            background-size: 18px 18px;
+            background-repeat: no-repeat;
+            background-position: 50% 50%;
+        }
+
+        .safe {
+            background-color: rgb(220, 220, 220);
+        }
+        .blank{
+            background-color:white;
+        }
+    </style>
+</head>
+<body>
+<ul>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+</ul>
+<script type="text/javascript">
+    var ul = document.getElementsByTagName('ul')[0];
+    var li = document.getElementsByTagName('li');
+    var arr = [];
+    var numup = 0;
+    var numdown = 0;
+    var around = [
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    ]
+    var len = li.length
+    for (var i = 0; i < len; i++) {
+        arr[i] = i;
+        li[i].sum = 0;
+        li[i].position = [Math.floor(i / 20), i % 20];
+    }
+    /*随机创造雷的位置：随机排列数组然后取前20个数组对应li，实现随机分配雷点*/
+    arr.sort(function (a, b) {
+        return Math.random() - 0.5;
+    });
+    for (var i = 0; i < 80; i++) {
+        li[arr[i]].sum = -1;
+        around[Math.floor(arr[i] / 20 + 1)][arr[i] % 20 + 1] = -1;
+    }
+    /*判断周围的雷数为防止越界，将around扩大一圈，周边是0*/
+    for (var i = 1; i < 21; i++) {
+        for (var j = 1; j < 21; j++) {
+            if (around[i][j] != -1) {
+                if (around[i - 1][j - 1] == -1) {
+                    li[(i - 1) * 20 + j - 1].sum++;
+                    around[i][j] ++;
+                }
+                if (around[i - 1][j] == -1) {
+                    li[(i - 1) * 20 + j - 1].sum++;
+                    around[i][j] ++;
+                }
+                if (around[i - 1][j + 1] == -1) {
+                    li[(i - 1) * 20 + j - 1].sum++;
+                    around[i][j] ++;
+                }
+                if (around[i][j - 1] == -1) {
+                    li[(i - 1) * 20 + j - 1].sum++;
+                    around[i][j] ++;
+                }
+                if (around[i][j + 1] == -1) {
+                    li[(i - 1) * 20 + j - 1].sum++;
+                    around[i][j] ++;
+                }
+                if (around[i + 1][j - 1] == -1) {
+                    li[(i - 1) * 20 + j - 1].sum++;
+                    around[i][j] ++;
+                }
+                if (around[i + 1][j] == -1) {
+                    li[(i - 1) * 20 + j - 1].sum++;
+                    around[i][j] ++;
+                }
+                if (around[i + 1][j + 1] == -1) {
+                    li[(i - 1) * 20 + j - 1].sum++;
+                    around[i][j] ++;
+                }
+            }
+            /*li[(i-1)*20+j-1].innerText = li[(i-1)*20+j-1].sum++;*/
+        }
+    }
+    /*阻止右键出菜单的默认事件*/
+    document.oncontextmenu = function () {
+        return false;
+    };
+    /*鼠标单击左键*/
+    ul.addEventListener('mouseup', testup, false);
+    /*左键绑定事件*/
+    function testup(e) {
+        var event = e || window.event;
+        var target = event.target || event.srcElement;
+        if (e.button == 0) {
+            numup ++;
+            if (target.sum != 0 && target.sum != -1) {
+                target.innerText = target.sum;
+                target.className = "safe";
+            }
+            if (target.sum == 0) {
+                var a = target.position[0] + 1;
+                var b = target.position[1] + 1;
+                function retBlank(x, y) {
+                    if (x < 21 && x > 0 && y < 21 && y > 0) {
+                        if (li[(x - 1) * 20 + y - 1].flag != 1) {
+                            li[(x - 1) * 20 + y - 1].flag = 1;
+                            li[(x - 1) * 20 + y - 1].className = "blank";
+                            if (around[x - 1][y] == 0) {
+                                retBlank(x - 1, y);
+                            } else{
+                                li[(x - 2) * 20 + y - 1].className = "safe";
+                                li[(x - 2) * 20 + y - 1].innerText = li[(x - 2) * 20 + y - 1].sum;
+                            }
+                            if (around[x - 1][y + 1] == 0) {
+                                retBlank(x - 1, y + 1);
+                            } else{
+                                li[(x - 2) * 20 + y].className = "safe";
+                                li[(x - 2) * 20 + y].innerText = li[(x - 2) * 20 + y].sum;
+                            }
+                            if (around[x][y + 1] == 0) {
+                                retBlank(x, y + 1);
+                            } else{
+                                li[(x - 1) * 20 + y].className = "safe";
+                                li[(x - 1) * 20 + y].innerText = li[(x - 1) * 20 + y].sum;
+                            }
+                            if (around[x + 1][y + 1] == 0) {
+                                retBlank(x + 1, y + 1);
+                            } else{
+                                li[x * 20 + y].className = "safe";
+                                li[x * 20 + y].innerText = li[x * 20 + y].sum;
+                            }
+                            if (around[x + 1][y] == 0) {
+                                retBlank(x + 1, y);
+                            }else{
+                                li[x * 20 + y - 1].className = "safe";
+                                li[x * 20 + y - 1].innerText = li[x * 20 + y - 1].sum;
+                            }
+                            if (around[x + 1][y - 1] == 0) {
+                                retBlank(x + 1, y - 1);
+                            }else{
+                                li[x * 20 + y - 2].className = "safe";
+                                li[x * 20 + y - 2].innerText = li[ x * 20 + y - 2].sum;
+                            }
+                            if (around[x][y - 1] == 0) {
+                                retBlank(x, y - 1);
+                            }else{
+                                li[(x - 1) * 20 + y - 2].className = "safe";
+                                li[(x - 1) * 20 + y - 2].innerText = li[(x - 1) * 20 + y - 2].sum;
+                            }
+                            if (around[x - 1][y - 1] == 0) {
+                                retBlank(x - 1, y - 1);
+                            }else{
+                                li[(x - 2) * 20 + y - 2].className = "safe";
+                                li[(x - 2) * 20 + y - 2].innerText = li[(x - 2) * 20 + y - 2].sum;
+                            }
+                        }
+                    }
+                }
+                retBlank(a, b);
+            }
+            if (target.sum == -1) {
+                for (var i = 0; i < 80; i++) {
+                    li[arr[i]].className = "peng";
+                }
+                ul.removeEventListener('mouseup', testup, false);
+                ul.removeEventListener('mousedown', testdown, false);
+            }
+        }
+    }
+    /*鼠标单击右键*/
+    ul.addEventListener('mousedown', testdown, false);
+    /*右键绑定事件*/
+    function testdown(e) {
+        var event = e || window.event;
+        var target = event.target || event.srcElement;
+        if (e.button == 2) {
+            numdown ++;
+            target.className = "mark";
+        }
+        if(numup == 320 && numdown == 80){
+            alert("Victory");
+        }
+    }
+</script>
+</body>
+</html>

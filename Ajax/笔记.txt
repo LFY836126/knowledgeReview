@@ -1,0 +1,116 @@
+http协议的特点就是必须是客户端主动去发起请求，服务端被请求
+数据库编程：用代码的方式去操作数据库的读写，配合我们的应用程序去完成整体其他的功能
+网络编程：能发出请求，能接受响应
+Ajax就是一套API：弥补了js不能接受请求，发送请求（现在js可以发请求了）
+1.什么叫API：就是提供目录特定能力的一个事物，然后有输入有输出。
+2.对什么什么进行编程就是用代码的方式去操作它
+
+不管服务端是采用XML还是JSON本质上都是将数据返回给客户端
+JSON和XML只是数据的描述方式
+服务端应该设置一个合理的Content-Type
+讲课老师：https://github.com/zce
+ajax就是浏览器提供给我们的API，这套API的价值就是让我们可以通过js直接发送请求和响应
+
+ jQuery 中的 Ajax
+一个你会用我会用他会用到的点，就一定有一个封装好的
+
+1.什么叫API：就是提供目录特定能力的一个事物，然后有输入有输出。
+2.Ajax：就是js发请求，然后服务器响应的一个接口，是一套API
+3.核心提供的类型：XMLHttpRequest，这里有个一历史遗留性问题，就是之前利用XML传递数据，所以叫的是XMLHttpRequest，虽然现在已经利用json传递数据了
+在ajax领域中，它到ajax中拿的不是页面拿到的是数据，它传递的请求报文响应报文都是字符串，如何通过字符串去描述一个数据，之前是利用XML，现在用json
+
+注意：
+涉及到 AJAX 操作的页面“不能”使用文件协议访问（文件的方式访问）
+ajax发送请求步骤：
+     1. 安装浏览器（用户代理）
+     xhr 就类似于浏览器的作用（发送请求接收响应）
+     var xhr = new XMLHttpRequest()
+     2. 打开浏览器 输入网址
+    xhr.open('GET', 'http://day-11.io/time.php')//建立与服务端的连接
+     3. 敲回车键 开始请求
+    xhr.send()
+     4. 等待响应
+     5. 看结果
+
+同一目录下的可以用  ./   或者直接  /   就行，要是C盘的就是/c
+
+假如加载一个东西，但是当网速特别慢的时候，我需要很久才能得到我要的响应，那么要是把xhr.send()写在了javascript页面中
+整个页面就会因为等待响应而卡住，整个网页就会堵塞在这个等待响应的地方，所以总而言之，ajax不是那么容易就能到这个响应的
+所以： 因为响应需要时间，所以无法通过返回值的方式返回响应。
+因为客户端永远不知道服务端何时才能返回我们需要的响应，所以 AJAX API 采用事件的机制（通知的感觉）
+例1：
+  <script>
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET','./time.php');
+    xhr.send();
+     xhr.onreadystatechange = function () {
+       // 这个事件并不是只在响应时触发，状态改变就触发
+       // console.log(1)
+      console.log(this.readyState);
+     }
+  </script>
+打印结果：2  3  4
+因为那个函数是代表了状态改变就触发，正常我们是有5个状态的：’创建xhr‘ ，‘ open ’ ...，但是我们在上面已经open了
+然后从open到最后就改变了3个状态，所以结果是2 3 4
+如果像下面这样那就是1 2 3 4了，因为0是初始状态，所以没有0，还有4代表整个状态已经结束，我们可以拿到响应了
+改正：如果需要补货第一个状态的变化，需要注意代码执行顺序的问题（不要出现来不及的情况）
+  <script>
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function(){
+        console.log(this.readyState);
+    }
+    xhr.open('GET','./time.php');
+    xhr.send();
+  </script>
+
+例2：打印出状态为4的时候的this
+    xhr.onreadystatechange = function () {
+        if (this.readyState !== 4) {
+            return
+        }
+        console.log(this);
+//        console.log(this.responseText);     /* 获取响应的内容（响应体）*/
+    }
+返回给我们一个XMLHttpRequest对象，有response，有readyState，还有responseText等属性
+responseText永远拿到的都是服务端响应给我们的响应体的内容
+所以当我们拿到响应就利用readyState=4时候来获取响应值
+
+例：readyState状态变化
+就是用xhr帮我们发个请求，不是我们自己的代码发的而是我们让xhr帮我们发的
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

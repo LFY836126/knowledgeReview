@@ -1,0 +1,11 @@
+*{
+	margin:0;
+	padding:0;
+	list-style:none;
+}
+.usernav-wrapper .usernav-content .usernav-left{
+	border:1px solid red;
+}
+.usernav-wrapper .usernav-content .usernav-left li{
+	float:left;
+}

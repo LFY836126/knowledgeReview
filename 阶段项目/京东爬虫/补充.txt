@@ -1,0 +1,4 @@
+项目在C:\Users\83612\Documents\IdeaProjects\JingDong
+问题：只能爬取30个数据
+注意：需要在可视化工具上先建立一个moviedata数据库 然后建立一个jingdongbook的表，包含三项：bookID，bookName，bookPrice
+jar包 位置：D:\Program Files\repository

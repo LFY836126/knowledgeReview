@@ -1,0 +1,4240 @@
+第一天：
+第一节：02-HTML5-什么是html5
+1.H5并不是新的语言，而是html语言的第五次重大修改--版本
+
+2.支持：所有的主流浏览器都支持h5.（chrome,firefox,safari。。。）。IE9及以上支持h5(有选择的支持，并不会全部支持),但是ie8及以下不支持h5.
+
+3.改变了用户与文档的交互方式：多媒体：video  audio canvas
+
+4.增加了其它的新特性：语义特性，本地存储特性，网页多媒体，二维三维，特效（过渡，动画）
+
+5.相对于h4:
+	1.进步：抛弃了一些不合理不常用的标记和属性
+	2.新增了一些标记和属性--表单
+	3.从代码角度而言，h5的网页结构代码更简洁。
+6.
+<!--html:5 +tab-->
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+</body>
+</html>
+
+<!--html:xt +tab:XHTML过渡型文档类型-->
+<!--：网址规范的解析的规则  transitional：过渡-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>Document</title>
+</head>
+<body>
+
+</body>
+</html>
+
+<!--html:4s +tab-->
+<!--strict:严格：完全按照h4的请求进行解析-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>Document</title>
+</head>
+<body>
+
+</body>
+</html>
+
+第二节：03-HTML5-html5中的语义标签
+1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        header{
+             width: 100%;
+             height: 100px;
+             background-color: red;
+         }
+        nav{
+            width: 100%;
+            height: 36px;
+            background-color: green;
+        }
+        main{
+            width: 100%;
+            height: 500px;
+            background-color: #ccc;
+        }
+        main > article{
+            width: 80%;
+            height: 100%;
+            background-color: purple;
+            float: left;
+        }
+        main > aside{
+            width: 20%;
+            height: 100%;
+            background-color: pink;
+            float: right;
+        }
+        footer{
+            width: 100%;
+            height: 80px;
+            background-color: skyblue;
+        }
+    </style>
+</head>
+<body>
+<header>头部</header>
+<nav>导航</nav>
+<main>
+    <article>左边</article>
+    <aside>右边</aside>
+</main>
+<footer>底部</footer>
+<!--<div class="header"></div>
+<div class="nav"></div>
+<div class="mainContent">
+    <div class="left"></div>
+    <div class="right"></div>
+</div>
+<div class="footer"></div>-->
+</body>
+</html>
+
+第三节：04-HTML5-html5中的语义标签的兼容性处理
+1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        header{
+             display: block;
+             width: 100%;
+             height: 100px;
+             background-color: red;
+         }
+        nav{
+            display: block;
+            width: 100%;
+            height: 36px;
+            background-color: green;
+        }
+        /*IE9:行级元素在设置宽度的时候是失效，需要将行级元素转换为块级元素
+        IE8:完全不支持语义标签(不支持html5):在IE8中，它不认识语义标签，所以无法解析这些标签，也就意味着所写的样式无效。*/
+        main{
+            /*将行级元素转换为块级元素*/
+            display: block;
+            width: 100%;
+            height: 500px;
+            background-color: #ccc;
+        }
+        main > article{
+            width: 80%;
+            height: 100%;
+            background-color: purple;
+            float: left;
+        }
+        main > aside{
+            width: 20%;
+            height: 100%;
+            background-color: pink;
+            float: right;
+        }
+        footer{
+            display: block;
+            width: 100%;
+            height: 80px;
+            background-color: skyblue;
+        }
+    </style>
+</head>
+<body>
+<!--第一种方式：手动创建标签-->
+<!--<script>
+    /*手动创建标签:默认的标签的类型都是行级元素*/
+    document.createElement("header");
+    document.createElement("nav");
+    document.createElement("main");
+    document.createElement("article");
+    document.createElement("aside");
+    document.createElement("footer");
+</script>-->
+<!--第二种方式：引入第三方插件-->
+<!--html5shiv.min.js:在默认情况下，IE8及以下的IE版本不支持HTML5,引入这个文件就可以做到兼容-->
+<script src="../js/html5shiv.min.js"></script>
+<header>头部</header>
+<nav>导航</nav>
+<main>
+    <article>左边</article>
+    <aside>右边</aside>
+</main>
+<footer>底部</footer>
+<!--<div class="header"></div>
+<div class="nav"></div>
+<div class="mainContent">
+    <div class="left"></div>
+    <div class="right"></div>
+</div>
+<div class="footer"></div>-->
+</body>
+</html>
+
+第四节：05-HTML5-表单的新增type属性
+1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="">
+    用户名：<input type="text" name="userName"> <br>
+    密码：<input type="password" name="userPwd"> <br>
+    <!--email提供了默认的电子邮箱的完整验证：要求必须包含@符号，同时必须包含服务器名称，如果不能满足验证，则会阻止当前的数据提交-->
+    邮箱：<input type="email"> <br>
+    <!--tel它并不是来实现验证。它的本质目的是为了能够在移动端打开数字键盘。意味着数字键盘限制了用户只能输入数字。  如何查看效果：qq发送文件>>手机端使用qq来接收>>使用手机浏览器查看-->
+    电话：<input type="tel"> <br>
+    <!--验证只能输入合法的网址：必须包含http://-->
+    网址：<input type="url"> <br>
+    <!--number：只能输入数字(包含小数点)，不能输入其它的字符
+    max:最大值
+    min:最小值
+    value:默认值-->
+    数量：<input type="number" value="60" max="100" min="0"> <br>
+    <!--search：可以提供更人性化的输入体验-->
+    请输入商品名称：<input type="search"> <br>
+    <!--range:范围-->
+    范围：<input type="range" max="100" min="0" value="50"> <br>
+    颜色：<input type="color"> <br>
+    <!--日期时间相关-->
+    <!--time:时间：时分秒-->
+    时间：<input type="time"> <br>
+    <input type="time" \>
+    <!--date：日期：年月日-->
+    日期：<input type="date"> <br>
+    <!--datetime:大多数浏览器不能支持datetime.只有苹果下面的safari支持，用于屏幕阅读器-->
+    日期时间：<input type="datetime"><br>
+    <!--datetime-local:日期和时间-->
+    日期时间：<input type="datetime-local"> <br>
+    月份：<input type="month"> <br>
+    星期：<input type="week">
+    <!--提交-->
+    <input type="submit">
+</form>
+</body>
+</html>
+
+第五节：06-HTML5-表单中新增的其它属性
+1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="" id="myForm">
+    <!--placeholder：提示文本，提示占位-->
+    <!--autofocus:自动获取焦点-->
+    <!--autocomplete:自动完成：on:打开  off:关闭
+    1.必须成功提交过:提交过才会记录
+    2.当前添加autocomplete的元素必须有name属性-->
+    用户名：<input type="text" name="userName" placeholder="请输入用户名" autofocus autocomplete="on"> <br>
+    <!--tel并不会实现验证，仅仅是在移动端能够弹出数字键盘-->
+    <!--required:必须输入，如果没有输入则会阻止当前数据提交-->
+    <!--pattern:正则表达式验证
+    *:代表任意个
+    ?:代表0个或1个
+    +：代表1个或多个-->
+    手机号：<input type="tel" name="userPhone" required pattern="^(\+86)?1\d{10}$"> <br>
+    <!--multiple：可以选择多个文件-->
+    文件：<input type="file" name="photo" multiple> <br>
+    <!--email:有默认验证  在email中，multiple允许输入多个邮箱地址，以逗号分隔-->
+    邮箱：<input type="email" name="email" multiple><br>
+    
+    <!--提交：-->
+    <input type="submit"> <br>
+</form>
+<!--下面这个表单元素并没有包含在form中：默认情况下面表单元素的数据不会进行提交-->
+<!--form:指定表单id,那么在将来指定id号的表单进行数据提交的时候，也会将当前表单元素的数据一起提交-->
+地址：<input type="text" name="address" form="myForm">
+</body>
+</html>
+
+第六节：07-HTML5-表单新增元素(datalist)
+1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="">
+    <!--专业：
+    <select name="" id="">
+        <option value="1">前端与移动开发</option>
+        <option value="2">java</option>
+        <option value="3">javascript</option>
+        <option value="4">c++</option>
+    </select>-->
+    <!--不仅可以选择，还应该可以输入-->
+    <!--建立输入框与datalist的关联  list="datalist的id号"-->
+    专业：<input type="text" list="subjects"> <br>
+    <!--通过datalist创建选择列表-->
+    <!-- firefox不支持label属性 -->
+    <datalist id="subjects">
+        <!--创建选项值：value:具体的值 label:提示信息，辅助值-->
+        <!--option可以是单标签也可以是双标签-->
+        <option value="英语" label="不会"/>
+        <option value="前端与移动开发" label="前景非常好"></option>
+        <option value="java" label="使用人数多"></option>
+        <option value="javascript" label="做特效"></option>
+        <option value="c" label="不知道"></option>
+    </datalist>
+
+    网址：<input type="url" list="urls">
+    <datalist id="urls">
+        <!--如果input输入框的type类型是url,那么value值必须添加http://-->
+        <option value="http://www.baidu.com" label="百度"></option>
+        <option value="http://www.sohu.com"></option>
+        <option value="http://www.163.com"></option>
+    </datalist>
+</form>
+</body>
+</html>
+第七节：08-HTML5-表单新增元素(keygen+output)
+1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="">
+    用户名：<input type="text" name="userName"><br>
+    密码：<input type="password" name="userPwd"> <br>
+    <!-- keygen兼容性不好，使用频率低 -->
+    <!-- keygen可以用作加密，可以用作验证 -->
+    加密：<keygen></keygen><br>
+    <input type="submit">
+</form>
+
+<!--显示输出信息：只能显示不能修改
+1.语义性更强
+2.值需要你去设置，不能自动计算
+-->
+<output>总金额：￥100.00</output>
+</body>
+</html>
+
+第八节：09-HTML5-表单的新增事件（oninput和oninvalid）
+1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="">
+    用户名：<input type="text" name="userName" id="userName"><br>
+    电话：<input type="tel" name="userPhone" id="userPhone" pattern="^1\d{10}$"> <br>
+    <input type="submit">
+</form>
+<script>
+    /*1.oninput:监听当前指定元素内容的改变：只要内容改变(添加内容，删除内容)，就会触发这个事件*/
+    document.getElementById("userName").oninput=function(){
+        console.log("oninput:"+this.value);
+    }
+
+    /*onkeyup:键盘弹起的时候触发：每一个键的弹起都会触发一次*/
+    /*可以自己试一下，用ctrl+v复制 和鼠标复制，触发的oninput和onkeyup次数是不一样的*/
+    document.getElementById("userName").onkeyup=function(){
+        console.log("onkeyup:"+this.value);
+    }
+
+    /*oninvalid:当验证不通过时触发*/
+    document.getElementById("userPhone").oninvalid=function(){
+        /*设置默认的提示信息*/
+        this.setCustomValidity("请输入合法的11位手机号");
+   }
+</script>
+</body>
+</html>
+
+第九节：10-HTML5-进度条
+1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--max:最大值
+value:当前进度值-->
+<progress max="100" value="100"></progress>
+
+<!--度量器：衡量当前进度值-->
+<!--high:规定的较高的值
+low:规定的较低的值
+max:最大值
+min:最小值
+value:当前度量值-->
+<meter max="100" min="0" high="80" low="40" value="30"></meter><!-- 属于low -->
+<meter max="100" min="0" high="80" low="40" value="60"></meter><!-- 属于中间 -->
+<meter max="100" min="0" high="80" low="40" value="100" name="level"></meter><!-- 属于high -->
+</body>
+</html>
+
+第十节：11-HTML5-表单总结案例
+1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../css/formCss.css">
+</head>
+<body>
+<form action="">
+    <fieldset>
+        <legend>学生档案</legend>
+        <label for="userName">姓名:</label>
+        <input type="text" name="userName" id="userName" placeholder="请输入用户名">
+        <label for="userPhone">手机号码:</label>
+        <input type="tel" name="userPhone" id="userPhone" pattern="^1\d{10}$">
+        <label for="email">邮箱地址:</label>
+        <input type="email" required name="email" id="email">
+        <label for="collage">所属学院:</label>
+        <input type="text" name="collage" id="collage" list="cList" placeholder="请选择">
+        <datalist id="cList">
+            <option value="前端与移动开发学院"></option>
+            <option value="java学院"></option>
+            <option value="c++学院"></option>
+        </datalist>
+        <label for="score">入学成绩:</label>
+        <input type="number" max="100" min="0" value="0" id="score">
+        <label for="level">基础水平:</label>
+        <meter id="level" max="100" min="0" low="59" high="90"></meter>
+        <label for="inTime">入学日期:</label>
+        <input type="date" id="inTime" name="inTime">
+        <label for="leaveTime">毕业日期:</label>
+        <input type="date" id="leaveTime" name="leaveTime">
+        <input type="submit">
+    </fieldset>
+</form>
+<script>
+    document.getElementById("score").oninput=function(){
+        document.getElementById("level").value=this.value;
+    }
+</script>
+</body>
+</html>
+
+*{
+    padding: 0;
+    margin: 0;
+}
+form{
+    width: 600px;
+    margin:20px auto;
+}
+
+form > fieldset{
+    padding: 10px;
+}
+
+form > fieldset > meter,
+form > fieldset > input{
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    margin:10px 0;
+    border: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    padding-left:5px;
+    /*width=内容+padding+border*/
+    box-sizing: border-box;
+}
+form > fieldset > meter{
+    padding-left:0px;
+}
+
+
+第十一节：12-HTML5-音频和视频（video，audio）
+1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--embed:可以直接插入音频视频，本质是通过本机安装的音频视频播放软件来播放的。要求必须已经安装了这些软件  兼容性-->
+
+<!--flash插件: 安装flash 1.先学习flash,增加使用成本  2.iphone,ipd,不支持flash-->
+
+<!--audio:音频-->
+<!--
+src:播放文件的路径
+controls:音频播放器的控制器面板
+autoplay:自动播放
+loop:循环播放-->
+<!--<audio src="../mp3/aa.mp3" controls></audio>-->
+
+<!--video：视频-->
+<!--
+src:播放文件的路径
+controls:音频播放器的控制器面板
+autoplay:自动播放
+loop:循环播放
+poster:指定视频还没有完全下载完毕，或者用户没有点击播放前显示的封面。 默认显示当前视频文件的第一副图像
+width:视频的宽度
+height:视频的高度
+-->
+<!--注意事项：视频始终会保持原始的宽高比。意味着如果你同时设置宽高，并不是真正的将视频的画面大小设置为指定的大小，而只是将视频的占据区域设置为指定大小，除非你设置的宽高刚好就是原始的宽高比例。所以建议：在设置视频宽高的时候，一般只会设置宽度或者高度，让视频文件自动缩放-->
+<!--<video src="../mp3/mp4.mp4" poster="../images/l1.jpg" controls  height="600"></video>-->
+
+<!--source:因为不同的浏览器所支持的视频格式不一样，为了保证用户能够看到视频，我们可以提供多个视频文件让浏览器自动选择-->
+<!--<video src="../mp3/flv.flv" controls></video>-->
+<video controls>
+    <!--视频源，可以有多个源-->
+    <source src="../mp3/flv.flv" type="video/flv">
+    <source src="../mp3/mp4.mp4" type="video/mp4">
+</video>
+</body>
+</html>
+
+第十二节：13-HTML5-获取dom元素（querySelector和querySelectorAll）
+1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .red{
+            color: red;
+        }
+        .green{
+            color: green;
+        }
+        .blue{
+            color: blue;
+        }
+    </style>
+</head>
+<body>
+<ul>
+    <li>请选择</li>
+    <li class="red">前端</li>
+    <li class="green">java</li>
+    <li class="blue">javascript</li>
+    <li id="c">c++</li>
+</ul>
+<script>
+    /*获取第一个li标签*/
+    window.onload=function(){
+        /*ElementsByTagName获取的是数组*/
+        /*索引：不直观 以后的数据都是从后台动态获取，前台动态生成添加*/
+        /*var cli=document.getElementsByTagName("li")[1];
+        console.log(cli);*/
+
+        /*query:查询  Selector：选择器   querySelector(传入选择器名称)*/
+        /*querySelector:获取单个元素，如果获取的元素不止一个，那么只会返回满足条件的第一个元素*/
+        /*参数要求：如果是类选择器，必须添加.  如果是id选择器， 必须添加# ,否则当成标签处理*/
+        var javaLi=document.querySelector(".green");
+        var java = document.querySelector("#c");
+        //var javaLi=document.querySelector("#c");
+        console.log(javaLi);
+        console.log(java);
+
+        /*querySelectorAll获取满足条件的所有元素--数组*/
+        var allLi=document.querySelectorAll("li")[0];
+        console.log(allLi);
+    }
+</script>
+</body>
+</html>
+
+第十三节：14-HTML5-操作元素类样式（add remove toggle contains）
+1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .red{
+            color:red
+        }
+        .green{
+            color: green;
+        }
+        .blue{
+            color: blue;
+        }
+        .underline{
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<ul>
+    <li class="red">前端与移动开发</li>
+    <li class="blue">java</li>
+    <li>javascript</li>
+    <li class="red">c++</li>
+</ul>
+<input type="button" value="为第一个li元素添加样式" id="add">
+<input type="button" value="为第二个li元素移除样式" id="remove">
+<input type="button" value="为第三个li元素切换样式" id="toggle">
+<input type="button" value="判断第四个li元素是否包含某个样式" id="contain">
+<script>
+    window.onload=function(){
+        /*add:为元素添加指定名称的样式.一次只能添加一个样式*/
+        document.querySelector("#add").onclick=function(){
+            /*classList:当前元素的所有样式列表-数组*/
+            document.querySelector("li").classList.add("red");
+            /*document.querySelector("li").classList.add("underline");*/
+            // 用className可以实现给标签添加属性，但是它是属于覆盖的添加，不是增加，容易将某些class弄没
+            //document.querySelector("li").className="red underline"
+            /*获取元素添加的样式*/
+            var result=document.querySelector("li").classList.item(2);
+            console.log(result);
+        }
+
+        /*remove:为元素移除指定名称的样式(不是移除class属性)，一次也只能移除一个*/
+        document.querySelector("#remove").onclick=function(){
+            document.querySelector(".blue").classList.remove("blue");
+        }
+
+        /*toggle：切换元素的样式：如果元素之前没有指定名称的样式则添加。如果有则移除*/
+        document.querySelector("#toggle").onclick=function(){
+            document.querySelectorAll("li")[2].classList.toggle("green");
+        }
+
+        /*contains:判断元素是否包含指定名称的样式，返回true/false*/
+        document.querySelector("#contain").onclick=function(){
+            var isContain=document.querySelectorAll("li")[3].classList.contains("red");
+            console.log(isContain);
+        }
+    }
+</script>
+</body>
+</html>
+
+第十四节：15-HTML5-自定义属性
+1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--定义-->
+<!--规范：
+1.data-开头
+2.data-后必须至少有一个字符，多个单词使用-连接
+建议：
+1.名称应该都使用小写--不要包含任何的大写字符
+2.名称中不要有任何的特殊符号
+3.名称不要副作用纯数字-->
+<p data-school-name="itcast">传智播客</p>
+<p data-name="itcast">传智播客</p>
+<p data-school = "it" ></p>
+<!--取值-->
+<script>
+    window.onload=function(){
+        var p=document.querySelector("p");
+        /*获取自定义属性值*/
+        /*将data-后面的单词使用camel命名法连接:必须使用camel合法法获取值否则有可能无法获取到值*/
+        //var value=p.dataset["schoolname"];//data-schoolname
+        var value=p.dataset["schoolName"];//data-school-name
+        console.log(value);
+    }
+</script>
+</body>
+</html>
+
+第二天：
+第一节：01-HTML5-网络监听接口
+了解  网络状态改变事件 
+使用  全屏API 实现 元素全屏效果
+使用  文件读取接口 实现 文件读取预览效果
+使用  拖拽接口 实现 常见拖拽效果
+使用  地理定位接口 获取 用户位置信息
+使用  Web存储接口 实现数据的读写
+了解  应用缓存接口
+使用  多媒体接口 实现 自定义播放器
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /*1.ononline:网络连通的时候触发这个事件*/
+    window.addEventListener("online",function(){
+        alert("网络连通了");
+    });
+
+    /*2.onoffline:网络断开时触发*/
+    window.addEventListener("offline",function(){
+        alert("网络断开了");
+    })
+</script>
+</body>
+</html>
+
+第二节：02-HTML5-全屏接口的使用
+1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <img src="../images/l1.jpg" alt="">
+    <input type="button" id="full" value="全屏">
+    <input type="button" id="cancelFull" value="退出全屏">
+    <input type="button" id="isFull" value="是否全屏">
+</div>
+<script>
+    /*全屏操作的主要方法和属性
+    * 1.requestFullScreen():开启全屏显示
+    *   不同浏览器需要添加不同的前缀
+    *   chrome:webkit   firefox:moz   ie:ms   opera:o
+    * 2.cancelFullScreen():退出全屏显示:也添加前缀，在不同的浏览器下.退出全屏只能使用document来实现
+    * 3.fullScreenElement:是否是全屏状态，也只能使用document进行判断*/
+
+    window.onload=function(){
+        var div=document.querySelector("div");
+        /*添加三个按钮的点击事件*/
+        /*全屏操作*/
+        document.querySelector("#full").onclick=function(){
+            /*div.requestFullScreen();*/
+            /*div.webkitRequestFullScreen();*/
+            /*div.mozRequestFullScreen();*/
+            /*使用能力测试添加不同浏览器下的前缀*/
+            if(div.requestFullScreen){
+                div.requestFullScreen();
+            }
+            /*choome*/
+            else if(div.webkitRequestFullScreen){
+                div.webkitRequestFullScreen();
+            }
+            /*firefox*/
+            else if(div.mozRequestFullScreen){
+                div.mozRequestFullScreen();
+            }
+            /*IE*/
+            else if(div.msRequestFullScreen){
+                div.msRequestFullScreen();
+            }
+        }
+
+        /*退出全屏*/
+        document.querySelector("#cancelFull").onclick=function(){
+            if(document.cancelFullScreen){
+                document.cancelFullScreen();
+            }
+            else if(document.webkitCancelFullScreen){
+                document.webkitCancelFullScreen();
+            }
+            else if(document.mozCancelFullScreen){
+                document.mozCancelFullScreen();
+            }
+            else if(document.msCancelFullScreen){
+                document.msCancelFullScreen();
+            }
+        }
+
+        /*判断是否是全屏状态*/
+        document.querySelector("#isFull").onclick=function(){
+            /*两个细节：使用document判断  能力测试*/
+            /*还有这里只有firefox的函数命名规则是严格遵循h5标准*/
+            if(document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement){
+                alert(true);
+            }
+            else{
+                alert(false);
+            }
+        }
+    }
+</script>
+</body>
+</html>
+
+第三节：03-HTML5-FileReader的使用
+1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        div{
+            height: 20px;
+            width: 0%;
+            background-color:red;
+        }
+    </style>
+</head>
+<body>
+<!--展示图片：-->
+<!--src:指定路径(资源定位--url):src请求的是外部文件，一般来说是服务器资源。意味着它需要向服务器发送请求，它占用服务器资源-->
+<!--<img src="../images/l1.jpg" alt="">-->
+
+<!--需求：即时预览：
+即时：当用户选择完图片之后就立刻进行预览的处理 >>onchange
+预览：通过文件读取对象的readAsDataURL()完成-->
+<form action="">
+    文件： <input type="file" name="myFile" id="myFile" onchange="getFileContent();"> <br>
+    <div></div>
+    <input type="submit">
+</form>
+<img src="" alt="">
+<script>
+    var div=document.querySelector("div");
+    /*FileReader:读取文件内容
+    * 1.readAsText():读取文本文件(可以使用Txt打开的文件)，返回文本字符串，默认编码是UTF-8
+    * 2.readAsBinaryString():读取任意类型的文件。返回二进制字符串。这个方法不是用来读取文件展示给用户看，而是存储文件。例如：读取文件的内容，获取二进制数据，传递给后台，后台接收了数据之后，再将数据存储
+    * 3.readAsDataURL():读取文件获取一段以data开头的字符串，这段字符串的本质就是DataURL.DataURL是一种将文件(这个文件一般就是指图像或者能够嵌入到文档的文件格式)嵌入到文档的方案。DataURL是将资源转换为base64编码的字符串形式，并且将这些内容直接存储在url中>>优化网站的加载速度和执行效率。
+    * abort():中断读取*/
+    function getFileContent(){
+       /*1.创建文件读取对象*/
+        var reader=new FileReader();
+        /*2.读取文件，获取DataURL
+        * 2.1.说明没有任何的返回值:void：但是读取完文件之后，它会将读取的结果存储在文件读取对象的result中
+        * 2.2.需要传递一个参数 binary large object:文件(图片或者其它可以嵌入到文档的类型)
+        * 2.3:文件存储在file表单元素的files属性中，它是一个数组*/
+        
+        var file=document.querySelector("#myFile").files;
+        reader.readAsDataURL(file[0]);
+        /*获取数据*/
+        /*FileReader提供一个完整的事件模型，用来捕获读取文件时的状态
+        * onabort:读取文件中断片时触发
+        * onerror:读取错误时触发
+        * onload:文件读取成功完成时触发
+        * onloadend:读取完成时触发，无论成功还是失败
+        * onloadstart:开始读取时触发
+        * onprogress:读取文件过程中持续触发*/
+        reader.onload=function(){
+            //console.log(reader.result);
+            /*展示*/
+            document.querySelector("img").src=reader.result;
+        }
+
+        reader.onprogress=function(e){
+            var percent= e.loaded/ e.total*100+"%";
+            div.style.width=percent;
+        }
+    }
+</script>
+</body>
+</html>
+
+第四节：04-HTML5-拖拽接口的使用
+1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .div1{
+            width: 200px;
+            height: 200px;
+            border: 1px solid red;
+            position: relative;
+            margin-left:20px;
+            float: left;
+        }
+        .div2{
+            width: 200px;
+            height: 200px;
+            border: 1px solid blue;
+            position: relative;
+            margin-left:20px;
+            float: left;
+        }
+        .div3{
+            width: 200px;
+            height: 200px;
+            border: 1px solid green;
+            position: relative;
+            margin-left:20px;
+            float: left;
+        }
+        p{
+            background-color: orange;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+<div class="div1" id="div1">
+    <!--在h5中，如果想拖拽元素，就必须为元素添加draggable="true". 图片和超链接默认就可以拖拽-->
+    <p id="pe" draggable="true">试着把我拖过去</p>
+</div>
+<div class="div2" id="div2"></div>
+<script>
+    /*学习拖拽，主要就是学习拖拽事件*/
+    var p=document.querySelector("#pe");
+    var div2=document.querySelector("#div2");
+    var div1=document.querySelector("#div1");
+    /*应用于被拖拽元素的事件
+    *ondrag         应用于拖拽元素，整个拖拽过程都会调用--持续
+     ondragstart    应用于拖拽元素，当拖拽开始时调用
+     ondragleave    应用于拖拽元素，当鼠标离开拖拽元素时调用
+     ondragend    应用于拖拽元素，当拖拽结束时调用*/
+    p.ondragstart=function(){
+        console.log("ondragstart");
+    }
+    p.ondragend=function(){
+        console.log("ondragend");
+    }
+    p.ondragleave=function(){
+        console.log("被拖拽元素：ondragleave");
+    }
+    p.ondrag=function(){
+        //console.log("ondrag");
+    }
+
+    /*应用于目标元素的事件
+    *ondragenter    应用于目标元素，当拖拽元素进入时调用
+     ondragover    应用于目标元素，当停留在目标元素上时调用
+     ondrop        应用于目标元素，当在目标元素上松开鼠标时调用
+     ondragleave    应用于目标元素，当鼠标离开目标元素时调用*/
+    div2.ondragenter=function(){
+        console.log("ondragenter");
+    }
+    div2.ondragover=function(e){
+        //console.log("ondragover");
+        /*如果想触发ondrop事件，那么就必须在这个位置阻止浏览器的默认行为*/
+        e.preventDefault();
+    }
+    /*浏览器默认会阻止ondrop事件：我们必须在ondragover中阻止浏览器的默认行为*/
+    div2.ondrop=function(){
+        console.log("ondrop");
+        /*添加被拖拽的元素到当前目标元素*/
+        div2.appendChild(p);
+    }
+    div2.ondragleave=function(){
+        console.log("目标元素：ondragleave");
+    }
+
+    div1.ondragover=function(e){
+        //console.log("ondragover");
+        /*如果想触发ondrop事件，那么就必须在这个位置阻止浏览器的默认行为*/
+        e.preventDefault();
+    }
+    div1.ondrop=function(){
+        console.log("ondrop");
+        /*添加被拖拽的元素到当前目标元素*/
+        div1.appendChild(p);
+    }
+</script>
+</body>
+</html>
+
+第五节：05-HTML5-拖拽接口的使用-通用
+1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .div1{
+            width: 200px;
+            height: 200px;
+            border: 1px solid red;
+            position: relative;
+            margin-left:20px;
+            float: left;
+        }
+        .div2{
+            width: 200px;
+            height: 200px;
+            border: 1px solid blue;
+            position: relative;
+            margin-left:20px;
+            float: left;
+        }
+        .div3{
+            width: 200px;
+            height: 200px;
+            border: 1px solid green;
+            position: relative;
+            margin-left:20px;
+            float: left;
+        }
+        p{
+            background-color: orange;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+<div class="div1" id="div1">
+    <!--在h5中，如果想拖拽元素，就必须为元素添加draggable="true". 图片和超链接默认就可以拖拽-->
+    <p id="pe" draggable="true">试着把我拖过去</p>
+    <p id="pe1" draggable="true">试着也把我拖过去</p>
+</div>
+<div class="div2" id="div2"></div>
+<div class="div3" id="div3"></div>
+<script>
+    /*学习拖拽，主要就是学习拖拽事件*/
+    /*一般不要用全局变量，因为全局变量任何人都可以改，而且全局变量太多会造成内存泄漏，下面的1和2一起是一种取事件源对象的方式，但是最好不用。
+1.var obj=null;//当前被拖拽的地元素*/
+
+    /*应用于被拖拽元素的事件
+    *ondrag         应用于拖拽元素，整个拖拽过程都会调用--持续
+     ondragstart    应用于拖拽元素，当拖拽开始时调用
+     ondragleave    应用于拖拽元素，当鼠标离开拖拽元素时调用
+     ondragend    应用于拖拽元素，当拖拽结束时调用*/
+    document.ondragstart=function(e){
+        /*通过事件捕获来获取当前被拖拽的子元素*/
+        /*改变事件源对象透明度*/
+        e.target.style.opacity=0.5;
+        /*改变事件源对象父元素的边框的宽度*/
+        e.target.parentNode.style.borderWidth="5px";
+        /*将事件源对象存储起来*/
+/*2.obj= e.target;*/
+        /*通过dataTransfer来实现数据的存储与获取
+        * setData(format,data):
+        * format:数据的类型（只有两个值）：text/html   text/uri-list
+        * Data:数据:一般来说是字符串值*/
+         /*通过e.dataTransfer.setData存储的数据，只能在drop事件中获取*/
+        e.dataTransfer.setData("text/html", e.target.id);
+    }
+    document.ondragend=function(e){
+        e.target.style.opacity=1;
+        e.target.parentNode.style.borderWidth="1px";
+    }
+    document.ondragleave=function(e){
+    }
+    document.ondrag=function(e){
+    }
+
+    /*应用于目标元素的事件
+    *ondragenter    应用于目标元素，当拖拽元素进入时调用
+     ondragover    应用于目标元素，当停留在目标元素上时调用
+     ondrop        应用于目标元素，当在目标元素上松开鼠标时调用
+     ondragleave    应用于目标元素，当鼠标离开目标元素时调用*/
+    document.ondragenter=function(e){
+        console.log(e.target);
+    }
+    document.ondragover=function(e){
+        /*如果想触发ondrop事件，那么就必须在这个位置阻止浏览器的默认行为*/
+        e.preventDefault();
+    }
+    /*浏览器默认会阻止ondrop事件：我们必须在ondragover中阻止浏览器的默认行为*/
+    document.ondrop=function(e){
+        /*添加元素*/
+        //e.target.appendChild(obj);
+        /*通过e.dataTransfer.setData存储的数据，只能在drop事件中获取*/
+        var id=e.dataTransfer.getData("text/html");
+        /*console.log("id="+id);*/
+        e.target.appendChild(document.getElementById(id));
+    }
+    document.ondragleave=function(e){
+    }
+</script>
+</body>
+</html>
+
+第六节：06-HTML5-地理定位接口(上)
+1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .de{
+            width: 300px;
+            height: 300px;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+<div id="demo" class="de"></div>
+<script>
+    var x=document.getElementById("demo");
+    function getLocation()
+    {
+        /*能力测试*/
+        if (navigator.geolocation)
+        {
+            /*1.获取地理信息成功之后的回调
+            * 2.获取地理信息失败之后的回调
+            * 3.调整获取当前地进信息的方式*/
+            //navigator.geolocation.getCurrentPosition(success,error,option);
+            /*option:可以设置获取数据的方式
+            * enableHighAccuracy:true/false:是否使用高精度
+            * timeout:设置超时时间，单位ms
+            * maximumAge:可以设置浏览器重新获取地理信息的时间间隔，单位是ms*/
+            navigator.geolocation.getCurrentPosition(showPosition,showError,{
+                /*enableHighAccuracy:true,
+                timeout:3000*/
+            });
+        }
+        else{
+            x.innerHTML="Geolocation is not supported by this browser.";
+        }
+    }
+    /*成功获取定位之后的回调*/
+    /*如果获取地理信息成功，会将获取到的地理信息传递给成功之后的回调*/
+    // position.coords.latitude 纬度
+    // position.coords.longitude 经度
+    // position.coords.accuracy 精度
+    // position.coords.altitude 海拔高度
+    function showPosition(position)
+    {
+        x.innerHTML="Latitude: " + position.coords.latitude +
+                "<br />Longitude: " + position.coords.longitude;
+    }
+    /*获取定位失败之后的回调*/
+    function showError(error)
+    {
+        switch(error.code)
+        {
+            case error.PERMISSION_DENIED:
+                x.innerHTML="User denied the request for Geolocation."
+                break;
+            case error.POSITION_UNAVAILABLE:
+                x.innerHTML="Location information is unavailable."
+                break;
+            case error.TIMEOUT:
+                x.innerHTML="The request to get user location timed out."
+                break;
+            case error.UNKNOWN_ERROR:
+                x.innerHTML="An unknown error occurred."
+                break;
+        }
+    }
+    getLocation();
+</script>
+
+</body>
+</html>
+
+第七节：07-HTML5-百度地图案例
+1.
+<!DOCTYPE html>
+<html>
+<head>
+    <title>普通地图&全景图</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=	DarF2LCCGzn6T16zgy8ZPkvYYE5CT6fu"></script>
+    <style type="text/css">
+        body, html{width: 100%;height: 100%;overflow: hidden;margin:0;font-family:"微软雅黑";}
+        #panorama {height: 50%;overflow: hidden;}
+        #normal_map {height:50%;overflow: hidden;}
+    </style>
+</head>
+<body>
+<div id="panorama"></div>
+<div id="normal_map"></div>
+<script type="text/javascript">
+    //全景图展示
+    var panorama = new BMap.Panorama('panorama');
+    panorama.setPosition(new BMap.Point(116.404125,39.91405)); //根据经纬度坐标展示全景图
+    panorama.setPov({heading: -40, pitch: 6});
+
+    panorama.addEventListener('position_changed', function(e){ //全景图位置改变后，普通地图中心点也随之改变
+        var pos = panorama.getPosition();
+        map.setCenter(new BMap.Point(pos.lng, pos.lat));
+        marker.setPosition(pos);
+    });
+    //普通地图展示
+    var mapOption = {
+        mapType: BMAP_NORMAL_MAP,
+        maxZoom: 18,
+        drawMargin:0,
+        enableFulltimeSpotClick: true,
+        enableHighResolution:true
+    }
+    var map = new BMap.Map("normal_map", mapOption);
+    var testpoint = new BMap.Point(116.404125,39.91405);
+    map.centerAndZoom(testpoint, 18);
+    var marker=new BMap.Marker(testpoint);
+    marker.enableDragging();
+    map.addOverlay(marker);
+    map.enableScrollWheelZoom(true);
+    map.addControl(new BMap.MapTypeControl());
+    marker.addEventListener('dragend',function(e){
+        panorama.setPosition(e.point); //拖动marker后，全景图位置也随着改变
+        panorama.setPov({heading: -40, pitch: 6});}
+    );
+</script>
+</body>
+</html>
+
+第八节：08-HTML5-web存储_sessionStorage
+1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<pre>
+sessionStorage的使用：存储数据到本地。存储的容量5mb左右。（用于存储临时的值）
+    1.这个数据本质是存储在当前页面的内存中-意味着其它页面和浏览器无法获取数据
+    2.它的生命周期为关闭当前页面，关闭页面，数据会自动清除
+
+setItem(key,value):存储数据，以键值对的方式存储
+getItem(key):获取数据，通过指定名称的key获取对应的value值
+removeItem(key):删除数据，通过指定名称key删除对应的值
+clear():清空所有存储的内容
+</pre><br>
+<input type="text" id="userName"><br>
+<input type="button" value="设置数据" id="setData">
+<input type="button" value="获取数据" id="getData">
+<input type="button" value="删除数据" id="removeData">
+<script>
+    /*存储数据*/
+    document.querySelector("#setData").onclick=function(){
+        /*获取用户名*/
+        var name=document.querySelector("#userName").value;
+        /*存储数据*/
+        window.sessionStorage.setItem("userName",name);
+    }
+    /*获取数据*/
+    document.querySelector("#getData").onclick=function(){
+        /*如果找不到对应名称的key,那么就会获取null*/
+        var name=window.sessionStorage.getItem("userName");
+        alert(name);
+    }
+    /*删除数据*/
+    document.querySelector("#removeData").onclick=function(){
+        /*在删除的时候如果key值错误，不会报错，但是也不会删除数据*/
+        window.sessionStorage.removeItem("userName1");
+    }
+</script>
+</body>
+</html>
+
+第九节：09-HTML5-localStorage的使用
+1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<pre>
+localStorage的使用：
+    1.存储的内容大概20mb
+    2.不同浏览器不能共享数据。但是在同一个浏览器的不同窗口中可以共享数据
+    3.永久生效，它的数据是存储在硬盘上，并不会随着页面或者浏览器的关闭而清除.如果想清除，必须手动清除
+
+setItem(key,value):存储数据，以键值对的方式存储
+getItem(key):获取数据，通过指定名称的key获取对应的value值
+removeItem(key):删除数据，通过指定名称key删除对应的值
+clear():清空所有存储的内容</pre>
+<br>
+<input type="text" id="userName"><br>
+<input type="button" value="设置数据" id="setData">
+<input type="button" value="获取数据" id="getData">
+<input type="button" value="删除数据" id="removeData">
+
+<script>
+    document.querySelector("#setData").onclick=function(){
+        var name=document.querySelector("#userName").value;
+        /*使用localStorage存储数据*/
+        window.localStorage.setItem("userName",name);
+    }
+    /*获取数据*/
+    document.querySelector("#getData").onclick=function(){
+        var name=window.localStorage.getItem("userName");
+        alert(name);
+    }
+    /*清除数据*/
+    document.querySelector("#removeData").onclick=function(){
+        window.localStorage.removeItem("userName");
+    }
+</script>
+</body>
+</html>
+
+第十节：10-HTML5-应用程序缓存
+1.
+<!DOCTYPE html>
+<!--manifest="应用程序缓存清单文件的路径  建议文件的扩展名是appcache,这个文件的本质就是一个文本文件"-->
+<html lang="en" manifest="demo.appcache">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        img{
+            width: 300px;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+<img src="../images/l1.jpg" alt="">
+<img src="../images/l2.jpg" alt="">
+<img src="../images/l3.jpg" alt="">
+<img src="../images/l44.jpg" alt="">
+</body>
+</html>
+2.
+demo.appcache文件：
+CACHE MANIFEST
+#上面一句代码必须是当前文档的第一句
+#后面写注释
+
+#需要缓存的文件清单列表
+CACHE:
+#下面就是需要缓存的清单列表
+../images/l1.jpg
+../images/l2.jpg
+# *:代表所有文件
+
+#配置每一次都需要重新从服务器获取的文件清单列表
+NETWORK:
+../images/l3.jpg
+
+#配置如果文件无法获取则使用指定的文件进行替代
+FALLBACK:
+../images/l4.jpg ../images/banner_1.jpg
+# /:代表所有文件
+
+第十一节：11-HTML5-自定义播放器(接口说明与界面说明)
+1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../css/font-awesome.css">
+    <link rel="stylesheet" href="../css/css.css">
+</head>
+<body>
+<h3 class="playerTitle">视频播放器</h3>
+<div class="player">
+    <video src="../mp4/chrome.mp4"></video>
+    <div class="controls">
+        <a href="javascript:;" class="switch fa fa-play"></a>
+        <a href="javascript:;" class="expand fa fa-expand"></a>
+        <div class="progress">
+            <div class="bar"></div>
+            <div class="loaded"></div>
+            <div class="elapse"></div>
+        </div>
+        <div class="time">
+            <span class="currentTime">00:00:00/</span>
+            <span class="totalTime">00:00:00</span>
+        </div>
+    </div>
+</div>
+<script src="../js/jquery.min.js"></script>
+<script>
+    /*通过jq来实现功能*/
+    $(function(){
+        /*1.获取播放器*/
+        var video=$("video")[0];
+
+        /*2.实现播放与暂停*/
+        $(".switch").click(function(){
+            /*实现播放与暂停的切换：如果是暂停>>播放  ，如果是播放 >> 暂停*/
+            if(video.paused){/*video.paused表示是暂停状态*/
+                video.play();
+                /*移除暂停样式，添加播放样式*/
+            }
+            else{
+                video.pause();
+                /*移除播放样式，添加暂停样式*/
+            }
+            /*设置标签的样式  fa-pause:暂停   fa-play：播放*/
+            $(this).toggleClass("fa-play fa-pause");
+        });
+
+        /*3.实现全屏操作*/
+        $(".expand").click(function(){
+            /*全屏>>不同浏览器需要添加不同的前缀>>能力测试*/
+            if(video.requestFullScreen){
+                video.requestFullScreen();
+            }
+            else if(video.webkitRequestFullScreen){
+                video.webkitRequestFullScreen();
+            }
+            else if(video.mozRequestFullScreen){
+                video.mozRequestFullScreen();
+            }
+            else if(video.msRequestFullScreen){
+                video.msRequestFullScreen();
+            }
+        });
+
+        /*4.实现播放业务逻辑：当视频文件可以播放时触发下面的事件*/
+        video.oncanplay=function(){
+            setTimeout(function(){
+                /*1.将视频文件设置为显示*/
+                video.style.display="block";
+                /*2.获取当前视频文件的总时长(以秒做为单位，同时获取了小数值)，计算出时分秒*/
+                var total=video.duration; //01:01:40   00:00:36
+                /*3.计算时分少  60*60=3600
+                * 3700:3700/3600
+                * 3700:3700%3600 >> 100 /60*/
+                /*var hour=Math.floor(total/3600);
+                /!*补0操作*!/
+                hour=hour<10?"0"+hour:hour;
+                var minute=Math.floor(total%3600/60);
+                minute=minute<10?"0"+minute:minute;
+                var second=Math.floor(total%60);
+                second=second<10?"0"+second:second;*/
+                var result=getResult(total)
+                /*4.将计算结果展示在指定的dom元素中*/
+                $(".totalTime").html(result);
+            },2000);
+        }
+
+        /*通过总时长计算出时分秒*/
+        function getResult(time){
+            var hour=Math.floor(time/3600);
+            /*补0操作*/
+            hour=hour<10?"0"+hour:hour;
+            var minute=Math.floor(time%3600/60);
+            minute=minute<10?"0"+minute:minute;
+            var second=Math.floor(time%60);
+            second=second<10?"0"+second:second;
+            /*返回结果*/
+            return hour+":"+minute+":"+second;
+        }
+
+        /*5.实现播放过程中的业务逻辑，当视频播放时会触发ontimeupdate事件
+        * 如果修改currentTime值也会触发这个事件，说白了，只要currenTime值变化，就会触发这个事件*/
+        video.ontimeupdate=function(){
+            /*1.获取当前的播放时间*/
+            var current=video.currentTime;
+            /*2.计算出时分秒*/
+            var result=getResult(current);
+            /*3.将结果展示在指定的dom元素中*/
+            $(".currentTime").html(result);
+            /*4.设置当前播放进度条样式  0.12>>0.12*100=12+%>12%*/
+            var percent=current/video.duration*100+"%";
+            $(".elapse").css("width",percent);
+        }
+
+        /*6.实现视频的跳播*/
+        $(".bar").click(function(e){
+            /*1.获取当前鼠标相对于父元素的left值--偏移值*/
+            var offset= e.offsetX;
+            /*2.计算偏移值相对总父元素总宽度的比例*/
+            var percent=offset/$(this).width();
+            /*3.计算这个位置对应的视频进度值*/
+            var current=percent*video.duration;
+            /*4.设置当前视频的currentTime*/
+            video.currentTime=current;
+        });
+
+        /*7.播放完毕之后，重置播放器的状态*/
+        video.onended=function(){
+            video.currentTime=0;
+            $(".switch").removeClass("fa-pause").addClass("fa-play");
+        }
+    });
+</script>
+</body>
+</html>
+
+第三天：详见CSS3-第一天.ppt
+
+第一节：01-HTML5-CSS3简介
+1.如同人类的的进化一样，CSS3是CSS2的“进化”版本，在CSS2基础上，增强或新增了许多特性，弥补了CSS2的众多不足之处，使得Web开发变得更为高效和便捷
+2.CSS3现状浏览器支持程度差，需要添加私有前缀 移动端支持优于PC端 不断改进中 应用相对广泛
+3.如何对待？坚持渐进增强原则（优雅降级-hack） 考虑用户群体 遵照产品的方案 听Boss的
+4.如何使用手册
+ []	表示可选项
+ |	表示或者 
+ ||	表示多选一
+ ？	0个或1个
+ *	表示0个或多个
+ {}	表示范围
+
+第二节：02-HTML5-属性选择器
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>属性选择器</title>
+    <style>
+        .red{
+            color: red;
+        }
+        .blue{
+            color: blue;
+        }
+        .darkred{
+            color: darkred;
+        }
+        .blueviolet{
+            color:blueviolet;
+        }
+        /*属性选择器：属性是相对于标签而言。所谓属性选择器就是根据指定名称的属性的值来查找元素*/
+        /*1.E[attr]:查找指定的拥有attr属性的E标签。如查找拥有style属性的li标签*/
+        li[style]{
+            text-decoration: underline;
+        }
+
+        /*2.E[attr=value]:查找拥有指定的Attr属性并且属性值为value的E标签。如想查找拥有class属性并且值为Red的li标签   =是严格匹配*/
+        li[class=red]{
+            /*font-size: 30px;*/
+        }
+        /*3.E[attr*=value]:查找拥有指定的attr属性并且属性值中包含(可以在任意位置)value的E标签*/
+        li[class*=red]{
+            /*font-size: 30px;*/
+        }
+        /*4.E[attr^=value]:查找拥有指定的attr属性并且属性值以value开头的E标签*/
+        li[class^=blue]{
+            font-size: 30px;
+        }
+        /*5.E[attr$=value]:查找拥有指定的attr属性并且属性值以value开结束的E标签*/
+        li[class$=blue]{
+            /*font-size: 30px;*/
+        }
+    </style>
+</head>
+<body>
+<p style="">看看能不能也添加样式</p>
+<ol>
+    <li class="red" style="">河南再次发生矿难，死伤人数超过100</li>
+    <li class="blue">禽流感次发生蔓延，温家宝指示</li>
+    <li class="darkred" style="">南方农作物减产绝收面积上亩</li>
+    <li class="blue">猪流感在广减产绝收发</li>
+    <li class="red">全国多作物减产绝收面积上亩</li>
+    <li class="blueviolet">猪流感在广东群体性暴发</li>
+</ol>
+</body>
+</html>
+
+第三节：03-HTML5-兄弟伪类
+1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>选择器 - 兄弟伪类</title>
+    <style>
+		.first{
+			color: red;
+		}
+		/*兄弟伪类：
+		+：获取当前元素的相邻的满足条件的元素
+		~：获取当前元素的满足条件的兄弟元素*/
+
+		/*下面这句样式说明查找 ：添加了.first样式的标签的的li元素
+		1.相邻
+		2.必须是指定类型的元素*/
+		.first + li{
+			color: blue;
+		}
+
+		/*下面样式查找添加了.first样式的元素的所有兄弟li元素
+		1.必须是指定类型的元素*/
+		.first ~ li{
+			color: pink;
+		}
+    </style>
+</head>
+<body>
+<ul>
+	<li class="first">前端与移动开发</li>
+	<span>能不能变成蓝色</span>
+	<li>java</li>
+	<li>javascript</li>
+	<li>c++</li>
+	<li>平面设计</li>
+</ul>
+</body>
+</html>
+
+第四节：04-HTML5-相对于父元素的结构伪类
+1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>选择器 - 相对父元素的伪类</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        ul{
+            width: 700px;
+            height: 500px;
+            margin:0 auto;
+            margin-top:100px;
+            list-style: none;
+            border-left:1px solid #ccc;
+            border-top:1px solid #ccc;
+        }
+        ul > li{
+            float: left;
+            width:100px;
+            box-sizing: border-box;
+            height: 100px;
+            line-height:100px;
+            text-align: center;
+            background-color: #fff;
+            border-right:1px solid #ccc;
+            border-bottom:1px solid #ccc;
+        }
+        /*相对于父元素的结构伪类*/
+        /*E:first-child:查找E元素的父级元素中的第一个E元素。在查找的时候并不会限制查找的元素的类型*/
+        /*下面这句样式查找：li的父元素中的第一个li元素
+        1.相对于当前指定元素的父元素
+        2.查找的类型必须是指定的类型*/
+        li:first-child{
+            color: red;
+        }
+        /*E:last-child:查找E元素的父元素中最后一个指定类型的子元素*/
+        li:last-child{
+            background-color: skyblue;
+        }
+        /*查找的时候限制类型  first-of-type*/
+        /*1.也是相对于父元素
+        2.在查找的时候只会查找满足类型条件的元素，过渡掉其它类型的元素*/
+        li:first-of-type{
+            color: red;
+        }
+        li:last-of-type{
+            color: orange;
+        }
+        
+        /*指定索引位置 nth-child(从1开始的索引||关键字||表达式)*/
+        li:nth-child(5){
+            background-color: lightblue;
+        }
+        /*偶数个元素添加背景  even:偶数  odd:奇数*/
+        /*li:nth-child(even){
+            background-color: orange;
+        }
+        li:nth-child(odd){
+            background-color: pink;
+        }*/
+        li:nth-of-type(even){
+            background-color: orange;
+        }
+        li:nth-of-type(odd){
+            background-color: pink;
+        }
+
+        /*想为前面的5个元素添加样式*/
+        /*n:默认取值范围为0~子元素的长度.但是当n<=0时，选取无效
+        0>>5
+        1>>4
+        ...
+        4>>1
+        5>>0*/
+        li:nth-last-of-type(-n+5){
+            font-size: 30px;
+        }
+        li:nth-of-type(-n+5){
+            font-size: 30px;
+        }
+
+        /*空值:没有任何的内容，连空格都没有*/
+        li:empty{
+            background-color: red;
+        }
+
+    </style>
+</head>
+<body>
+<ul>
+    <div></div>
+    <li> </li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+    <li>5</li>
+    <li>6</li>
+    <li>7</li>
+    <li>8</li>
+    <li>9</li>
+    <li>10</li>
+    <li>11</li>
+    <li>12</li>
+    <li>13</li>
+    <li>14</li>
+    <li>15</li>
+    <li>16</li>
+    <li>17</li>
+    <li>18</li>
+    <li>19</li>
+    <li>20</li>
+    <li>21</li>
+    <li>22</li>
+    <li>23</li>
+    <li>24</li>
+    <li>25</li>
+    <li>26</li>
+    <li>27</li>
+    <li>28</li>
+    <li>29</li>
+    <li>30</li>
+    <li>31</li>
+    <li>32</li>
+    <li>33</li>
+    <li>34</li>
+    <li>35</li>
+</ul>
+</body>
+</html>
+
+第五节：05-HTML5-伪类样式target
+1.、
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>CSS3 选择器 -伪类target</title>
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+			background-color: #F7F7F7;
+		}
+
+		.content {
+			width: 960px;
+			margin: 0 auto;
+			padding: 30px;
+		}
+
+		p {
+			font-size: 18px;
+			line-height: 1.75;
+		}
+
+		ul {
+			position: fixed;
+			top: 100px;
+			left: 30px;
+			margin: 0;
+			padding: 0;
+		}
+
+		/*E:target:可以为锚点目标元素添加样式，当目标元素被触发为当前锚链接的目标时，调用此伪类样式*/
+		h2:target{
+			color: red;
+		}
+	</style>
+</head>
+<body>
+	<ul class="nav">
+		<li><a href="#title1">CSS (层叠样式表)</a></li>
+		<li><a href="#title2">实例</a></li>
+		<li><a href="#title3">发展历史</a></li>
+		<li><a href="#title4">使用方法</a></li>
+		<li><a href="#title5">布局特点</a></li>
+		<li><a href="#title6">创建编辑</a></li>
+	</ul>
+	<div class="content">
+		<h2 id="title1">CSS (层叠样式表)</h2>
+		<p>层叠样式表是一种用来表现HTML（标准通用标记语言的一个应用）或XML（标准通用标记语言的一个子集）等文件样式的计算机语言。</p>
+		<p>CSS目前最新版本为CSS3，是能够真正做到网页表现与内容分离的一种样式设计语言。相对于传统HTML的表现而言，CSS能够对网页中的对象的位置排版进行像素级的精确控制，支持几乎所有的字体字号样式，拥有对网页对象和模型样式编辑的能力，并能够进行初步交互设计，是目前基于文本展示最优秀的表现设计语言。CSS能够根据不同使用者的理解能力，简化或者优化写法，针对各类人群，有较强的易读性。</p>
+		<h2 id="title2">实例</h2>
+		<p>如果你要在HTML元素中设置CSS样式，你需要在元素中设置"id" 和 "class"选择器。[1] d 选择器可以为标有特定 id 的 HTML 元素指定特定的样式。HTML元素以id属性来设置id选择器,CSS 中 id 选择器以 "#" 来定义。以下的样式规则应用于元素属性 id="para1":</p>
+		<p>class 选择器用于描述一组元素的样式，class选择器有别于id选择器，class可以在多个元素中使用。class 选择器在HTML中以class属性表示, 在 CSS 中，类选择器以一个点"."号显示：在以下的例子中，所有拥有 center 类的 HTML 元素均为居中。</p>
+		<h2 id="title3">发展历史</h2>
+		<p>作为一项W3C推荐，CSS1发布于 1996年12月17 日。1999 年1月11日，此推荐被重新修订。</p>
+		<p>作为一项 W3C 推荐，CSS2发布于 1999年1月11日。CSS2添加了对媒介（打印机和听觉设备）和可下载字体的支持。</p>
+		<h2 id="title4">使用方法</h2>
+		<p>有三种方法可以在站点网页上使用样式表：外联式Linking（也叫外部样式）：将网页链接到外部样式表。嵌入式Embedding（也叫内页样式）：在网页上创建嵌入的样式表。内联式Inline（也叫行内样式）：应用内嵌样式到各个网页元素。其中，优先级：内联式 > 嵌入式 > 外联式</p>
+		<p>当样式需要被应用到很多页面的时候，外部样式表将是理想的选择。使用外部样式表，你就可以通过更改一个文件来改变整个站点的外观。</p>
+		<p>当特殊的样式需要应用到个别元素时，就可以使用内联样式。 使用内联样式的方法是在相关的标签中使用样式属性。样式属性可以包含任何 CSS 属性。以下实例显示出如何改变段落的颜色和左外边距。</p>
+		<h2 id="title5">布局特点</h2>
+		<p>对于蜘蛛在爬行一个网站的页面时，若是有太多的垃圾代码，会使搜索蜘蛛对其产生不友好、不信任感，同时蜘蛛的爬行速度也会因此而减缓，对于网站SEO而言，可谓一大忌。就如传统的用table页面，对此我们就需要对网站进行代码优化，而这便需要动用CSS+div了，下面便来谈谈使用CSS+div进行代码优化的一些益处。</p>
+		<p>网站使用DIV+CSS布局使代码很是精简，相信大多朋友也都略有所闻，css文件可以在网站的任意一个页面进行调用，而若是使用table表格修改部分页面却是显得很麻烦。要是一个门户网站的话，需手动改很多页面，而且看着那些表格也会感觉很乱也很浪费时间，但是使用css+div布局只需修改css文件中的一个代码即可。</p>
+		<p>采用div-css布局的网站对于搜索引擎很是友好，因此其避免了Table嵌套层次过多而无法被搜索引擎抓取的问题，而且简洁、结构化的代码更加有利于突出重点和适合搜索引擎抓取。</p>
+		<h2 id="title6">创建编辑</h2>
+		<p>创建和编辑css更加常用的是AdobeDreamweaver系列软件，可视化编辑更利于web工程师快速的创建和编辑css，新版本CS5.0、CS5.5、CS6.0、CC，包含Adobe BrowserLab，用于针对多种浏览器测试css的兼容性。Adobe Dreamweaver是一个css创建和编辑必不可少的利器！</p>
+		<p>FrontPage2000 包含有能用来为站点创建外部样式表的模板。可以用空白模板或已包含样式的模板来创建（例如 Arcs）。当保存样式表时， FrontPage 会以 . css 作为文件扩展名。要编辑样式表，请双击文件夹列表中的样式表。</p>
+	</div>
+</body>
+</html>
+
+第六节：06-HTML5-伪元素(before after)
+1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>伪元素：::before  ::after</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        body{
+            padding: 200px;
+        }
+        div:nth-of-type(1){
+            width: 300px;
+            height: 200px;
+            background-color: red;
+            float: left;
+        }
+        div:nth-of-type(2){
+            width: 100px;
+            height: 200px;
+            background-color: blue;
+            float: left;
+            position: relative;
+        }
+
+        div:nth-of-type(2)::before{
+            /*必须添加content属性，否则后期不可见*/
+            content: "";
+            /*默认是行级元素，如果想设置宽高，就必须转换为块级元素*/
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            left: -10px;
+            top: -10px;
+        }
+        div:nth-of-type(2)::after{
+            /*必须添加content属性，否则后期不可见*/
+            content: "";
+            /*默认是行级元素，如果想设置宽高，就必须转换为块级元素*/
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            left: -10px;
+            bottom: -10px;
+        }
+    </style>
+</head>
+<body>
+<div></div>
+<div></div>
+</body>
+</html>
+
+第七节：07-HTML5-其它伪元素的使用
+1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        /*获取第一个字符：实现首字下沉*/
+        p::first-letter{
+            color: red;
+            font-size: 30px;
+            float: left;/*文本环绕*/
+        }
+
+        /*获取第一行内容:如果设置了::first-letter,那么无法同时设置它的样式*/
+        p::first-line{
+            text-decoration: underline;
+        }
+
+        /*设置当前选中内容的样式*/
+        p::selection{
+            background-color: pink;
+            color: red;
+            /*它只能设置显示的样式，而不能设置内容大小*/
+            /*font-size: 30px;*/
+        }
+    </style>
+</head>
+<body>
+<p>眉毛上的汗水和眉毛下的泪水，你必须选择一样<br>你不努力，活该生活在社会的最底层</p>
+</body>
+</html>
+
+第八节：08-HTML5-颜色模式之RGB
+第九节：09-HTML5-颜色模式之HSL
+第十节：10-HTML5-HTML5中两种颜色设置的方式
+1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        div{
+            width: 200px;
+            height: 200px;
+            border: 1px solid #ccc;
+            /*1.使用预设了值*/
+            /*background-color: red;*/
+            /*2.使用颜色拾取器*/
+            /*background-color: #c9ffa6;*/
+            
+            /*rgb(红，绿，蓝)*/
+            /*background-color: rgb(255,150,0);*/
+
+            /*hsl(颜色(0~360)，饱和度(0%~100%)，明度(0%~100%))*/
+            /* 颜色：红橙（30）黄（60）绿（120）青（180）蓝（240）紫（300） */
+            /*明度默认是50%（相当于photoshop中明度的100%，html5在这方面做了调整）,一般建议保留50的值*/
+            /* 明度越大相当于白色添加越多，越小相当于黑色添加的越多 */
+
+            /* 饱和度相当于兑水，饱和度越大，对的水越少 */
+            /*background-color: hsl(300,100%,50%);*/
+            
+            /*h5中的颜色设置*/
+            /*rgba(红色，绿色，蓝色，透明度)
+            透明度：0代表完全透明  1代表完成不透明  不会影响子元素*/
+            /*background-color: rgba(255,0,255,0.2);*/
+
+            /* 背景半透明，字体颜色不变 */
+            background-color: hsla(300,100%,50%,0.2);
+
+        }
+    </style>
+</head>
+<body>
+    <div>这是内容</div>
+</body>
+</html>
+
+第十一节：11-HTML5-文件阴影
+1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        .demo{
+            width: 600px;
+            padding: 30px;
+            background-color: #666;
+            margin:20px auto;
+            text-align: center;
+            font:bold 80px/100% "微软雅黑";
+            color: #fff;
+        }
+        /*添加阴影 text-shadow:offsetX offsetY blur color*/
+        .demo1{
+            text-shadow: -2px -2px 5px red;
+        }
+        .demo2{
+            text-shadow: 0px 0px 30px #fff;
+        }
+        /*多层阴影效果*/
+        .demo3{
+            text-shadow: 0px 0px 30px #fff,0px 0px 50px red,0px 0px 70px #fff;
+        }
+        .demo4{
+            color: black;
+            text-shadow: 0px 1px 0px #fff;
+        }
+        /*浮雕立体效果*/
+        .demo5{
+            color: #fff;
+            text-shadow: -1px -1px 0px #eee,-2px -2px 0px #ddd,-3px -3px 0px #ccc;
+        }
+        .demo6{
+            /*color: transparent; 会造成一个模糊的现象 */
+            color: transparent;
+            /* 字体颜色由hsla中的颜色填充 */
+            text-shadow: 0px 0px 8px hsla(30,100%,30%,1);
+        }
+    </style>
+</head>
+<body>
+<div class="demo demo1">中华人民共和国</div>
+<div class="demo demo2">中华人民共和国</div>
+<div class="demo demo3">中华人民共和国</div>
+<div class="demo demo4">中华人民共和国</div>
+<div class="demo demo5">中华人民共和国</div>
+<div class="demo demo6">中华人民共和国</div>
+<div class="demo demo7">中华人民共和国</div>
+</body>
+</html>
+
+第十二节：12-HTML5-盒模型
+1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        .items{
+            width:100%;
+            text-align: center;
+            margin-top: 100px;
+        }
+        .item{
+            width: 316px;
+            height: 170px;
+            display: inline-block;
+            margin:0 10px;
+            overflow: hidden;
+            /*添加盒模型*/
+            box-sizing: border-box;
+        }
+        .b1{
+            background-image: url("../images/1.jpg");
+        }
+        .b2{
+            background-image: url("../images/2.jpg");
+        }
+        .b3{
+            background-image: url("../images/3.jpg");
+        }
+
+        /*鼠标上 移时添加边框*/
+        .item:hover{
+            border: 10px solid red;
+        }
+
+        .box{
+            width: 400px;
+            height: 200px;
+            background-color: #ccc;
+            margin: 100px auto;
+        }
+        .left{
+            /*默认情况下，width仅仅是内容的宽度*/
+            width: 200px;
+            height: 100%;
+            background-color: red;
+            float: left;
+            /*添加内间距*/
+            padding-left: 10px;
+            border-right: 10px solid green;
+            /*添加右边框*/
+            /*border-right: 3px solid green;*/
+            /*设置盒模型*/
+            /*content-box:你设置的width属性值仅仅是内容的宽度，盒子的最终的宽高值在width的基础上再加上padding和border的宽度*/
+            /*border-box:你设置的width属性值就是盒子的最终的宽度，包含了border和padding和内容。如果添加了padding和border,那么真正放置内容的区域会减小--但是它可以稳固页面的结构*/
+            box-sizing: border-box;
+        }
+        .right{
+            width: 200px;
+            height: 100%;
+            background-color: blue;
+            float: left;
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+    <div class="left">在默认情况下，CSS设置的盒子宽度仅仅是内容区的宽度，而非盒子的宽度。同样，高度类似。真正盒子的宽度（在页面呈现出来的宽度）和高度，需要加上一些其它的属性</div>
+    <div class="right"></div>
+</div>
+<div class="items">
+    <div class="item b1"></div>
+    <div class="item b2"></div>
+    <div class="item b3"></div>
+</div>
+</body>
+</html>
+
+第十三节：13-HTML5-边框圆角
+1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        div{
+            width: 200px;
+            /*height: 200px;*/
+            height: 100px;
+            background-color: red;
+            margin: 100px auto;
+            /*添加边框圆角*/
+            /*1.设置一个值：四个角的圆角值都一样*/
+            /*border-radius: 10px;*/
+            /*2.设置两个值:第一个值控制左上/右下，第二个值控制右上/左下*/
+            /*border-radius: 10px 30px;*/
+            /*3.设置三个值：第一个值控制左上，第二值控制右上/左下，第三个值控制右下*/
+            /*border-radius: 10px 40px 60px;*/
+            /*4.设置四个值：左上  右上 右下 左下*/
+            /*border-radius: 10px 30px 60px 100px;*/
+
+            /*添加/是用来设置当前个不同方向的半径值  水平x方向/垂直y方向*/
+            /*border-radius: 100px/50px;*/
+
+            /*添加某个角点的圆角*/
+            /*border-radius: 0px 50px 0px 0px;*/
+            /*border-上下-左右-radius:*/
+            /*border-top-right-radius: 100px;
+            border-top-left-radius: 100px;*/
+            /*border-bottom-left-radius: 100px;
+            border-bottom-right-radius: 100px;*/
+
+            /*设置某个角点的两个方向上的不同圆角*/
+            /*border-top-right-radius: 100px 50px;
+            border-bottom-left-radius: 80px 40px;
+            border-bottom-right-radius: 60px 30px;
+            border-top-left-radius: 40px 20px;*/
+            /*如果想设置四个角点的不同方向上的不同圆角值*/
+            /*分别是水平方向的：左上，右上，右下，左下 / 垂直方向的：左上，右上，右下，左下*/
+            border-radius: 100px 0px 0px 0px/20px 0px 0px 0px;
+        }
+        .nav{
+            height: 65px;
+            margin:100px auto;
+        }
+        .left{
+            width: 14px;
+            height: 100%;
+            background: url("../images/left.gif") no-repeat;
+            float: left;
+        }
+        .center{
+            width: 800px;
+            height: 100%;
+            background: url("../images/center.gif");
+            float: left;
+        }
+        .right{
+            width: 11px;
+            height: 100%;
+            background: url("../images/right.gif") no-repeat;
+            float: left;
+        }
+    </style>
+</head>
+<body>
+<!--<div class="nav">
+    <div class="left"></div>
+    <div class="center"></div>
+    <div class="right"></div>
+</div>-->
+<div></div>
+</body>
+</html>
+
+第十四节：14-HTML5-案例-andorid机器人
+1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        body{
+            background-color: #ccc;
+        }
+        .content{
+            width: 500px;
+            height: 500px;
+            border: 1px solid red;
+            margin:50px auto;
+        }
+        .an_header{
+            width: 250px;
+            height: 125px;
+            background-color: darkgreen;
+            margin: 10px auto;
+            /*添加圆角*/
+            border-radius: 125px 125px 0 0;
+            position: relative;
+        }
+        /*使用伪元素添加眼睛*/
+        .an_header::before,
+        .an_header::after{
+            /*1.一定设置content属性*/
+            content: "";
+            /*2.如果需要设置宽度就应该转换其为块级元素，它默认是行级元素  float  display  position*/
+            position: absolute;
+            bottom: 40px;
+            width: 20px;
+            height: 20px;
+            border-radius: 10px;
+            background-color: #fff;
+        }
+        .an_header::before{
+            left: 70px;
+        }
+        .an_header::after{
+            right: 70px;
+        }
+        .an_body{
+            width: 250px;
+            height: 250px;
+            background-color: darkgreen;
+            border-radius: 0px 0px 20px 20px;
+            margin:0 auto;
+            position: relative;
+        }
+        .an_body::before,
+        .an_body::after{
+            content: "";
+            position: absolute;
+            top: 20px;
+            background-color: darkgreen;
+            width: 30px;
+            height: 180px;
+            border-radius: 10px;
+        }
+        .an_body::before{
+            left:-40px;
+        }
+        .an_body::after{
+            right:-40px;
+        }
+
+        .an_footer{
+            width: 250px;
+            height: 100px;
+            position: relative;
+            margin:0 auto;
+        }
+        .an_footer::before,
+        .an_footer::after{
+            content: "";
+            position: absolute;
+            top: 00px;
+            background-color: darkgreen;
+            width: 30px;
+            height: 90px;
+            border-radius: 0px 0px 10px 10px;
+        }
+        .an_footer::before{
+            left: 50px;
+        }
+        .an_footer::after{
+            right: 50px;
+        }
+    </style>
+</head>
+<body>
+<div class="content">
+    <div class="an_header"></div>
+    <div class="an_body"></div>
+    <div class="an_footer"></div>
+</div>
+</body>
+</html>
+
+第十五节：15-HTML5-边框阴影
+1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #F7F7F7;
+        }
+
+        img {
+            width: 100%;
+            display: block;
+        }
+
+        .items {
+            padding: 30px;
+            overflow: hidden;
+        }
+
+        .item {
+            width: 200px;
+            height: 200px;
+            padding-bottom: 100px;
+            margin-right: 30px;
+            border: 1px solid #CCC;
+            background-color: #FFF;
+            float: left;
+        }
+       /* div{
+            width: 200px;
+            height: 200px;
+            background-color: orange;
+            margin:100px auto;
+            !*添加边框阴影*!
+            box-shadow: -10px 10px 5px 0px rgba(0,0,150,0.2) inset,10px -10px 5px 0px rgba(0,0,150,0.2) inset;
+        }*/
+
+        /*需求：为前面四个图片盒子添加右下角的外阴影，为最后个盒子添加四个方向的内阴影*/
+        .item:nth-of-type(-n+4){
+            box-shadow: 3px 3px 3px #ccc;
+        }
+        .item:last-of-type{
+            /* （正）左   （负）右  
+               （正）上   （负）下
+            */
+            /* 左上 */
+            box-shadow: 3px 3px 3px #ccc inset,
+            /* 右下 */
+            -3px -3px 3px #ccc inset;
+        }
+    </style>
+</head>
+<body>
+<!--文本阴影：text-shadow:offsetX offsetY blur color-->
+<!--边框阴影：box-shadow:h v blur spread color inset
+h:水平方向的偏移值
+v:垂直方向的偏移值
+blur:模糊--可选，默认0
+spread:阴影的尺寸，扩展和收缩阴影的大小--可选(可以调负值) 默认0
+color:颜色--可选，默认黑色
+inset:内阴影--可选,默认是外阴影-->
+<!--<div></div>-->
+<div class="items">
+    <div class="item">
+        <img src="../images/pic_1.jpg">
+    </div>
+    <div class="item">
+        <img src="../images/pic_2.jpg">
+    </div>
+    <div class="item">
+        <img src="../images/pic_3.jpg">
+    </div>
+    <div class="item">
+        <img src="../images/pic_4.jpg">
+    </div>
+    <div class="item"></div>
+</div>
+
+</body>
+</html>
+
+第四天：
+
+第一节：01-HTML5-线性渐变
+1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        div{
+            width: 300px;
+            height: 300px;
+            /*添加渐变：渐变不是一个单一钩，它产生的是图像，所以需要使用background*/
+            /*linear-gradient(方向，开始颜色 位置，颜色2 位置，颜色3 位置...);*/
+            /*方向：
+            to top:0deg（向上）
+            to right:90deg（向右）
+            to bottom:180deg --默认值（向下）
+            to left:270deg*/(向左)
+            /*background: linear-gradient(to right,red,blue)*/;
+            background: linear-gradient(to right,red 0%,red 50%,blue 50%,blue 100%);
+        }
+    </style>
+</head>
+<body>
+<div></div>
+</body>
+</html>
+
+第二节：02-HTML5-径向渐变
+1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        div{
+            width: 300px;
+            height: 200px;
+            /*添加径向渐变：产生也是图像*/
+            /*background: radial-gradient(red,blue);*/
+            /*语法：radial-gradient(形状 大小 坐标,颜色1，颜色2...)：
+
+            形状shape:circle:产生正方形的渐变色   ellipse:适配当前的形状,如果是正方形的容器，两者效果一样.如果宽高不一样，默认效果切换到ellipse
+
+            大小size: closest-side：最近边； farthest-side：最远边； closest-corner：最近角； farthest-corner：最远角。默认是最远的角farthest-corner
+
+            at position:坐标，默认在正中心。可以赋值坐标（参照元素的左上角（0 0）），也可以赋值关键字(left center right top bottom)*/
+
+            /*background: radial-gradient(circle,red,blue);*/
+            /*background: radial-gradient(circle farthest-side at 50px 50px,red,blue);*/
+            /*background: radial-gradient(at left top,red,blue);*/
+            
+            /*设置颜色的位置*/
+            background: radial-gradient(red,red 50%,blue 50%,blue);
+        }
+    </style>
+<body>
+<div></div>
+</body>
+</html>
+
+第三节：03-HTML5-重复渐变
+1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body{
+            background-color: #ccc;
+        }
+        div:first-of-type{
+            width: 300px;
+            height: 300px;
+            /*background: radial-gradient(
+                    #fff 0%,#fff 10%,
+                    #000 10%,#000 20%,
+                    #fff 20%,#fff 30%,
+                    #000 30%,#000 40%);*/
+            /* 默认是最远的角 */
+            background: repeating-radial-gradient(circle closest-side at center center,
+            #fff 0%,#fff 10%,
+            #000 10%,#000 20%);
+        }
+        div:last-of-type{
+            width: 200px;
+            height: 800px;
+            background: repeating-linear-gradient(45deg,
+                    #fff 0%,#fff 10%,
+                    #000 10%,#000 20%);
+        }
+    </style>
+</head>
+<body>
+<div></div>
+<div></div>
+</body>
+</html>
+
+第四节：04-HTML5-background(上)
+1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+	div{
+            width: 500px;
+            height: 500px;
+            border: 1px solid red;
+            overflow: scroll;
+            /*1.添加背景颜色*/
+            /*background-color: skyblue;*/
+            /*2.添加背影图片
+            如果图片大于容器，那么默认就从容器左上角开始放置
+            如果图片小于容器，那么图片默认会平铺*/
+            /*background-image: url("../images/bg-img.jpg");*/
+            background-image: url("../images/share1.png");
+            /*3.设置背景平铺
+            round:会将图片进行缩放之后再平铺
+            space:图片不会缩放平铺，只是会在图片之间产生相同的间距值*/
+            /*background-repeat: space;*/
+
+            /*4.设置页面：跟随滚动/固定
+            background-attachment:;
+            fixed:背景图片的位置固定不变
+            scroll:当滚动容器的时候，背景图片也会跟随滚动*/
+
+            /*local和scroll的区别：前提是滚动当前容器
+            配合和overflow:scroll一起使用
+            local:背景图片会跟随内容一起滚动
+            scroll:背景图片不会跟随内容一起滚动*/
+            background-attachment: scroll;
+        }
+	</style>
+</head>
+<body>
+	<div></div>
+</body>
+</html>
+
+第五节：05-HTML5-background(中)
+1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        div{
+            width: 300px;
+            height: 500px;
+            border: 1px solid red;
+            /*添加背景*/
+            background-image: url("../images/bg-img.jpg");
+            /*background-image: url("../images/share1.png");*/
+            background-repeat: no-repeat;
+            /*设置背景图片的大小  宽度/高度   宽度/auto(保持比例自动缩放)
+            建议：在使用这个属性之前衔确定宽高比与容器的宽高比是否一致，否则会造成图片失真变形*/
+            /*background-size: 300px 500px;*/
+            /*background-size: 300px;*/
+            /*设置百分比，是参照父容器可放置内容区域的百分比*/
+            /*background-size: 50% 50%;*/
+            /*设置contain:按比例调整图片大小，使用图片宽高自适应整个元素的背景区域，使图片全部包含在容器内
+            1.图片大于容器：有可能造成容器的空白区域,将图片缩小
+            2.图片小于容器：有可能造成容器的空白区域，将图片放大*/
+            /*background-size: contain;*/
+
+            /*cover:与contain刚好相反，背景图片会按比例缩放自 适应整个背景区域，如果背景区域不足以包含所有背景图片，图片内容会溢出
+            1.图片大于容器：等比例缩小，会填满整个背景区域，有可能造成图片的某些区域不可见
+            2.图片小于容器：等比例放大，填满整个背景区域，图片有可能造成某个方向上内容的溢出*/
+            background-size: cover;
+        }
+    </style>
+</ead>
+<body>
+<div></div>
+</body>
+</html>
+
+第六节：06-HTML5-background(backgroundSize案例)
+1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        div{
+            width: 100%;
+            height: 360px;
+            background: url("../images/slide_01_2000x410.jpg");
+            /*设置背景图片的大小*/
+            background-size: cover;
+            /*设置position*/
+            background-position: center;
+        }
+    </style>
+</head>
+<body>
+<div>
+    
+</div>
+</body>
+</html>
+
+第七节：07-HTML5-background(下)
+1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        /*提升移动端响应区域的大小*/
+        a{
+            width: 50px;
+            height: 50px;
+            display: block;
+            background-color: #ddd;
+            margin:100px auto;
+            box-sizing: border-box;
+            
+            background-image: url("../images/sprites.png");
+            /*设置背景偏移，参照background-origin原点，这个原点默认在容器的左上角*/
+            background-position: -20px 0;
+
+            /*添加padding*/
+            padding:14px;
+            /*设置背景坐标的原点
+            border-box:从border的位置开始填充背景，会与border重叠
+            padding-box:从padding的位置开始填充背景，会与padding重叠
+            content-box:从内容的位置开始填充背景*/
+            background-origin: content-box;
+            /*设置内容的裁切:设置的是裁切，控制的是显示
+            border-box:其实是显示border及以内的内容
+            padding-box:其实是显示padding及以内的内容
+            content-box:其实是显示content及以内的内容*/
+            background-clip: content-box;
+        }
+    </style>
+</head>
+<body>
+<a href=""></a>
+</body>
+</html>
+
+第八节：08-HTML5-边框图片(上)
+第九节：09-HTML5-边框图片(中)
+1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        div{
+            width: 200px;
+            height: 200px;
+            margin:100px auto;
+            box-sizing: border-box;
+            border: 27px solid red;
+            /*padding: 27px;*/
+            /*添加边框图片*/
+            /*border-image-source:可以指定边框图片的路径,默认只是填充到容器的四个角点*/
+            /*border-image-source: url("../images/border1.png");*/
+            /*让它成为九宫格：border-image-slice:设置四个方向上的裁切距离.fill:做内容的内部填充  问题：如果分别设置1，2，3，4个值代表什么意思*/
+            /*border-image-slice: 27 fill;*/
+            /*border-image-width:边框图片的宽度。如果没有设置这个属性，那么宽度默认就是元素的原始的边框宽度。
+            细节：1.边框图片的本质是背景，并不会影响元素内容的放置  2.内容只会被容器的border和padding影响
+            建议：一般将值设置为原始的边框的宽度*/
+            /*border-image-width: 27px;*/
+            /*border-image-outset:扩展边框*/
+            /*border-image-outset: 0px;*/
+            /*border-image-repeat:
+            repeat:直接重复平铺
+            round:将内容缩放进行完整的重复平铺*/
+            /*border-image-repeat: round;*/
+
+            /*缩写：*/
+            /*border-image: source slice / width/outset repeat;*/
+            border-image: url("../images/border1.png") 27 / 27px /0px round;
+        }
+    </style>
+</head>
+<body>
+<div>边框图片的宽度。如果没有设置这个属性，那么宽度默认就是元素的原始的边框宽度</div>
+</body>
+</html>
+
+第十节：10-HTML5-边框图片(案例)
+1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        div{
+            width: 500px;
+            height: auto;
+            border: 10px solid red;
+            margin:100px auto;
+            /*添加边框图片*/
+            border-image-source: url("../images/btn_bg.png");
+            /*设置受保护的区域大小*/
+            border-image-slice: 10 fill;
+            /*设置边框图片的宽度
+            1.明确圆角的大小
+            2.明确受保护的区域的大小*/
+            border-image-width: 10px;
+            /*设置背景平铺效果  
+            默认是stretch：拉伸
+            还有值repeat：纯色会出现纹理
+            还有值round：纯色效果也差不多是纹理
+            */
+            border-image-repeat: stretch;
+        }
+    </style>
+</head>
+<body>
+<div>边框图片的本质是背景，并不会影响元素内容的放置边框图片的本质是背景，并不会影响元素内容的放置边框图片的本质是背景，并不会影响元素内容的放置边框图片的本质是背景，并不会影响元素内容的放置边框图片的本质是背景，并不会影响元素内容的放置边框图片的本质是背景，并不会影响元素内容的放置边框图片的本质是背景，并不会影响元素内容的放置边框图片的本质是背景，并不会影响元素内容的放置边框图片的本质是背景，并不会影响元素内容的放置边框图片的本质是背景，并不会影响元素内容的放置</div>
+</body>
+</html>
+
+第十一节：11-HTML5-过渡
+1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        div{
+            width: 200px;
+            height: 200px;
+            background-color: red;
+            position: absolute;
+            left: 100px;
+            top: 100px;
+            /*添加过渡效果:过渡效果执行完毕之后，默认会还原到原始状态*/
+            /*1.transition-property:添加过渡效果的样式属性名称*/
+            /*transition-property: left;*/
+            /*2.transition-duration:过渡效果的耗时 以秒做为单位*/
+            /*transition-duration: 2s;*/
+            /*3.transition-timing-function:设置时间函数--控制运动的速度
+                取值：linear：线性
+                      ease:先慢后快再慢;
+                      还有很多值
+               */
+            /*transition-timing-function: linear;*/
+            /*4.transition-delay:过渡效果的延迟*/
+            /*transition-delay: 2s;*/
+
+            /*简写：transition:属性名称 过渡时间  时间函数  延迟*/
+            /*transition: left 2s linear 0s;*/
+
+            /*为多个样式同时添加过渡效果*/
+            transition: left 2s linear 0s,background-color 5s linear 0s;
+
+            /*为所有样式添加过渡效果 all:所有样式
+            1.所有样式的过渡效果一样
+            2.效率低下，它会去查询所有添加的样式
+            3.建议：以后不要这么写
+            4.steps(4):可以让过渡效果分为指定的几次来完成*/
+            transition:all 2s steps(4);
+            -moz-transition: all 2s steps(4);
+            -webkit-transition: all 2s steps(4);
+            -o-transition: all 2s steps(4);
+        }
+       /*单击*/
+        div:active{
+            left: 1000px;
+            background-color: blue;
+        }
+    </style>
+</head>
+<body>
+<div></div>
+</body>
+</html>
+
+第十二节：12-HTML5-过渡案例-手风琴菜单
+1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        .menu{
+            width: 200px;
+            height:auto;
+            margin:100px auto;
+        }
+        .item{
+            width: 100%;
+            height:auto;
+        }
+        .item > h3{
+            height: 40px;
+            line-height: 40px;
+            background-color: #7dffe7;
+            color: orange;
+            border-bottom: 2px solid #ccc;
+            padding-left:10px;
+        }
+        .item > .itemBox{
+            width: 100%;
+            height:0px;
+            overflow: hidden;
+            /*display: none;*/
+            /*添加过渡效果:过渡效果只能产生从某个值到另外一个具体的值的过渡*/
+            /*1.一定要设置为哪些css样式添加过渡效果*/
+            /*transition-property: display;*/
+            transition-property: height;
+            /*2.一定要设置过渡效果的耗时*/
+            transition-duration: 1s;
+        }
+        .item > .itemBox > ul{
+            list-style: none;
+            background-color: #eaffb6;
+            padding:10px;
+        }
+
+        /*为item添加hover伪类*/
+        .item:hover > .itemBox{
+            /*display: block;*/
+            height: 110px;
+        }
+    </style>
+</head>
+<body>
+<div class="menu">
+    <div class="item">
+        <h3>市内新闻</h3>
+        <div class="itemBox">
+            <ul>
+                <li>深圳超市肉菜档遭抢</li>
+                <li>深圳超市肉菜档遭抢</li>
+                <li>深圳超市肉菜档遭抢</li>
+                <li>深圳超市肉菜档遭抢</li>
+            </ul>
+        </div>
+    </div>
+    <div class="item">
+        <h3>省内新闻</h3>
+        <div class="itemBox">
+            <ul>
+                <li>深圳超市肉菜档遭抢</li>
+                <li>深圳超市肉菜档遭抢</li>
+                <li>深圳超市肉菜档遭抢</li>
+                <li>深圳超市肉菜档遭抢</li>
+            </ul>
+        </div>
+    </div>
+    <div class="item">
+        <h3>国内新闻</h3>
+        <div class="itemBox">
+            <ul>
+                <li>深圳超市肉菜档遭抢</li>
+                <li>深圳超市肉菜档遭抢</li>
+                <li>深圳超市肉菜档遭抢</li>
+                <li>深圳超市肉菜档遭抢</li>
+            </ul>
+        </div>
+    </div>
+    <div class="item">
+        <h3>国际新闻</h3>
+        <div class="itemBox">
+            <ul>
+                <li>深圳超市肉菜档遭抢</li>
+                <li>深圳超市肉菜档遭抢</li>
+                <li>深圳超市肉菜档遭抢</li>
+                <li>深圳超市肉菜档遭抢</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+
+第十三节：13-HTML5-transform2D转换(translate)
+第十四节：14-HTML5-transform2D转换(scale)
+第十五节：15-HTML5-transform2D转换(rotate)
+第十六节：16-HTML5-transform2D转换(skew)
+1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        div{
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            margin-left: 200px;
+            margin-top:10px;
+            /*添加过渡效果  css样式名称 耗时*/
+            transition: transform 2s;
+        }
+        /*移动translate*/
+        div:first-of-type:active{
+            /*使用transform实现元素的移动 a.移动是参照元素的左上角 b.执行完毕之后会恢复到原始状态
+            1.如果只有一个参数就代表x方向
+            2.如果有两个参数就代表x/y方向*/
+            /*transform: translate(100px);*/
+            /*transform: translate(400px,500px);*/
+            /*transform: translate(0px,500px);*/
+
+            /*添加水平或者垂直方向的移动*/
+            /*transform:translateX(300px);*/
+            transform:translateY(300px);
+        }
+        /*缩放：scale*/
+        div:nth-of-type(2):active{
+            /*实现缩放  1指不缩放，>1.01放大  <0.99缩小  参照元素的几何中心
+            1.如果只有一个参数，就代表x和y方向都进行相等比例的缩放
+            2.如果有两个参数，就代表x/y方向*/
+            /*transform: scale(2);*/
+            /*transform: scale(2,1);*/
+            /*缩放指定的方向 */
+            /*transform:scaleX(0.5);*/
+            transform:scaleY(0.5);
+        }
+        /*旋转：rotate*/
+        div:nth-of-type(3){
+            /*设置旋转轴心
+            1.x y
+            2.关键字：left top right bottom center*/
+            background-color: purple;
+            transform-origin: left top;
+            /* transform-origin:50px 50px; */
+        }
+        div:nth-of-type(3):active{
+            /*transform:rotate(-90deg);
+            transform: translateX(700px);*/
+            /*同时添加多个transform属性值*/
+            transform: translateX(700px) rotate(-90deg);
+            /*transform: rotate(-90deg) translateX(700px);*/
+        }
+        /*斜切：skew*/
+        div:nth-of-type(4):active{
+            background-color: blue;
+            /*如果角度为正，则往当前轴的负方向斜切，如果角度为负，则往当前轴的正方向斜切*/
+            transform:skew(-30deg);
+            /*transform:skew(30deg,-30deg);*/
+            /*设置某个方向的斜切值*/
+            /*transform:skewX(30deg);*/
+            /*transform:skewY(30deg);*/
+        }
+    </style>
+</head>
+<body>
+<div>1</div>
+<div>2</div>
+<div>3</div>
+<div>4</div>
+</body>
+</html>
+
+第十七节：17-HTML5-transform-origin（HTML5-旋转轴心案例）
+1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        .pkBox{
+            width: 155px;
+            height: 219px;
+            position: relative;
+            margin:300px auto;
+        }
+        .pkBox > img{
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            /*添加过渡*/
+            transition: transform 2s;
+            /*设置旋转轴心*/
+            transform-origin: right top;
+        }
+        /*添加鼠标上移的效果*/
+        .pkBox:hover >img:nth-of-type(1){
+             transform: rotate(60deg);
+         }
+        .pkBox:hover >img:nth-of-type(2){
+            transform: rotate(120deg);
+        }
+        .pkBox:hover >img:nth-of-type(3){
+            transform: rotate(180deg);
+        }
+        .pkBox:hover >img:nth-of-type(4){
+            transform: rotate(240deg);
+        }
+        .pkBox:hover >img:nth-of-type(5){
+            transform: rotate(300deg);
+        }
+        .pkBox:hover >img:nth-of-type(6){
+            transform: rotate(360deg);
+        }
+    </style>
+</head>
+<body>
+<div class="pkBox">
+    <img src="../images/pk1.png" alt="">
+    <img src="../images/pk2.png" alt="">
+    <img src="../images/pk1.png" alt="">
+    <img src="../images/pk2.png" alt="">
+    <img src="../images/pk1.png" alt="">
+    <img src="../images/pk2.png" alt="">
+</div>
+</body>
+</html>
+
+第十八节：18-HTML5-同时添加多个transform属性值
+1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        body{
+            background-color: #31965b;
+        }
+        .box{
+            width: 440px;
+            margin:100px auto;
+        }
+        .box > img{
+            transition: transform 1s;
+        }
+        .box > img:nth-of-type(1){
+            transform: translate(100px,100px) rotate(30deg);
+        }
+        .box > img:nth-of-type(2){
+            transform: translate(-100px,-100px) rotate(-30deg);
+        }
+        .box > img:nth-of-type(3){
+            transform: translate(200px,200px) rotate(60deg);
+        }
+        .box > img:nth-of-type(4){
+            transform: translate(-200px,-200px) rotate(-60deg);
+        }
+        .box > img:nth-of-type(5){
+            transform: translate(150px,150px) rotate(90deg);
+        }
+        .box > img:nth-of-type(6){
+            transform: translate(50px,150px) rotate(-90deg);
+        }
+        .box > img:nth-of-type(7){
+            transform: translate(-150px,-150px) rotate(60deg);
+        }
+        .box > img:nth-of-type(8){
+            transform: translate(10px,-250px) rotate(-90deg);
+        }
+        .box > img:nth-of-type(9){
+            transform: translate(-250px,10px) rotate(45deg);
+        }
+
+        .box:hover > img{
+            transform: none;
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+    <img src="../images/shield_1_01.png" alt="">
+    <img src="../images/shield_1_02.png" alt="">
+    <img src="../images/shield_1_03.png" alt="">
+    <img src="../images/shield_1_04.png" alt="">
+    <img src="../images/shield_1_05.png" alt="">
+    <img src="../images/shield_1_06.png" alt="">
+    <img src="../images/shield_1_07.png" alt="">
+    <img src="../images/shield_1_08.png" alt="">
+    <img src="../images/shield_1_09.png" alt="">
+</div>
+</body>
+</html>
+
+第十九节：19-HTML5-实现任意元素居中
+1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        .box{
+            width: 400px;
+            height: 400px;
+            border-radius: 200px;
+            background-color: #ccc;
+            margin:100px auto;
+            position: relative;
+        }
+        .rec{
+            width: 200px;
+            height: 200px;
+            background-color: red;
+            position: absolute;
+            /*定位的百分比是参照父容器的宽高*/
+            left: 50%;
+            top: 50%;
+            /*使用transform实现元素的居中  百分比是参照元素本身的宽高*/
+            transform: translate(-50%,-50%);
+            /*transform: translate(-50px,-50px);*/
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+    <div class="rec"></div>
+</div>
+</body>
+</html>
+
+第二十节：20-HTML5-3d移动
+第二十一节：21-HTML5-3d缩放
+第二十二节：22-HTML5-3d旋转
+1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        div{
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            margin-left: 200px;
+            margin-top:10px;
+            /*添加过渡*/
+            transition: transform 2s;
+        }
+        /*添加三维移动--3D移动*/
+        /* active代表鼠标点击 */
+        div:first-of-type:active{
+            /*translate3d(X方向的偏移，Y方向的偏移，Z方向的偏移)*/
+            /*transform: translate3d(400px,0,0);*/
+            /*transform: translate3d(400px,400px,0);*/
+            transform: translate3d(0px,0px,400px);
+        }
+        /*添加三维缩放*/
+        div:nth-of-type(2):active{
+            /*scale3d(x方向上的缩放，y方向的缩放，z方向的缩放)
+            >1.01 放大   <0.99 缩小*/
+            /*transform:scale3d(2,0.5,10);*/
+            transform:scale3d(1,1,10);
+        }
+        /*添加三维旋转*/
+        div:nth-of-type(3):active{
+            /*rotate3d(x,y,z,angle):
+            x:代表x轴方向上的一个向量值
+            y:代表y轴方向上的一个向量值
+            z:代表z轴方向上的一个向量值*/
+            transform: rotate3d(1,1,1,330deg);
+        }
+    </style>
+</head>
+<body>
+<div>1</div>
+<div>2</div>
+<div>3</div>
+<div>4</div>
+</body>
+</html>
+
+第五天：
+第一节：01-HTML5-立方体(上)
+第二节：02-HTML5-立方体(下)
+第三节：03-HTML5-3d变换(景深透视)
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        .box{
+            width: 200px;
+            height: 200px;
+            margin:100px auto;
+            position: relative;
+            /*让box默认旋转，方便观察*/
+            transform: rotate3d(1,1,0,0deg);
+            /*让子元素保留3d变换之后的效果*/
+            transform-style: preserve-3d;
+            /*添加透视景深效果，默认是中心平面*/
+            perspective: 0px;
+            /*设置透视的观察角度,视角往左移，x减小
+                                视角往下移，y增大
+            默认是几何中心
+            */
+            perspective-origin: 0px 0px;
+        }
+        .box > div{
+            width: 200px;
+            height: 200px;
+            position: absolute;
+            opacity: 0.5;
+        }
+        .front{
+            background-color: red;
+            transform: translateZ(100px);
+        }
+        .back{
+            background-color: green;
+            transform: translateZ(-100px) rotateY(180deg);
+        }
+        .left{
+            background-color: blue;
+            /*移动+旋转(方向利用左手螺旋法则判断)*/
+            transform: translateX(-100px) rotateY(-90deg);
+        }
+        .right{
+            background-color: pink;
+            transform: translateX(100px) rotateY(90deg);
+        }
+        .top{
+            background-color: purple;
+            transform: translateY(-100px) rotateX(90deg);
+        }
+        .bottom{
+            background-color: orange;
+            transform: translateY(100px) rotateX(-90deg);
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+    <div class="front">front</div>
+    <div class="back">back</div>
+    <div class="left">left</div>
+    <div class="right">right</div>
+    <div class="top">top</div>
+    <div class="bottom">bottom</div>
+</div>
+</body>
+</html>
+
+
+第四节：04-HTML5-动画(创建动画)
+1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        div{
+            width: 100px;
+            height: 100px;
+            background-color: red;
+
+            /*添加动画效果*/
+            /*1.animation-name:指定动画名称*/
+            animation-name: moveTest;
+            /*2.设置动画的总耗时*/
+            animation-duration: 2s;
+            /*3.设置动画的播放次数，默认为1次  可以指定具体的数值，也可以指定infinite(无限次)*/
+            animation-iteration-count: 1;
+            /*4.设置交替动画  alternate:来回交替*/
+            animation-direction: alternate;
+            /*5.设置动画的延迟*/
+            animation-delay: 2s;
+            /*5.设置动画结束时的状态：默认情况下，动画执行完毕之后，会回到原始状态
+            forwards:会保留动画结束时的状态，在有延迟的情况下，并不会立刻进行到动画的初始状态
+            backwards:不会保留动画结束时的状态，在添加了动画延迟的前提下，如果动画有初始状态，那么会立刻进行到初始状态
+            both:会保留动画的结束时状态，在有延迟的情况下也会立刻进入到动画的初始状态*/
+            animation-fill-mode: both;
+            /*6.动画的时间函数*/
+            animation-timing-function: linear;
+            /*设置动画的播放状态  paused:暂停   running:播放*/
+            animation-play-state: running;
+        }
+
+        /*创建动画*/
+        @keyframes moveTest {
+            /*百分比是指整个动画耗时的百分比  10s*/
+            /*0%{
+                transform: translate(0,0);
+            }*/
+            /*from:0%*/
+            from{
+                transform: translate(0,0) rotate(45deg);
+            }
+            /*0~1*/
+            50%{
+                transform: translate(0,500px);
+            }
+            /*1~2*/
+            /*100%{
+                transform: translate(500px,600px);
+            }*/
+            /*to:100%*/
+            to{
+                transform: translate(500px,600px);
+            }
+        }
+    </style>
+</head>
+<body>
+<div></div>
+<input type="button" value="播放" id="play">
+<input type="button" value="暂停" id="pause">
+<script>
+    var div=document.querySelector("div");
+    document.querySelector("#play").onclick=function(){
+        div.style.animationPlayState="running";
+    }
+    document.querySelector("#pause").onclick=function(){
+        div.style.animationPlayState="paused";
+    }
+</script>
+</body>
+</html>
+
+第六节：06-HMLT5-动画案例-无缝滚动
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        div{
+            width: 882px;
+            height: 86px;
+            margin:100px auto;
+            background-color: #ddd;
+            overflow: hidden;
+        }
+        div >ul{
+            width: 200%;
+            list-style: none;
+            /*1.设置的名称*/
+            animation-name: move;
+            /*2.设置动画的耗时*/
+            animation-duration: 7s;
+            /*3.市场无限循环*/
+            animation-iteration-count: infinite;
+            /*4.设置时间函数*/
+            animation-timing-function: linear;
+        }
+
+        div > ul > li{
+            width:126px;
+            float: left;
+        }
+        div > ul > li　> img{
+            width:100%;
+        }
+        /*鼠标上移，停止动画*/
+        div:hover > ul{
+            cursor: pointer;
+            animation-play-state: paused;
+        }
+
+        /*创建动画*/
+        @keyframes move {
+            from{
+                transform:translateX(0);
+            }
+            to{
+                transform:translateX(-882px);
+            }
+        }
+    </style>
+</head>
+<body>
+<div>
+    <ul>
+        <li><img src="../images/1.jpg" alt=""></li>
+        <li><img src="../images/2.jpg" alt=""></li>
+        <li><img src="../images/3.jpg" alt=""></li>
+        <li><img src="../images/4.jpg" alt=""></li>
+        <li><img src="../images/5.jpg" alt=""></li>
+        <li><img src="../images/6.jpg" alt=""></li>
+        <li><img src="../images/7.jpg" alt=""></li>
+        <li><img src="../images/1.jpg" alt=""></li>
+        <li><img src="../images/2.jpg" alt=""></li>
+        <li><img src="../images/3.jpg" alt=""></li>
+        <li><img src="../images/4.jpg" alt=""></li>
+        <li><img src="../images/5.jpg" alt=""></li>
+        <li><img src="../images/6.jpg" alt=""></li>
+        <li><img src="../images/7.jpg" alt=""></li>
+    </ul>
+</div>
+
+</body>
+</html>
+
+第七节：07-HTML5-时钟案例-结构分析
+第八节：08-HTML5-时钟案例-钟表结构代码实现
+第九节：09-HTML5-时钟案例-时钟案例动画添加
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        .clock{
+            width: 300px;
+            height: 300px;
+            border: 10px solid #ccc;
+            /*border-radius: 160px;*/
+            /*百分比参照元素的实际宽高*/
+            border-radius: 50%;
+            margin:100px auto;
+            position: relative;
+        }
+        .line{
+            width: 8px;
+            height: 300px;
+            background-color: #ccc;
+            position: absolute;
+            /*参照父容器的宽*/
+            left: 50%;
+            top:0;
+            /*参照元素本身*/
+            transform: translate(-50%,0);
+        }
+        .line1,.line4{
+            width: 10px;
+        }
+        .line2{
+            transform: translate(-50%,0) rotate(30deg);
+        }
+        .line3{
+            transform: translate(-50%,0) rotate(60deg);
+        }
+        .line4{
+            transform: translate(-50%,0) rotate(90deg);
+        }
+        .line5{
+            transform: translate(-50%,0) rotate(120deg);
+        }
+        .line6{
+            transform: translate(-50%,0) rotate(150deg);
+        }
+        .cover{
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            background-color: #fff;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%,-50%);
+        }
+        .hour{
+            width: 6px;
+            height: 80px;
+            background-color: red;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%,-100%);
+            transform-origin: center bottom;
+            animation: clockAnimation 43200s linear infinite;
+        }
+        .minute{
+            width: 4px;
+            height: 90px;
+            background-color: green;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%,-100%);
+            transform-origin: center bottom;
+            animation: clockAnimation 3600s linear infinite;
+        }
+        .second{
+            width: 2px;
+            height: 100px;
+            background-color: blue;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%,-100%);
+
+            /*设置旋转轴心*/
+            transform-origin: center bottom;
+            /*添加动画*/
+            animation: clockAnimation 60s infinite steps(60);
+            /*steps(60)与animation-timing-function的其它属性冲突*/
+            /*animation-timing-function: steps(60);*/
+        }
+        .center{
+            width: 20px;
+            height: 20px;
+            background-color: #ccc;
+            border-radius: 50%;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%,-50%);
+        }
+
+        /*创建动画*/
+        @keyframes clockAnimation {
+            from{
+                transform:translate(-50%,-100%) rotate(0deg);
+            }
+            to{
+                transform:translate(-50%,-100%) rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="clock">
+    <div class="line line1"></div>
+    <div class="line line2"></div>
+    <div class="line line3"></div>
+    <div class="line line4"></div>
+    <div class="line line5"></div>
+    <div class="line line6"></div>
+    <div class="cover"></div>
+    <div class="hour"></div>
+    <div class="minute"></div>
+    <div class="second"></div>
+    <div class="center"></div>
+</div>
+</body>
+</html>
+
+第十节：10-HTML5-web字体（阿里巴巴矢量图标库）
+1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        @font-face {
+            font-family: 'shuangyuan';
+            src: url('../fonts/webfont.eot'); /* IE9*/
+            src: url('../fonts/webfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+            url('../fonts/webfont.woff') format('woff'), /* chrome、firefox */
+            url('../fonts/webfont.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+            url('../fonts/webfont.svg#webfont') format('svg'); /* iOS 4.1- */
+        }
+        /*定义一个样式，使用自定义的web字体*/
+        .myFont{
+            font-family: shuangyuan;
+        }
+    </style>
+</head>
+<body>
+1.得自定义想生成对应字体文件的内容
+2.使用网络资源生成web字体
+3.使用
+    a.定义自定义字体
+    b.定义样式使用自定义字体
+    c.指定样式，调用样式
+<span class="myFont">开发人员可以为自已的网页指定特殊的字体，无需考虑用户电脑上是否安装了此特殊字体，从此把特殊字体处理成图片的时代便成为了过去。它的支持程度比较好，甚至IE低版本浏览器也能支持</span>
+</body>
+</html>
+
+第十一节：11-HTML5-字体图标
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        @font-face {
+            font-family: 'iconfont';
+            src: url('../fonts/iconfont.eot'); /* IE9*/
+            src: url('../fonts/iconfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+            url('../fonts/iconfont.woff') format('woff'), /* chrome、firefox */
+            url('../fonts/iconfont.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+            url('../fonts/iconfont.svg#iconfont') format('svg'); /* iOS 4.1- */
+        }
+        .myFont{
+            font-family: iconfont;
+        }
+        /*笑脸*/
+        .smile::before{
+            content: "\e641";
+            color: red;
+            font-size: 50px;
+        }
+        /*输出*/
+        .output::before{
+            content: "\e640";
+            color: blue;
+            font-size: 50px;
+        }
+    </style>
+</head>
+<body>
+<!--使用字体图标的时候，得自己指定你想使用的图片-->
+<span class="myFont smile"></span>
+<span class="myFont output"></span>
+<span class="myFont">&#xe642;</span>
+</body>
+</html>
+
+第十二节：12-HTML5-多列布局
+1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        .wrapper {
+            width: 100%;
+            padding: 20px;
+            box-sizing: border-box;
+            /*设置多列布局*/
+            /*1.设置列数*/
+            column-count: 3;
+            /*2.添加列间隙样式,与边框样式的添加一样*/
+            column-rule: dashed 3px red;
+            /*3。设置列间隙大小*/
+            column-gap: 50px;
+            /*4.设置列宽
+            原则：取大优先
+            1.如果人为设置宽度更大，则取更大的值，但是会填充整个屏幕，意味最终的宽度可能也会大于设置的宽度--填充满整个屏幕
+            2.如果人为设置宽度更小，使用默认计算的宽度*/
+            column-width: 200px;
+        }
+        h4{
+            /*设置跨列显示  1  / all*/
+            column-span: all;
+        }
+    </style>
+</head>
+<body>
+<div class="wrapper">
+    <h4>CSS3简介</h4>
+    <p>
+        CSS即层叠样式表（Cascading StyleSheet）。 在网页制作时采用层叠样式表技术，可以有效地对页面的布局、字体、颜色、背景和其它效果实现更加精确的控制。 只要对相应的代码做一些简单的修改，就可以改变同一页面的不同部分，或者页数不同的网页的外观和格式。CSS3是CSS技术的升级版本，CSS3语言开发是朝着模块化发展的。以前的规范作为一个模块实在是太庞大而且比较复杂，所以，把它分解为一些小的模块，更多新的模块也被加入进来。这些模块包括： 盒子模型、列表模块、超链接方式 、语言模块 、背景和边框 、文字特效 、多栏布局等。
+    </p>
+    <p>1、
+        CSS3圆角表格
+        CSS3圆角表格
+        圆角表格，对应属性：border-radius。
+        2、以往对网页上的文字加特效只能用filter这个属性，这次CSS3中专门制订了一个加文字特效的属性，而且不止加阴影这种效果。对应属性：font-effect。
+        3、丰富了对链接下划线的样式，以往的下划线都是直线，这次可不一样了，有波浪线、点线、虚线等等，更可对下划线的颜色和位置进行任意改变。（还有对应顶线和中横线的样式，效果与下划线类似）对应属性：text-underline-style，text-underline-color，text-underline-mode，text-underline-position。
+        4、在文字下点几个点或打个圈以示重点，CSS3也开始加入了这项功能，这应该在某些特定网页上很有用。对应属性：font-emphasize-style和font-emphasize-position。
+        边框
+        border-color:控制边框颜色，并且有了更大的灵活性，可以产生渐变效果
+    </p>
+    <p>
+        变形(transform)、转换(transition)和动画(animation)
+        transform: rotate | scale | skew | translate |matrix;
+        旋转rotate、扭曲skew、缩放scale和移动translate以及矩阵变形matrix。
+        transition主要包含四个属性值：执行变换的属性：transition-property,变换延续的时间：transition-duration,在延续时间段，变换的速率变化transition-timing-function,变换延迟时间transition-delay。下面分别来看这四个属性值
+        在开始介绍Animation之前我们有必要先来了解一个特殊的东西，那就是"Keyframes",我们把他叫做“关键帧”，玩过flash的朋友可能对这个东西并不会陌生。下面我们就一起来看看这个“Keyframes”是什么东西。前面我们在使用transition制作一个简单的transition效果时，我们包括了初始属性和最终属性，一个开始执行动作时间和一个延续动作时间以及动作的变换速率，其实这些值都是一个中间值，如果我们要控制的更细一些，比如说我要第一个时间段执行什么动作，第二个时间段执行什么动作（换到flash中说，就是第一帧我要执行什么动作，第二帧我要执行什么动作），这样我们用Transition就很难实现了，此时我们也需要这样的一个“关键帧”来控制。那么CSS3的Animation就是由“keyframes”这个属性来实现这样的效果。下面我们一起先来看看Keyframes:
+        Keyframes具有其自己的语法规则，他的命名是由"@keyframes"开头，后面紧接着是这个“动画的名称”加上一对花括号“{}”，括号中就是一些不同时间段样式规则，有点像我们css的样式写法一样。对于一个"@keyframes"中的样式规则是由多个百分比构成的，如“0%”到"100%"之间，我们可以在这个规则中创建多个百分比，我们分别给每一个百分比中给需要有动画效果的元素加上不同的属性，从而让元素达到一种在不断变化的效果，比如说移动，改变元素颜色，位置，大小，形状等，不过有一点需要注意的是，我们可以使用“fromt”“to”来代表一个动画是从哪开始，到哪结束，也就是说这个 "from"就相当于"0%"而"to"相当于"100%",值得一说的是，其中"0%"不能像别的属性取值一样把百分比符号省略，我们在这里必须加上百分符号（“%”）如果没有加上的话，我们这个keyframes是无效的，不起任何作用。因为keyframes的单位只接受百分比值。[2]
+    </p>
+</div>
+</body>
+</html>
+
+第十三节：13-HTML5-传统布局方式的局限
+1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        .box{
+            width: 1000px;
+            height: 200px;
+            border: 1px solid red;
+            box-sizing: border-box;
+        }
+        .first{
+            width: 200px;
+            height: 100%;
+            background-color: red;
+            float: left;
+        }
+        .second{
+            width: 200px;
+            height: 100%;
+            background-color: green;
+            float: right;
+        }
+        .third{
+            width: 200px;
+            height: 100%;
+            background-color: blue;
+            margin:0 auto;
+        }
+        .fourth{
+            width: 200px;
+            height: 100%;
+            background-color: pink;
+            float: left;
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+    <div class="first"></div>
+    <div class="second"></div>
+    <div class="third"></div>
+    <div class="fourth"></div>
+</div>
+</body>
+</html>
+
+第十四节：13-HTML5-传统布局方式的局限
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        .box{
+            width: 1000px;
+            height: 200px;
+            border: 1px solid red;
+            box-sizing: border-box;
+            /*设置父容器为伸缩盒子：会使每一个子元素自动变成伸缩项*/
+            display: flex;
+            /*设置子元素的排列方式
+            flex-start:让子元素从父容器的起始位置开始排列
+            flex-end:让子元素从父容器的结束位置开始排列
+            center:让子元素从父容器的中间位置开始排列
+            space-between:左右对齐父容器的开始和结束，中间平均分页，产生相同的间距
+            space-around:将多余的空间平均的分页在每一个子元素的两边 margin:0 auto.造成中间盒子的间距是左右两边盒子间距的两倍*/
+            justify-content: space-around;
+        }
+        .first{
+            width: 200px;
+            height: 100%;
+            background-color: red;
+        }
+        .second{
+            width: 200px;
+            height: 100%;
+            background-color: green;
+        }
+        .third{
+            width: 200px;
+            height: 100%;
+            background-color: blue;
+        }
+        .fourth{
+            width: 200px;
+            height: 100%;
+            background-color: pink;
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+    <div class="first">1</div>
+    <div class="second">2</div>
+    <div class="third">3</div>
+    <div class="fourth">4</div>
+</div>
+</body>
+</html>
+
+第十五节：15-HTML5-伸缩盒子的属性-flex-flow
+1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        .box{
+            width: 900px;
+            height: 600px;
+            border: 1px solid red;
+            box-sizing: border-box;
+            margin:0 auto;
+            /*设置父容器为盒子：会使每一个子元素自动变成伸缩项
+             当子元素的宽度和大于父容器宽度的时候，子元素会自动平均收缩*/
+            display: flex;
+            /*设置子元素的主轴方向上的排列方式*/
+            justify-content: space-around;
+
+            /*flex-flow:是flex-wrap和flex-direction的综合
+            flex-wrap:控制子元素是否换行显示，默认不换行
+                nowrap:不换行--则收缩
+                wrap:换行
+                wrap-reverse:翻转，原来是从上到下，翻转后就是从下到上来排列*/
+            /*flex-wrap: wrap;*/
+            /*flex-direction：设置子元素的排列方向：就是用来主轴方向，
+        /*   row 
+          水平方向 >> 主轴
+          垂直方向 >> 侧轴
+          column
+          垂直方向 >> 主轴
+          水平方向 >> 侧轴 */
+          /*
+            默认主轴方向是row(水平方向)
+                row:水平排列方向，从左到右
+                row-reverse:水平排列方向，从右到左
+                column:垂直排列方向，从上到下
+                column-reverse：垂直排列方向，从下到上*/
+            /*flex-direction: column-reverse;*/
+
+            flex-flow: row wrap;
+        }
+        .first{
+            width: 200px;
+            height: 200px;
+            background-color: red;
+        }
+        .second{
+            width: 200px;
+            height: 200px;
+            background-color: green;
+        }
+        .third{
+            width: 200px;
+            height: 200px;
+            background-color: blue;
+        }
+        .fourth{
+            width: 200px;
+            height: 200px;
+            background-color: pink;
+        }
+        .fifth{
+            width: 200px;
+            height: 200px;
+            background-color: purple;
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+    <div class="first">1</div>
+    <div class="second">2</div>
+    <div class="third">3</div>
+    <div class="fourth">4</div>
+    <div class="fifth">5</div>
+</div>
+</body>
+</html>
+
+第十六节：16-HTML5-伸缩盒子的属性-flex-grow
+1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        .box{
+            width: 900px;
+            height: 600px;
+            border: 1px solid red;
+            margin:0 auto;
+            /*设置父容器为盒子：会使每一个子元素自动变成伸缩项
+             当子元素的宽度和大于父容器宽度的时候，子元素会自动平均收缩*/
+            display: flex;3
+            /*设置子元素的主轴方向上的排列方式*/
+            justify-content: space-around;
+
+        }
+        .first{
+            width: 200px;
+            height: 200px;
+            background-color: red;
+            /*flow-grow:可以来扩展子元素的宽度：设置当前元素应该占据剩余空间的比例值
+            比例值计算 ：当前空间的flex-grow/所有兄弟元素的flex-grow的和
+            flex-grow的默认是0:说明子元素并不会去占据剩余的空间*/
+            flex-grow: 1;
+        }
+        .second{
+            width: 200px;
+            height: 200px;
+            background-color: green;
+            flex-grow: 1;
+        }
+        .third{
+            width: 200px;
+            height: 200px;
+            background-color: blue;
+            flex-grow: 2;
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+    <div class="first">1</div>
+    <div class="second">2</div>
+    <div class="third">3</div>
+</div>
+</body>
+</html>
+
+第十七节：17-HTML5-伸缩盒子的属性-flex-shink
+1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        .box{
+            width: 500px;
+            height: 600px;
+            border: 1px solid red;
+            margin:0 auto;
+            /*设置父容器为盒子：会使每一个子元素自动变成伸缩项
+             当子元素的宽度和大于父容器宽度的时候，子元素会自动平均收缩*/
+            display: flex;
+            /*设置子元素的主轴方向上的排列方式*/
+            justify-content: space-around;
+
+        }
+        .first {
+            width: 200px;
+            height: 200px;
+            background-color: red;
+            /*flex-shrink:定义收缩比例，通过设置的值来计算收缩空间
+             比例值计算 ：当前空间的flex-shrink/所有兄弟元素的flex-shrink的和
+            默认值为1*/
+            flex-shrink: 2;
+        }
+        .second{
+            width: 200px;
+            height: 200px;
+            background-color: green;
+            flex-shrink: 1;
+        }
+        .third{
+            width: 200px;
+            height: 200px;
+            background-color: blue;
+            flex-shrink: 1;
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+    <div class="first">1</div>
+    <div class="second">2</div>
+    <div class="third">3</div>
+</div>
+</body>
+</html>
+
+第十八节：18-HTML5-伸缩盒子的属性-flex
+1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        .box{
+            width: 100%;
+            height: 500px;
+            background-color: #ccc;
+            margin:0 auto;
+            /*设置父容器的为伸缩盒子*/
+            display: flex;
+            /*设置子元素在主轴方向上的排列方式*/
+            /*justify-content: flex-start;*/
+        }
+        .left{
+            /*flex：当它的值为数字时，是用来设置当前伸缩子项占据剩余空间的比例值，也就等价于flex-flow
+            -*/
+            flex: 1;
+            height: 500px;
+            background-color: red;
+        }
+        .right{
+            flex: 4;
+            height: 500px;
+            background-color: blue;
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+    <div class="left"></div>
+    <div class="right"></div>
+</div>
+</body>
+</html>
+
+第十九节：19-HTML5-伸缩盒子的flex属性的应用案例
+1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        div{
+            width: 500px;
+            height: 400px;
+            border: 1px solid #ccc;
+            margin:100px auto;
+        }
+        div > ul{
+            list-style: none;
+            width: 100%;
+            /*将父容器设置了伸缩盒子，子元素默认成为伸缩项  float margin*/
+            display: flex;
+        }
+        div > ul > li{
+            /*宽度
+            1.我们并不知道li的具体的数量
+            2.也不直接设置%*/
+            height: 36px;
+            line-height: 36px;
+            text-align: center;
+            background-color: #9fff9d;
+            border-right: 1px solid #ccc;
+            flex: 1;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <ul>
+        <li>首页</li>
+        <li>商品分类</li>
+        <li>我的订单</li>
+        <li>最新商品</li>
+        <li>联系我们</li>
+    </ul>
+</div>
+</body>
+</html>
+
+第二十节·：20-HTML5-伸缩盒子的align-items属性
+1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        .box{
+            width: 900px;
+            height: 600px;
+            border: 1px solid red;
+            margin:0 auto;
+            /*设置父容器为盒子：会使每一个子元素自动变成伸缩项
+             当子元素的宽度和大于父容器宽度的时候，子元素会自动平均收缩*/
+            display: flex;
+            /*设置子元素的主轴方向上的排列方式*/
+            justify-content: space-around;
+            /*align-items:设置子元素(伸缩项)在侧轴方向上的对齐方式
+            center:设置在侧轴方向上居中对齐
+            flex-start:设置在侧轴方向上顶对齐
+            flex:end:设置在侧轴方向上底对齐
+            stretch:拉伸：让子元素在侧轴方向上进行拉伸，填充满整个侧轴方向>> 默认值
+            baseline:文本基线*/
+            align-items: center;
+        }
+        .first {
+            width: 200px;
+            height: 200px;
+            background-color: red;
+            align-self: flex-start;
+        }
+        .second{
+            width: 200px;
+            height: 200px;
+            background-color: green;
+            /*设置单个元素在侧轴方向上的对齐方式*/
+            align-self: flex-end;
+        }
+        .third{
+            width: 200px;
+            height: 200px;
+            background-color: blue;
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+    <div class="first">bb</div>
+    <div class="second" style="font-size: 100px">gg</div>
+    <div class="third">klkaslg</div>
+</div>
+</body>
+</html>
+
+第二十一节：21-HTML5-伸缩盒子案例-宽高自动适应
+1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        .layout{
+            width: 500px;
+            height: 600px;
+            background-color: #CCCCCC;
+            margin:10px auto;
+            /*设置父容器为伸缩盒子*/
+            display: flex;
+            /*默认的主轴是row,这里需要以列的方式进行排列*/
+            flex-direction: column;
+        }
+        header{
+            width: 100%;
+            height: 60px;
+            background-color: red;
+        }
+        main{
+            width: 100%;
+            background-color: green;
+            /*让当前伸缩项占据父容器的剩余空间*/
+            flex: 1;
+            /*让main成为伸缩盒子*/
+            display: flex;
+        }
+        main > article{
+            height: 100%;
+            flex: 1;
+            background-color: pink;
+        }
+        main > aside{
+            height: 100%;
+            flex: 3;
+            background-color: darkblue;
+        }
+        footer{
+            width: 100%;
+            height: 80px;
+            background-color: purple;
+        }
+    </style>
+</head>
+<body>
+<div class="layout">
+    <header></header>
+    <main>
+        <article></article>
+        <aside></aside>
+    </main>
+    <footer></footer>
+</div>
+</body>
+</html>
+
+第六天：

@@ -1,0 +1,4 @@
+sublime
+ctrl + ]/[整体右移或者左移
+edit - line-reindent  代码格式化
+shift+alt + 1/2/3分为几个屏

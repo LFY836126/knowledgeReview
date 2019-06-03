@@ -1,0 +1,338 @@
+1.div布局 css控制
+div布局 css控制
+2.doctype 几种类型？
+三种 strict transitional frameset
+3.xhtml与html与shtml 与htm区别？
+
+4.CSS有几种引入方式：？
+三种：内部样式表 外部样式表 内联样式
+外部样式表：<link rel="stylesheet" type="text/css" href=" .css">
+内部样式表：<style type="text/css">h1{ }  </style>
+前两者都是放在head中
+内联样式表：放在标签中 当样式仅需要在一个元素中应用一次时 慎用
+5.div可以声明什么控制？
+class id 属性选择器 派生选择器
+6.属性clear清除浮动 left清除左浮 right清除右浮 both左右都进行清除
+7.浮动(重点理解) 
+8.常见问题：不加doctype 导致低版本ie解析效果出问题
+  id不能为数字 起不到效果
+  文件编码与charset声明不一致(乱码)
+9.盒模型 margin:外边距 命名规则 顺时针 上右下左 若缺少某个值则上和下对齐 左和右对齐
+  补充:外边距不能合并
+10.div{} 其中声明的属性应用于所有div 若以下还别的特殊声明则原始的被覆盖
+   补充:div默认宽度为一整行 高度为其中内容撑起来的 不确定;
+11.border
+border三要素;宽（border-width） 形状（border-style） 颜色（border-color）;
+border-style可以为：实线(solid) 虚线(dashed) 点线(dotted) 立体(outset)等
+border可以单独设置某个方向的边框    也可以单独设置边框的三要素之一
+
+12.问:为什么大的div框可以包含小的浮动的div框
+如果div中 两个子div是浮动的 父div的高度有没有被子div撑起来 父div是多高
+
+作业：将border形状全都尝试一遍 并且将三要素进行组合尝试
+用css控制div的边框画出一个三角形(将边框进行放大 内容区域进行缩小)
+画一颗圣诞树
+如何让边框透明border-top:50px solid transparent;
+浮动！！！！ 覆盖 之前布局时由float产生的覆盖
+
+圣诞树问题回答:
+将整个界面进行布局分为五部分即
+container head main main3 footer 
+再对每个部分应用边框 
+head和main1不需要太高的高度 border可以占用下面的位置
+main2需要设置正常的高度 保证树干可以不覆盖树叶
+并且只有最后的树干需要利用浮动float属性
+
+float属性回答:
+设置一个div1 其中再包含另一个div1 那么
+对div2应用float 那么div2浮动的范围只有div1中 
+若div2超出了div1指定的范围的话 就可能覆盖其他内容
+多个float元素是一定不会重叠的
+
+13.padding使用可以参照margin  类似
+   补充：盒子与盒子之间的距离用margin 盒子与文字之间的距离用padding
+14.背景颜色应用与padding与内容
+15.div中设置的宽高为内容的宽高 不包括padding 默认的内边距padding 外边距margin为0  
+16.问：一个盒子有margin border padding 实际占了多少空间
+   答：竖直方向：height+padding-top+padding-bottom+border-top+border-bottom+margin-top+margin-bottom
+       水平方向：width+padding-left+padding-right+border-left+border-right+margin-left+margin-right
+17.可以利用margin实现水平元素居中 margin:0px auto; 但是不能利用margin实现竖直元素居中
+18.margin重叠：上下相邻的“普通元素” ，“上下”边距 并非简单的相加 而是取其中较大的边距值 这种现象叫做margin重叠
+19.
+20.块级元素与内联元素（行内元素）的区别：块状元素独占一行 能设置宽高 有“竖直”方向的margin padding可以设置，而内敛元素都不可以（但可以设置水平方向的）
+21.内敛元素与块状元素的转化 display：block（块状）/inline（内联）/none（div元素及其内容都消失）
+
+作业：
+1.搜索并总结哪些元素是块状元素 哪些元素是内联元素（见文档）
+2.通常什么情况下会进行内联元素与块状元素的转化
+3.display除了可以等于inline block none还可以等于什么（见文档）
+4.“父子div”也会发生margin重叠 写出代码及效果图
+5.自行搜索 段落控制的其他css属性 并总结其功能（见文档）
+答：
+2.最常见的是导航栏 是将内敛元素与块级元素进行转化而来
+4.竖直方向会发生重叠 水平方向不会
+
+22.div中虽然自己看不见但是div中是有基线的
+23.字体常用属性
+font-style:italic;
+font-weight:bold;
+font-size:20px;
+line-height:50px;
+font-family:SimHei;
+或者合在一起写font:italic bold 20px/50px SimHei;
+24.字体分为有衬线（san-serif）无衬线（serif） 每种字体又分为若干各自的字体 
+   自己设置的字体 客户机器端未必有所以在设置font-family时要注意：'New Times',新宋,宋体,serif; 逐层降低标准
+25.背景图与背景色同时设置时优先显示背景图
+
+作业：
+1.对文字的控制 有没有其他属性 查手册研究用法
+2.有的网站既设定背景图又设定背景色是为什么
+3.还有没有别的其他的选择器 及其用法 总结
+答：
+2.当页面由于某种原因无法正常显示背景图时 页面可以使用这种颜色作为背景色
+
+26.文本段落相关属性
+   段落缩进：text-indent  
+   下划线或者上划线：text-decoration:overline/underline/line-through; 
+   居中:text-align:center;
+   字之间距离letter-spacing:10px;
+27.网页中原点为右上角 向右为正 向下为正
+28.背景相关属性
+   background-color:aquamarine;
+   background-image:url(https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1338209972,272283963&fm=27&gp=0.jpg);
+   background-repeat:no-repeat;
+   background-attachment:fixed;
+   background-position:-180px -180px;
+或者直接按照这个顺序写在一起：background:pink url(地址) no-repeat fixed -150px -150px;
+28.当一个图片被用作多个背景时 利用background-position来调整背景图片的位置
+   网页中原点为右上角 向右为正 向下为正 例如：   background-position:-180px -180px;
+28课：选择器
+id选择器  #id    
+类选择器  .class
+派生选择器（元素之间的上下级关系 ） div p 表示所有div下的p标签
+标签选择器  div
+29课：选择器优先级
+id选择器优先级最高（一般来说）
+标签选择器优先级最低
+30课：CSS引入的四种方式
+外部引入 <link rel="stylesheet" href="./idclass.css">
+头部写入 <style type="text/css"> p {color: red;}</style>
+直接在html标签中加 <p style="color:red">天天向上</p>
+利用@import url(idclass2.css); 先将它导入到idclass中 再与idclass应用到网页中
+注意：同一目录下./idclass  上一层目录下../idclass
+31课：CSS初始化
+相同的元素，如li 在不同的浏览器下显示的效果可能不同
+是因为 浏览器对各元素的margin border font-size等的初始化结果略有不同
+为了杜绝这种情况的发生，我们通过css强制让所有元素的属性值都一样
+这样浏览器显示效果就一致了 减少了不兼容的情况的发生 这个过程叫做css初始化
+作业：查找腾讯 淘宝 网易的css初始化代码
+32课：html思维导图
+33课：h标签和p标签
+标题只有h1到h6 1-6号标题字体越来越小
+p表示段落 在新闻网站中 h与p经常一起出现 新闻标题一般用h表示 而新闻中每一段内容 适合用p标签
+作业：总结h和p标签经常出现的场合
+34课：img标签
+图片标签自闭和 不需要结束标签
+区分title与alt
+本级目录下：./
+上一级目录下：../(点点斜杠)
+作业：那些是单闭合标签 那些是双闭合标签
+35课img是内联元素还是块状元素？
+img可以设置宽和高但是不独占一行   
+图片是内联元素
+图片是特殊的内联元素替换元素
+替换元素是可以设置宽和高的
+img拥有margin和border 可以通过设置display=block来消除周围边框
+注：两个块状元素之间是紧挨着的 没有空隙
+图片之间可以并排 但是其他元素应该不能与img并排
+作业：除了img 还有哪些替换元素 w3c叫做replaced element？
+36课有序列表与无序列表
+一般应用li时都会将其初始化
+例如设置list-style-type:none;（border margin都设置为零）
+为了保证不同的浏览器兼容问题
+但是一般会用自己选定的图片或者东西代替 避免不同浏览器不兼容
+作业：初始化css后；写li并用背景图片+padding来完成li小图标的效果且达到各浏览器兼容
+37课整齐的表格
+tr 行
+td 列
+列合并 colspan
+行合并 rowspan
+单元格之间默认有距离的
+collapse 破裂融合
+border-collapse:collapse 消除单元格之间的距离
+border-collapse:separate 每个单元格独立
+border-spacing:20px      每个单元格间隔20px（增大了单元格之间的距离）
+table：表格
+作业：做课程表
+38超链接标签 a标签
+href 写入网址 
+target属性 _self（自身跳转） _blank（打开新窗口）
+也可以设置title属性 表示鼠标放上时显示title内容
+a标签是一个内联元素
+作业：搜索为什么href="xxx.com/index.html#a1"
+答 如下 锚点
+39课锚点
+
+<a name="x"></a>
+p1
+<a href="maodiana.html#x">x</a>
+解释：在p1前添加<a name="x"></a>
+则点击x则自动跳转到p1所在位置
+40课伪类
+链接分为正常状态 鼠标停放时的状态 点的状态 点完后的状态
+css允许我们针对a标签的四种状态设置各自的css特性 叫做css伪类
+active:一般不必写
+一定注意顺序L（点击一下）V（点击后）H（）A
+a:link可以简写为a
+作业：完成a标签4个伪类的不同css设置
+41课字符实体
+在html开发中 有一些字符 不是于直接写出如&gt;&lt;
+一般的格式：&+实体+;      例如：&nbsp;表示空格
+实体有很多 记住常用的
+&gt; &lt;  &quot  &yen;  &copy;
+大于 小于 双引号 人民币 商标
+作业：找出20个实体
+42课首页布局实战
+作业：做出it网的布局
+43课公司网站开发之导航
+在哪个目录下,文件地址：  ./image/131514.jpg
+background中可以放置图片地址如url(./image/131514.jpg)
+将两个块状元素并排 可以直接进行浮动 不需要进行行内元素的转化
+作业：做导航
+
+问：为什么a标签中设置text-align没有效果？
+这些属性怎么知道放在哪个标签中？
+a标签在转换为块状元素后 为什么要设置宽和高 直接填满可以么 a的默认宽高又是多少？
+
+答：a转换为块元素后填满了li元素 并且可以利用text-align元素
+44课公司网站开发之main区域
+重要：清除浮动： 
+.clv{
+    clear:both;
+    height:0px;
+    width:0px;
+}
+并排：浮动
+紧挨：margin
+div：height
+背景能铺在padding处 但padding能把里边的内容挤走？
+为什么核心任务那里用的h1标签却没有溢出？
+清除格式会将h1正常的字体删除么？
+一定要注意浮动元素之间的布局！！！！
+在浮动元素上写字 当区域不够大 字会自动写在下面 有可能被其他元素遮挡住
+增加元素的margin 或者padding是什么在改变 内容区域怎么变？
+增加两个li之间的竖直距离 用height （为什么不用margin？）
+为什么随着网页的变小 布局发生改变？
+为什么 浮动元素不会覆盖图片 而是将图片挤到其他位置？
+ul的默认属性无法更改 只能利用网页中标准初始化的格式
+45课main区域2
+导航栏一般都要将a标签设置为block 为了当鼠标停在标签上时 整块背景都会改变
+当li变为浮动时 ul的高度就是字体所占高度
+若想增加高度可以控制ul的height属性来增加高度
+注意父子margin重叠的问题
+作业：完成首页布局 并研究利用行高来实现文字的竖直方向居中对齐
+46课footer区域
+47课颜色微调
+48课 行高与文字竖直居中
+在div中文本区域实际上是有基线的 通常我们写的字都会在一行中的竖直方向的正中间
+a是一块 li是一行 当使用背景图片时会更明显
+想让文本竖直居中 那么可以让line-height等于height 
+49课IE浏览器兼容
+为了避免不同浏览器不兼容 有些属性必须手动声明 像大小 字体 颜色等 都要手动声明
+CSS控制之bug
+1.没有正确使用doctype 指的是 stricted transitional frameset
+2.各浏览器对不同标签的初始值不同 例如li边框小黑点 可能都显示不一样
+  解决办法:利用css初始化 然后再自己声明
+3.自身书写不规范引起
+  解决办法：面壁!!!
+4.浏览器bug引起
+5.盒模型bug 因为IE盒模型解析大小不同
+  正确声明doctype
+6.双倍margin bug 描述：
+  对于左浮元素 左margin是定义的两倍
+  右浮元素 右margin是定义的两倍
+解决 ：_display:inline;  下划线一定要写 不写会影响其他页面上的显示布局
+7.3像素的margin bug
+IE 浮动元素并不覆盖非浮动元素 并且两指之间还会有3像素 所以 写代码要严谨 或者两个都浮动 或者都不浮动
+8.IE不认识a:link 所以直接写a就可以 其他浏览器也能识别
+作业 网页在低版本IE下测试通过
+搜索IE下的更多bug
+50课色彩的表示
+ 1.颜色用数字来表示
+ 2.颜色由3原色组成的 红:red 绿green 蓝blue 即 rgb
+ 3.3原色各在[0-255]之间变化
+ 综上所述 本质是组合3原色
+ 1.用16进制组合[0-255] #234567（当6个字符一样时可以简写为3个）
+ 2.用十进制来组合，如rgb(240,25,25)
+ 3.html提供常用的颜色的名称如orange，pink purple red
+作业：写出50中颜色制成一张表格
+51课尺寸的表示
+ 1.可以用像素表示px 
+   可以用百分比显示% 块状子元素要是不说宽度默认占满父元素的宽度
+ 2.文字可以用px来表示是大小
+   也可以用em来表示大小 em是相对大小 可以简单理解为1em就是父元素font-size的大小
+作业：搜索其他尺寸的表示方式
+答： ex pt pc in mm cm
+52课css画圆角
+利用border-radius:150px;(值等于高宽的一半)
+也可以让某一角单独变换：border-top-left-radius:10px;
+53课相对定位与绝对定位
+相对定位：指元素在其正常的位置上，偏移某些像素 相对自己原来的位置
+不懂！！！！！
+用绝对定位时 父元素要求有position属性才行 否则将依据父父父父父父的父...body 那个祖先有position属性 相对于那个祖先 如果都没有 相对于body 
+相对定位 相对于自己原来的元素 他原本的位置还在 别的元素不能占用
+绝对定位 相对于父元素 不占位置 其他元素正常显示 两个绝对定位 后来者会盖住前一个 可以利用z-index:1000px/z-index:1001px;来控制谁盖住谁 谁大谁盖住谁(形象理解中为直升飞机)
+54课overflow溢出的处理
+overflow:visiable(默认的结果是溢出)
+overflow:hidden(让溢出的内容进行隐藏)
+overflow:scroll(出现滚动框)
+overflow:auto(当出现内容溢出时才加滚动条 当没有溢出时 不显示滚动条)
+再定一些小的div时 应加上overflow:hidden 以免某些浏览器出问题
+建议在clv清浮动内加一个overflow:hidden 避免问题
+作业：其他清除浮动的方法
+答：现在主流在父元素上填入以下
+.clearfloat:after{display:block;clear:both;content:"";visibility:hidden;height:0} 
+.clearfloat{zoom:1} 
+55课表单
+<option value="大学">大学</option>
+下拉框 利用option来进行选择
+自己选的变量值为option中的内容
+传递给系统的值为 value中的内容
+默认值 姓名 密码 性别 爱好 下拉框 上传文件 文本框 提交 重置（见代码 更详细）
+作业 写一个表单 具有所有的表单类型 第二次再加上一个默认值 知道method的作用
+56课框架集
+1.不能有body
+2.利用frameset标签<frameset rows="30%,*"> 将页面分为两部分 上面占30% 剩下的为下面的
+3.利用a标签 target属性 实现点击左边右边随之改变
+ （右边frame起个名字 左边a标签中target属性值等于右边的名字）
+作业 做出一个品字形框架 并点击左边链接 右边进行变化
+57课结课作业
+作业提交：http://www.zixue.it/forum-42-5.html
+结课实习作业：做一个商城网站 仿京东商城（如下） 做出
+首页 http://free.68ecshop.com/jingdongfree/index.php
+栏目页 http://free.68ecshop.com/jingdongfree/category.php?id=12
+以及商品页 http://free.68ecshop.com/jingdongfree/goods.php?id=40
+
+问题:
+1.浮动元素 hr有时候会跑到上面 有时会到下面？ 没有用clear both属性
+2.分不清什么时候 是块级元素还是内敛元素元素可以用margin 或者line-height等属性
+3.行内元素不可以设置height属性 但是可以设置line-height
+4.p标签的height问题  css属性控制p标签时候 最好给p标签加上标识符 不要利用p标签的父元素控制p标签 有可能height属性不起作用
+5.为什么a标签之后跟了一个img标签之后 line-height就不起作用了 不会竖直居中 若是将img标签变为浮动元素则不影响a的竖直居中
+6.a标签垂直居中 并且前面和后面都有图片
+
+5.
+竖直居中 
+    字的竖直居中 利用line-height 
+    text-indent:3px; 字距离左边3px
+    div类似的块状元素 利用margin
+水平居中
+    字的水平居中利用text-align:center; 
+    div类似元素的水平居中利用margin
+6.将p设置为浮动元素 p就不会占据整个一行 并且还可以出现在其他内联元素上 因为它是浮动的 但不会出现在块级元素上 因为其他块级元素是占一整行的
+7.input标签中 可以利用font-size属性改变输入字体的大小
+8.记住自己是让div浮动 还是想让div中的元素或标签浮动 设置错可能会影响在div中标签或者元素在网页中的位置 上下还是并列 还是覆盖等等
+最大问题！！！！
+   不知道限制条件放在哪里 父元素还是子元素 
+   不知道哪些属性适用于内联元素 那些属性适用于块级元素
+9.商品页 栏目页未做！！！

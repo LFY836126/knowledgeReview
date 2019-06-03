@@ -1,0 +1,264 @@
+程序中类
+
+ES6
+
+面向对象 ，类
+	属性
+	方法
+函数模拟
+
+人:  Person
+	属性: name
+	展示名字: showName
+
+     Person.prototype.showName
+ES5之前：
+	function Person(){
+		this.name='aaa';
+	}
+	Person.prototype.showName=function(){}
+
+ES6中变形:
+	class Person{
+		constructor(){ //构造方法(函数), 调用new，自动执行
+			this.name = 'aaa';
+		} //一定注意这里没有逗号
+		showName(){
+
+		}
+	}
+	--------------------------
+	const Person = class{}
+	------------------------------
+	let a = 'strive';
+	let b = 'method';
+
+	class Person{
+		[a+b](){
+			
+		}
+	}
+
+
+let aaa='aaa';
+let bbb='ddd';
+let json={
+	[aaa+bbb]:'welcome 51mmr.net'
+}
+
+注意： 
+1. ES6里面class没有提升功能，在ES5，用函数模拟可以，默认函数提升
+2. ES6里面this 比之前轻松多了
+
+
+矫正this:
+	1. fn.call(this指向谁, args1, args2....)
+	2. fn.apply(this指向谁, [args1, args2....])
+	3. fn.bind()
+例：
+        class Person{
+            constructor(){
+                this.name = 'Strive';
+
+                this.showName = this.showName.bind(this); //矫正this
+            }
+            showName(){
+                console.log('this:', this);
+                return `名字为: ${this.name}`;
+            }
+        }
+
+        let p1 = new Person();
+
+        let {showName } = p1;
+
+        console.log(showName());
+------------------------------------------------------------
+class里面取值函数(getter), 存值函数(setter)
+       class Person{
+            constructor(){
+                
+            }
+            get aaa(){
+                return `aaa的属性`;
+            }
+            set aaa(val){
+                console.log(`设置aaa属性，值为:${val}`);
+            }
+        }
+
+        let p1 = new Person();
+
+        p1.aaa='123';
+
+        console.log(p1.aaa);
+------------------------------------------------------------
+静态方法: 就是类身上方法
+	static aaa(){
+
+	}
+
+	父类.aaa();
+------------------------------------------------------------
+
+父类
+子类
+例：
+        //父类
+        function Person(name){
+            this.name = name;
+        }
+        Person.prototype.showName = function(){
+            return `名字是: ${this.name}`;
+        };
+
+        //子类
+        function Student(name,skill){
+            Person.call(this,name); //继承属性
+
+            this.skill = skill;
+        }
+        Student.prototype = new Person(); //继承方法
+        
+
+        //调用
+
+        let stu1 = new Student('Strive','逃学');
+        console.log(stu1.showName());
+------------------------------------------------------------
+继承:
+	之前:
+
+Person
+Student
+	
+	现在: extends
+	class Student extends Person{
+            
+             }
+例：
+        //父类
+        class Person{
+            constructor(name){
+                this.name = name;
+            }
+            showName(){
+                console.log('父类showName');
+                return `名字为: ${this.name}`;
+            }
+        }
+
+        //子类
+        class Student extends Person{
+            constructor(name,skill){
+                super(name);
+                this.skill = skill;
+            }
+            showName(){
+                super.showName(); //父级的方法执行
+
+                //TODO 做子级事情
+                console.log('子类里的showName');
+            }
+            showSkill(){
+                return  `哥们儿的技能为: ${this.skill}`;
+            }
+        }
+        
+
+        //调用
+
+        let stu1 = new Student('Strive','逃学');
+        console.log(stu1.showName());
+------------------------------------------------------------
+拖拽
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>51牧码人——http://www.51mmr.net 专注[前端+Java],人才培养</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        .box{
+            width:100px;
+            height:100px;
+            background: red;
+            position: absolute;
+            top:0;
+        }
+        .left{
+            left:0;
+        }
+        .right{
+            right:0;
+        }
+    </style>
+    <script>
+    </script>
+</head>
+<body>
+    <div id="div1" class="box left">DIV1</div>
+    <div id="div2" class="box right">DIV2</div>
+
+    <script>
+        //普通拖拽 -- 父类
+        class Drag{
+            constructor(id){
+                this.oDiv = document.querySelector(id);
+                this.disX = 0; 
+                this.disY = 0;
+                this.init();
+            }
+            init(){
+                this.oDiv.onmousedown = function(ev){
+                    this.disX = ev.clientX - this.oDiv.offsetLeft;
+                    this.disY = ev.clientY - this.oDiv.offsetTop;
+
+                    document.onmousemove = this.fnMove.bind(this);
+                    document.onmouseup = this.fnUp.bind(this);
+
+                    return false;
+                }.bind(this);
+            }
+            fnMove(ev){
+                this.oDiv.style.left = ev.clientX - this.disX+'px';
+                this.oDiv.style.top = ev.clientY - this.disY+'px';
+            }
+            fnUp(){
+                document.onmousemove=null;
+                document.onmouseup=null;
+            }
+        }
+
+        //子类—— 限制范围
+        class LimitDrag extends Drag{
+            fnMove(ev){
+                super.fnMove(ev);
+
+                //限制范围
+                if(this.oDiv.offsetLeft<=0){
+                    this.oDiv.style.left =0;
+                }
+            }
+        }
+
+        //调用
+        new Drag('#div1');
+        new LimitDrag('#div2');
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+	

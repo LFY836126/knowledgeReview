@@ -1,0 +1,263 @@
+html4.01
+html：hyperText markup language  超文本标记语言
+
+<html lang="en">：前面叫属性名，后面叫属性值，属性值必须加双引号。根标签：<html>
+lang="en" ：告诉搜素引擎爬虫，我们的网站是关于什么内容的，中文的就写zh，德语就写de（其实都是拼音）
+每一个网站都会有一个域名地址，不是物理地址（类似www.baidu.com ip=...，也就是带ip什么的），地址作用就是让用户能找到的
+SEO：搜索引擎优化业务
+lang="en"它就是SEO一部分业务，我们清楚的告诉搜索引擎爬虫我们的网站是关于什么内容的，更方便它来抓取咱们的网站
+
+charset：编码字符集
+1.gb2312：中国国家标准第2321条，只识别简体
+2.gbk：国家标准扩展版本，包括繁体中文字符集
+3.unicode：万国码，所有国家的语言都包括了
+4.utf-8：最通用的万国码
+
+1.p标签：让里面的内容成段显示。
+例1：
+<p>fjaksldgjpsjg</p><p>jajgasjgoijdfkjad</p><p>hfaskgjdkghuijgqui</p>
+
+2.h1~h6标签：一般用作报纸展示，
+三个特点：独成一段，更改字体大小，加粗字体
+例1：
+<h1>标题</h1>
+<h2>标题</h2>
+<h3>标题</h3>
+<h4>标题</h4>
+<h5>标题</h5>
+<h6>标题</h6>
+3.strong ：将里面字体加粗展示
+
+4.em：将里面字体斜体展示
+
+5.标签可以套标签
+例1：又加粗又斜体
+<strong>
+    <em>举个栗子</em>
+</strong>
+
+6.del：有中划线的标签
+例1：
+<del>￥50</del>
+
+7.address：在实际应用时比较少
+例1：
+    <address>哈尔滨理工大学</address>
+等价于：
+    <p>
+        <em>哈尔滨理工大学</em>
+    </p>
+
+8.div，span：没效果也很重要，可以充当容器
+好处1：结构化：分块明确，可以划分功能块，划分区间，让整个页面更加结构化
+好处2：绑定性操作：容器有捆绑操作
+例1：div中的所有字都变为淘宝红（f40）了
+    <div style="color:#f40">
+        <strong>a b c</strong>
+        <em>d e f</em>
+    </div>
+9.head一般是给浏览器的的，body一般是给自己操作的，title页表标签
+
+10.空格：英文单词分隔符
+例1：
+这个就会在div中换行
+    <div style="background-color:red;height:100px;width:100px">我是小仙女我是小仙女我是小仙女我是小仙女我是小仙女</div>
+这个就不换行
+    <div style="background-color:red;height:100px;width:100px">fjksdgklsgajkghalalfdklsdfjdiqotjnkdjb</div>
+因为汉字一个一个是分开的，所以浏览器可以识别，但是一串英文字母浏览器认定是一个单词，所以在div中放不下，也不会换行。
+改正：利用空格实现单词分割，这样浏览器就能识别一个一个单词了
+    <div style="background-color:red;height:100px;width:100px">fjk s dgkls gajk ghala lfdkls dfjdiq otjnk djb</div>
+
+11.html空格展示形式 :&nbsp;
+
+12.在网页中展示标签：一个标签&lt;div&gt;（lt：less than     gt：great than）
+效果就是：一个标签<div>
+
+13.回车标签，换行：</br>
+回车标签自己单独展现就能实现，不需要包裹任何东西就能展现出功能，这样的标签就不需要成对出现比如说</br>,我们把这样的标签叫做单标签
+单标签：<br>   <meta>  <hr>(水平线)
+
+14.ol和li：合起来叫做有序列表，ol是列表架，li是列表项
+（1）ol中有个type属性有五个值可以填1,a,A,i,I，默认是值是1，a,A：要是里面的li超过了26个的话，就当作26进制再标序号
+（2）倒序：<ol reversed="reversed">
+（3）从2开始排序：    <ol start="2">，这个start不只是针对type ="1"的情况，要是type="a"从b开始排也是<ol type="a" start="2">
+例1：
+    喜欢的东西
+    <ol>
+        <li>吃饭</li>
+        <li>睡觉</li>
+        <li>enmm...</li>
+    </ol>
+
+15.ul和li：无序列表,可以应用在导航栏上
+例1：
+    <ul type="disc">  <!--默认值是disciecle：实心圆的意思，着type还可以取值circle（圈）和square（方块）-->
+        <li>吃饭</li>
+        <li>睡觉</li>
+        <li>enmm...</li>
+    </ul>
+重要：有些功能特别符合ul和li的兼生附子结构，ul包裹着li，li是ul的子项
+功能：
+这个功能有很多功能子项来组成，每一个功能子项的功能，样式基本上都是相同的只不过说它们的内容有小小的差异，
+很多个功能子项组成了一个大功能，这样的功能我们最好用ul和li来展示，因为ul和li，因为ul和li更符合它天生的结构，例如抽屉，在网页上例如导航栏
+编程讲究可维护性
+淘宝导航栏：
+
+
+16.img标签：
+1.src属性：
+（1）网上url
+例1：
+    <img src="https://gss1.bdstatic.com/9vo3dSag_xI4khGkpoWK1HF6hhy/baike/c0%3Dbaike80%2C5%2C5%2C80%2C26
+	/sign=1ce4202fbefb43160e12722841cd2d46/ca1349540923dd5477c7e78cdd09b3de9d824899.jpg"
+                style="width:100px" alt="">
+（2）本地的相对路径
+例1：在同一个文件夹下的文件和图片形成了一个相对关系，这时我们就叫它相对路径
+文件路径：D:/a/b/a.html
+图片路径：D:a/b/123.jpg
+这时图片路径引入就可以这样：    <img src="123.jpg" alt="">
+（3）本地的绝对路径
+例1：虽然它俩所在文件夹形成了一个父子级，文件和图片不在一个文件夹下形成了绝对关系，这时我们就叫它绝对路径
+文件路径：D:/a/b/a.html
+图片路径：D:a/b/c/123.jpg
+这时图片路径引入就可以这样（必须写全）：    <img src="D:a/b/c/123.jpg" alt="">
+2.alt属性：图片占位符，当图片地址发生错误的时候，显示出的内容，
+例1：
+    <img src="123.jpg" alt="图片未加载">
+3.title：图片提示符，鼠标挪上去之后，提示的信息
+例1：
+    <img src="123.jpg" alt="图片未加载" title="我是小仙女">
+
+17.a（anchor）标签：可以包裹任何东西，文字啊，css，图片什么的都可以。
+1.href ：hyperText reference 超文本引用，里面填入你所指向的目标地址
+例1：里面东西是给用户看的，外面的东西是给浏览器看的
+<a href="http://www.baidu.com">百度</a>
+例2：可以包裹图片
+<a href="http://www.baidu.com"><img src="" alt=""></a>
+2.功能：
+（1）超链接，在新的页面跳转：target="_blank"
+例1：
+<a href="http://www.baidu.com" target="_blank">百度</a>
+（2）锚点
+例1：
+<div id="demo1" style="height:100px;width:100px;background-color:pink">demo1</div>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<div id="demo2" style="height:100px;width:100px;background-color:aqua">demo2</div>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<a href="#demo1">find demo1</a>
+<a href="#demo2">find demo2</a>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+（3）打电话，发邮件
+例1：当这个页面在手机上运行的话，你点击，他就会调用手机打电话的接口，并且把电话给它拨出去
+<a href="tel:10086"></a>
+例2：发邮件
+<a href="mailto:836126515@qq.com">发邮件啦</a>
+（4）协议限定符
+例1：
+<a href="javascript:while(1){alert('让你手欠')}">小仙女</a>
+
+缩写：
+h1 -->header
+p  -->paragraph
+img -->image
+ol  -->order
+ul -->unorder
+a  --> anchor（锚的意思，定在某个点的意思）
+
+18.from表单：能够发送数据，能够将前端的数据发送给后端工程师
+1.method属性：发送数据的方式，有两个值get/post
+2.action属性：发送给谁数据，也就是数据接收方的地址
+例1：这里这个p标签实现换行感觉比br标签更好一点，因为有的标签语义化也就是可读性或者可维护性不好
+    <p>
+        username:<input type="text" name="username">
+    </p>
+    <p>
+        password:<input type="password" name="password">
+    </p>
+    <input type="submit" value="提交">
+http://localhost:63342/webstrom%E7%A8%8B%E5%BA%8F/practice.html?username=LFY&password=123
+后面出现了这个 " ?username=LFY&password=123"    就说明提交成功了 这里这些数据有名（name）有值（用户输入的值）变得很有对应性，数据很完整。
+后端工程师拿到的数据其实就是这个样子的 "username=LFY&password=123"，会将数据拆分，数据名对应什么什么东西
+要是出现 "?"这代表啥也没有，没提交成功
+3.input type="radio"实现单选框
+例1：这个name就是为了统一它们在哪个选择题里的，它们三name一样就可以实现一道选择题了，单选了。	
+<form action="" method="get">
+    我现在稀罕的
+    1.尤长靖<input type="radio" name="">
+    2.罗云熙 <input type="radio" name="">
+    3.我自个 <input type="radio" name="">
+</form>
+一般提交给后台的数据都要有名有值，这个名有了，缺个值，那就利用value属性填上值，传给后台
+更改：
+<form action="" method="get">
+    我现在稀罕的
+    1.尤长靖<input type="radio" name="like" value="You">
+    2.罗云熙 <input type="radio" name="like" value="Luo">
+    3.我自个 <input type="radio" name="like" value="Liu">
+    <input type="submit">
+</form>
+提交完就会有like=You这样的数据
+例2：实现输入，搜索的功能，像淘宝搜索框一样
+<from>
+    <p>username:<input type="text" style="color:#999" name="username" value="请输入用户名" 
+	onfocus="if(this.value=='请输入用户名'){this.value='';this.style.color='#424242'}" 
+	onblur="if(this.value==''){this.value='请输入用户名';this.style.color='#999'};">
+   </p>
+    <p>password<input type="password" name="password"></p>
+</from>
+4.复选框
+<form action="" method="get">
+    我现在稀罕的
+    1.尤长靖<input type="checkbox" name="like" value="You">
+    2.罗云熙 <input type="checkbox" name="like" value="Luo">
+    3.我自个 <input type="checkbox" name="like" value="Liu">
+    <input type="submit">
+</form>
+提交之后就是多了一个这样的：like=You&like=Luo
+5.默认选中：checked="checked"
+例1：
+<h1>
+    CHOOSE YOU SEX!!!
+</h1>
+<form action="" method="get">
+    <p>
+        male:<input type="radio" name="sex" value="male" checked="checked">
+        female:<input type="radio" name="sex" value="female">
+    </p>
+    <input type="submit">
+</form>
+5.下拉菜单
+提交数据注重两点：数据名 数据值
+数据名利用select来实现，数据值在option中就是，但是要是在option中填上value，那么提交给后台的值那就以value为准
+例1：数据名name，数据值 option或者value中的值
+<form action="" method="get">
+<h1>province</h1>
+<select name="province">
+    <option value="Beijing">Beijing</option>
+    <option value="Shanghai">Shanghai</option>
+    <option value="Tianjing">Tianjing</option>
+</select>
+<input type="submit">
+</form>
+
+19.注释：<!-- -->
+注释作用：写注释，调bag，一般在公司，1/4时间在开发，3/4时间在调试
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

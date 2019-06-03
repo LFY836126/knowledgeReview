@@ -1,0 +1,1466 @@
+csp考试注意事项：
+https://blog.csdn.net/tigerisland45/article/details/78420636?locationNum=1&fps=1
+
+
+//矩阵逆时针逆置201503-1
+#include<iostream>
+#include<cstdio>
+#include<cstring>
+#include<cstdlib>
+#include<algorithm>
+#include<vector>
+#include<map>
+#include<cmath>
+using namespace std;
+#define MAX_N 1000
+int matrix[MAX_N + 5][MAX_N + 5] = {0};
+int main()
+{
+    int n,m;
+    cin >> n >>m;
+    for(int i = 0; i < n; i ++){
+        for(int j = 0; j < m; j ++){
+            cin >> matrix[i][j];
+        }
+    }
+    for(int i = m - 1; i > -1; i --){
+        int flag = true;
+        for(int j = 0; j < n; j ++){
+            flag || cout << " ";
+            cout << matrix [j][i];
+            flag = false;
+       }
+       cout << endl;
+    }
+    return 0;
+}
+//输入
+//2 3
+//
+//1 5 3
+//3 2 4
+
+//输出
+//3 4
+//5 2
+//1 3
+
+
+
+
+
+
+//最大波动201609-1
+#include<iostream>
+#include<cstdio>
+#include<cstring>
+#include<cstdlib>
+#include<algorithm>
+#include<vector>
+#include<map>
+#include<cmath>
+using namespace std;
+#define MAX_N 1000
+int arr[MAX_N + 5] = {0};
+int main()
+{
+    int n,m;
+//    注意直接把数放在arr[0]中，不要利用其他数进行中转
+    cin >> n >> arr[0];
+    int res =0;
+    for(int i = 1; i < n; i ++)
+    {
+        cin >> arr[i];
+        int r = abs(arr[i] - arr[i - 1]);
+        res = r >= res ? r : res;
+    }
+    cout <<res<< endl;
+    return 0;
+}
+//输入
+//6
+//2 5 5 7 3 5
+
+//输出
+//4
+
+
+
+//折点计数201604-1
+#include <iostream>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
+#include <algorithm>
+#include <vector>
+#include <map>
+#include <cmath>
+using namespace std;
+
+int main() {
+    int n, a;
+    vector<int> arr;
+    cin >> n;
+    while (n--) cin >> a, arr.push_back(a);
+    int ans = 0;
+    for (int i = 1; i < arr.size() - 1; i++) {
+        if (arr[i] < arr[i - 1] && arr[i] < arr[i + 1]) ans += 1;
+        if (arr[i] > arr[i - 1] && arr[i] > arr[i + 1]) ans += 1;
+    }
+    cout << ans << endl;
+    return 0;
+}
+//输入
+//7
+//5 4 1 2 3 6 4
+
+//输出
+//2
+
+
+//打酱油201709-1
+#include<iostream>
+#include<cstdio>
+#include<cstring>
+#include<cstdlib>
+#include<algorithm>
+#include<vector>
+#include<map>
+#include<cmath>
+using namespace std;
+int main()
+{
+    int n;
+    cin >> n;
+    int seven = n / 50;
+    int four = (n - (50 * seven)) /30;
+    int one = (n - seven * 50 - four * 30)/10;
+    int sum = 7 * seven + four * 4 + one;
+    cout << sum << endl;
+    return 0;
+}
+//输入
+//40
+//输出
+//5
+
+//输入
+//80
+//输出
+//11
+
+
+
+//数位之和201512-1
+#include <iostream>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
+#include <algorithm>
+#include <vector>
+#include <map>
+#include <cmath>
+#include <string>
+using namespace std;
+
+int main() {
+    string str;
+    cin >> str;
+    int ans = 0;
+    for (int i = 0; str[i]; i++) ans += str[i] - '0';
+    cout << ans << endl;
+    return 0;
+}
+
+//输入
+//20151220
+//输出
+//13
+
+
+//门禁系统201412-1
+
+#include <iostream>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
+#include <algorithm>
+#include <vector>
+#include <map>
+#include <cmath>
+using namespace std;
+
+#define MAX_N 1000
+int cnt[MAX_N + 5] = {0};
+
+int main() {
+    int n, a, flag = 0;
+    cin >> n;
+    while (n--) {
+        cin >> a;
+        cnt[a] += 1;
+        flag != 0 && cout << " ";
+        flag = 1;
+        cout << cnt[a];
+    }
+    cout << endl;
+    return 0;
+}
+
+//输入
+//5
+//1 2 1 1 3
+//输出
+//1 1 2 3 1
+
+
+
+//数列分段 201509-1
+#include <iostream>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
+#include <algorithm>
+#include <vector>
+#include <map>
+#include <cmath>
+using namespace std;
+
+int main() {
+    int n, a;
+    vector<int> arr;
+    cin >> n;
+    while (n--) cin >> a, arr.push_back(a);
+    int ans = 1;
+    for (int i = 1; i < arr.size(); i++) ans += (arr[i] != arr[i - 1]);
+    cout << ans << endl;
+    return 0;
+}
+//输入
+//8
+//8 8 8 0 12 12 8 0
+//输出
+//5
+
+//卖菜201809-1
+#include<iostream>
+#include<cstdio>
+#include<cstring>
+#include<cstdlib>
+#include<algorithm>
+#include<vector>
+#include<map>
+#include<cmath>
+using namespace std;
+#define MAX_N 1000
+int arr[MAX_N + 5] = {0};
+int main()
+{
+    int n;
+    int flag = 0;
+    cin >> n;
+    for(int i = 1; i <= n; i ++){
+        cin >> arr[i];
+    }
+    for(int i = 1; i < n + 1; i ++){
+        int res = (arr[i - 1] + arr[i] + arr[i + 1]);
+        if(i == 1 || i == n){
+            res = res/2;
+        }
+        else{
+            res = res/3;
+        }
+        flag != 0 && cout << " ";
+        cout << res;
+        flag = 1;
+    }
+    cout << endl;
+}
+//样例输入
+//8
+//4 1 3 1 6 5 17 9
+//样例输出
+//2 2 1 3 4 9 10 13
+
+
+
+//出现次数最多的数201312-1
+#include <iostream>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
+#include <algorithm>
+#include <vector>
+#include <map>
+#include <cmath>
+using namespace std;
+#define MAX_N 10000
+
+int cnt[MAX_N + 5] = {0};
+
+int main() {
+    int n, a;
+    cin >> n;
+    while (n--) cin >> a, cnt[a] += 1;
+    int ans = 0;
+    for (int i = 1; i <= MAX_N; i++) {
+        if (cnt[i] > cnt[ans]) ans = i;
+    }
+    cout << ans << endl;
+    return 0;
+}
+//
+//样例输入
+//6
+//10 1 10 20 30 20
+//样例输出
+//10
+
+//相反数 201403-1
+#include <iostream>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
+#include <algorithm>
+#include <vector>
+#include <map>
+#include <cmath>
+using namespace std;
+
+int main() {
+    int n, a;
+    cin >> n;
+    vector<int> arr;
+    while (n--) cin >> a, arr.push_back(a);
+    int ans = 0;
+    for (int i = 0; i < arr.size(); i++) {
+        for (int j = i + 1; j < arr.size(); j++) {
+            ans += !(arr[i] + arr[j]);
+        }
+    }
+    cout << ans << endl;
+    return 0;
+}
+//样例输入
+//5
+//1 2 3 -1 -2
+//样例输出
+//2
+
+
+
+//相邻数对201409-1
+
+#include <iostream>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
+#include <algorithm>
+#include <vector>
+#include <map>
+#include <cmath>
+using namespace std;
+
+#define MAX_N 10000
+int cnt[MAX_N + 5] = {0};
+
+int main() {
+    int n, a;
+    cin >> n;
+    while (n--) cin >> a, cnt[a] += 1;
+    int ans = 0;
+    for (int i = 1; i <= MAX_N; i++) {
+        ans += cnt[i] * cnt[i - 1];
+    }
+    cout << ans << endl;
+    return 0;
+}
+//样例输入
+//6
+//10 2 6 3 7 8
+//样例输出
+//3
+
+//最小差值201712-1
+#include<iostream>
+#include<cstdio>
+#include<cstring>
+#include<cstdlib>
+#include<algorithm>
+#include<vector>
+#include<map>
+#include<cmath>
+using namespace std;
+#define MAX_N 10000
+int arr[MAX_N + 5];
+int main()
+{
+    int n;
+    cin >> n;
+    for(int i = 0; i < n; i ++){
+        cin >> arr[i];
+    }
+    sort(arr, arr+n);
+    int res = 10000;
+    for(int i = 1; i < n; i ++){
+        if(abs(arr[i] - arr[i - 1]) < res){
+            res = abs(arr[i] - arr[i - 1]);
+        }
+    }
+    cout << res << endl;
+    return 0;
+}
+//样例输入
+//5
+//9 3 6 1 3
+//样例输出
+//0
+
+
+//跳一跳20180301
+#include<iostream>
+#include<cstdio>
+#include<cstring>
+#include<cstdlib>
+#include<algorithm>
+#include<vector>
+#include<map>
+#include<cmath>
+using namespace std;
+int main()
+{
+    int b, a, res;
+    cin >> a;
+    res = a;
+    if(a == 0)
+    {
+        cout << res << endl;
+    }
+    else
+    {
+        int cnt = 0;
+        while(cin >> b&&b)
+        {
+            if(b == 2 && b == a)
+            {
+                if(cnt == 0){
+                    cnt = 2;
+                }
+                else{
+                    cnt++;
+                }
+                res += cnt * 2;
+            }
+            else
+            {
+                res += b;
+                cnt = 0;
+            }
+            a = b;
+        }
+        cout << res << endl;
+    }
+    return 0;
+}
+//样例输入
+//1 1 2 2 2 1 1 2 2 0
+//样例输出
+//22
+
+
+
+//俄罗斯方块201604-2
+
+#include <iostream>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
+#include <algorithm>
+#include <vector>
+#include <cmath>
+using namespace std;
+
+
+int map[20][15] = {0};
+int block[10][10] = {0};
+
+void read1() {
+    for (int i = 1; i <= 15; i++) {
+        for (int j = 1; j <= 10; j++) {
+            cin >> map[i][j];
+        }
+    }
+    for (int i = 1; i <= 10; i++) map[16][i] = 1;
+    return ;
+}
+
+void read2() {
+    for (int i = 1; i <= 4; i++) {
+        for (int j = 1; j <= 4; j++) {
+            cin >> block[i][j];
+        }
+    }
+    return ;
+}
+
+void read3(int &ind) {
+    cin >> ind;
+}
+
+int main() {
+    int ind;
+    read1();
+    read2();
+    read3(ind);
+    int line = 1;
+    while (line <= 18) {
+        int flag = 1;
+        for (int i = 1; i <= 4 && flag; i++) {
+            if (line - 4 + i <= 0 || line - 4 + i > 16) continue;
+            for (int j = 1; j <= 4 && flag; j++) {
+                if (block[i][j] == 0) continue;
+                if (block[i][j] == map[line - 4 + i][j + ind - 1]) flag = 0;
+            }
+        }
+        if (flag == 0) break;
+        line += 1;
+    }
+    line -= 1;
+    for (int i = 1; i <= 4; i++) {
+        if (line - 4 + i <= 0 || line - 4 + i > 15) continue;
+        for (int j = 1; j <= 4; j++) {
+            map[line - 4 + i][j + ind - 1] |= block[i][j];
+        }
+    }
+    for (int i = 1; i <= 15; i++) {
+        for (int j = 1; j <= 10; j++) {
+            j == 1 || cout << " ";
+            cout << map[i][j];
+        }
+        cout << endl;
+    }
+    return 0;
+}
+//样例输入
+//0 0 0 0 0 0 0 0 0 0
+//0 0 0 0 0 0 0 0 0 0
+//0 0 0 0 0 0 0 0 0 0
+//0 0 0 0 0 0 0 0 0 0
+//0 0 0 0 0 0 0 0 0 0
+//0 0 0 0 0 0 0 0 0 0
+//0 0 0 0 0 0 0 0 0 0
+//0 0 0 0 0 0 0 0 0 0
+//0 0 0 0 0 0 0 0 0 0
+//0 0 0 0 0 0 0 0 0 0
+//0 0 0 0 0 0 0 1 0 0
+//0 0 0 0 0 0 1 0 0 0
+//0 0 0 0 0 0 1 0 0 0
+//1 1 1 0 0 0 1 1 1 1
+//0 0 0 0 1 0 0 0 0 0
+//0 0 0 0
+//0 1 1 1
+//0 0 0 1
+//0 0 0 0
+//3
+//样例输出
+//0 0 0 0 0 0 0 0 0 0
+//0 0 0 0 0 0 0 0 0 0
+//0 0 0 0 0 0 0 0 0 0
+//0 0 0 0 0 0 0 0 0 0
+//0 0 0 0 0 0 0 0 0 0
+//0 0 0 0 0 0 0 0 0 0
+//0 0 0 0 0 0 0 0 0 0
+//0 0 0 0 0 0 0 0 0 0
+//0 0 0 0 0 0 0 0 0 0
+//0 0 0 0 0 0 0 0 0 0
+//0 0 0 0 0 0 0 1 0 0
+//0 0 0 0 0 0 1 0 0 0
+//0 0 0 0 0 0 1 0 0 0
+//1 1 1 1 1 1 1 1 1 1
+//0 0 0 0 1 1 0 0 0 0
+
+
+//火车购票201609-2
+#include<cstdio>
+#include<cmath>
+#include<cstring>
+#include<iostream>
+using namespace std;
+int a[25][10] = {0};
+int b[20];
+int main()
+{
+    int n, p;
+    cin >> n;
+    for(int i = 0; i < 20; i ++)
+    {
+        b[i] = 5;
+    }
+    while(n--)
+    {
+        cin >> p;
+        int k = 0;
+        int flag = 0;
+        int s = 0;
+        for(int i = 0; i < 20; i ++)
+        {
+            if(b[i] >= p)
+            {
+                int f = 0;
+                for(int j = 0; j < 5; j ++)
+                {
+                    if(k < p)
+                    {
+                        if(a[i][j] == 0)
+                        {
+                            a[i][j] = 1;
+                            k ++;
+                            b[i] --;
+                            f && cout << " ";
+                            cout << i * 5 + j + 1;
+                            f = 1;
+                        }
+                    }
+                    else
+                    {
+                        flag = 1;
+                        break;
+                    }
+                }
+                if(flag)
+                {
+                    break;
+                }
+            }
+            else
+            {
+                s ++;
+            }
+        }
+        int f1 = 0;
+        if(s == 20)
+        {
+            for(int i = 0; i < 20; i++)
+            {
+                for(int j = 0; j < 5; j++)
+                {
+                    if(a[i][j] == 0)
+                    {
+                        a[i][j] = 1;
+                        p --;
+                        f1 && cout << " ";
+                        cout << i * 5 + j + 1;
+                        f1 = 1;
+                    }
+                    if(p == 0)
+                    {
+                        break;
+                    }
+                }
+                if(p == 0)
+                {
+                    break;
+                }
+            }
+        }
+        cout << endl;
+    }
+    return 0;
+}
+
+
+//样例输入
+//4
+//2 5 4 2
+//样例输出
+//1 2
+//6 7 8 9 10
+//11 12 13 14
+//3 4
+
+
+//买菜201809-2
+#include<cstdio>
+#include<cstring>
+#include<iostream>
+using namespace std;
+#define SIZE 2000
+int a[SIZE + 5][2] = {0};
+int b[SIZE + 5][2] = {0};
+int main(){
+    int n;
+    cin >> n;
+    int x = 0;
+    for(int i = 0; i < n; i ++){
+        for(int j = 0; j < 2; j ++){
+            cin >> a[i][j];
+        }
+    }
+    for(int i = 0; i < n; i ++){
+        for(int j = 0; j < 2; j ++){
+            cin >> b[i][j];
+        }
+    }
+    int sum = 0;
+    for(int i = 0; i < n; i ++){
+        for(int j = 0; j < n; j ++){
+            int x = b[j][0];
+            int y = b[j][1];
+            if((b[j][0] < a[i][1] && b[j][0] >= a[i][0])||(b[j][1] <= a[i][1] && b[j][1] > a[i][0])||(b[j][0] <= a[i][0] && b[j][1] >= a[i][1])){
+                x = x > a[i][0] ? x : a[i][0];
+                y = y < a[i][1] ? y : a[i][1];
+                sum += (y - x);
+            }
+            else{
+                continue;
+            }
+        }
+    }
+    cout << sum << endl;
+    return 0;
+}
+//样例输入
+//4
+//1 3
+//5 6
+//9 13
+//14 15
+//2 4
+//5 7
+//10 11
+//13 14
+//样例输出
+//3
+
+
+//碰撞的小球201803-2 
+#include<iostream>
+#include<cstdio>
+#include<cstring>
+#include<cstdlib>
+#include<algorithm>
+#include<vector>
+#include<map>
+#include<cmath>
+using namespace std;
+int main()
+{
+    int sD[105];//方向
+    int sI[105];//碰撞后位置
+    int sP[105];//当前位置
+    int n,l,t;
+    for(int i = 0; i < 105; i ++)
+    {
+        sD[i] = 1;
+    }
+    cin >> n >> l >> t;
+    for(int i = 0; i < n; i ++)
+    {
+        cin >> sI[i];
+    }
+    for(int i = 0; i < t; i ++)
+    {
+        for(int j = 0; j < n; j ++)
+        {
+            sP[j] = sI[j];
+        }
+        for(int j = 0; j < n ; j++){
+            if((sP[j] == l && sD[j] == 1) || (sP[j] == 0 && sD[j] == -1)){
+                sD[j] = -sD[j];
+            }
+            else{
+                for(int k = 0; k < n ; k ++){
+                    if((sP[k] == sP[j]) && (k != j)){
+                        sD[j] = -sD[j];
+                    }
+                }
+            }
+            sI[j] += sD[j];
+        }
+    }
+    int flag = 0;
+    for(int i = 0; i < n; i ++){
+        flag&&cout << " ";
+        cout << sI[i];
+        flag = 1;
+    }
+    cout << endl;
+    return 0;
+}
+//样例输入
+//10 22 30
+//14 12 16 6 10 2 8 20 18 4
+//样例输出
+//6 6 8 2 4 0 4 12 10 2
+
+
+//工资计算 2016 12-2
+#include<iostream>
+#include<cstdio>
+#include<cstring>
+#include<cstdlib>
+#include<algorithm>
+#include<vector>
+#include<map>
+#include<cmath>
+using namespace std;
+int a[7] = {3500, 4955, 7655, 11255, 30755, 44755, 61005};
+int b[7] = {3500, 5000, 8000, 12500, 38500, 58500, 83500};
+int c[7] = {0, 45, 300, 900, 6500, 6000, 8750};
+float huilu[7] = {0.03, 0.1, 0.2, 0.25, 0.3, 0.35, 0.45};
+
+int main()
+{
+    int n;
+    cin >> n;
+    int flag = 0;
+    int num;
+    float res;
+    for(int i = 0; i < 6; i ++)
+    {
+        if(n > a[i] && n <= a[i+1])
+        {
+            num = i;
+            flag = 1;
+            break;
+        }
+    }
+    if(flag)
+    {
+        for(int i = 0; i < num + 1; i ++)
+        {
+            n += c[i];
+        }
+        res = ((n - b[num]*huilu[num])/(1 - huilu[num]));
+    }
+    else if(n <= 3500){
+        res = n;
+    }
+    else if(n > 61005){
+        for(int i = 0; i < 7; i++){
+            n += c[i];
+        }
+        res =((n - b[6]*huilu[6])/(1 - huilu[6]));
+    }
+    cout << res;
+    return 0;
+}
+//样例输入
+//9255
+//样例输出
+//10000
+
+
+//20170902公共钥匙盒
+#include<iostream>
+#include<cstdio>
+#include<cstring>
+#include<cmath>
+using namespace std;
+#define MAX_N 11000
+int key[MAX_N];
+int keyj[MAX_N] = {0};
+int j[MAX_N] = {0};
+int h[MAX_N] = {0};
+int keyh[MAX_N] = {0};
+void sortT(int tim[MAX_N + 5], int key[MAX_N + 5], int k)
+{
+    for(int i = 0; i < k; i ++)
+    {
+        for(int j = i + 1; j < k; j ++)
+        {
+            if(tim[i] > tim[j] || (tim[i] == tim[j] && key[i] > key[j]) )
+            {
+                int tmp1, tmp2;
+                tmp1 = tim[i];
+                tim[i] = tim[j];
+                tim[j] = tmp1;
+                tmp2 = key[i];
+                key[i] = key[j];
+                key[j] = tmp2;
+            }
+        }
+    }
+}
+int main()
+{
+
+    int n, k, t;
+    cin >> n >> k;
+    for(int i = 1; i < n + 20; i++)
+    {
+        key[i] = i;
+//        cout << key[i];
+    }
+    for(int i = 0; i < k ; i++)
+    {
+        cin >> keyj[i] >> j[i] >> t;
+        h[i] = j[i] + t;
+        keyh[i] = keyj[i];
+    }
+    sortT(j,keyj,k);
+    sortT(h,keyh,k);
+//    for(int i = 0; i < k; i ++){
+//        cout << keyj[i] << " " << j[i] << " " << h[i] << " " << keyh[i];
+//        cout << endl;
+//    }
+    int x = 0,y = 0, s;
+    while(x != k && y != k)
+    {
+        s = j[x] < h[y]? 0 : 1;
+        if(s == 0)
+        {
+            for(int i = 1; i < n + 1; i++)
+            {
+                if(key[i] == keyj[x])
+                {
+                    key[i] = 0;
+                    break;
+                }
+            }
+            x++;
+        }
+        if(s == 1)
+        {
+            for(int i = 1; i < n + 1; i++)
+            {
+                if(key[i] == 0)
+                {
+                    key[i] = keyh[y];
+                    break;
+                }
+            }
+            y++;
+        }
+    }
+    if(x == k)
+    {
+        for(int i = 1; i < n + 1 && y < k; i ++)
+        {
+            if(key[i] == 0)
+            {
+                key[i] = keyh[y];
+                y++;
+            }
+        }
+    }
+//    else if(y == k)
+//    {
+//        for(int i1 = x; i1 < k; i1++)
+//        {
+//            for(int j1 = 1; j1 < n + 1; j1++)
+//            {
+//                if(key[j1] == keyj[i1])
+//                {
+//                    key[j1] = 0;
+//                    break;
+//                }
+//            }
+//        }
+//    }
+    int flag = 0;
+    for(int i = 1; i < n + 1 ; i++)
+    {
+        flag && cout << " ";
+        cout << key[i];
+        flag = 1;
+    }
+    cout << endl;
+//    for(int i = 1; i < n + 1 ; i++)
+//    {
+//        cout << i << " ";
+//    }
+    return 0;
+}
+//5 5
+//5 1 4
+//1 1 4
+//4 2 8
+//3 2 8
+//2 2 8
+
+输入
+//5 7
+//1 1 14
+//3 3 12
+//1 15 12
+//2 7 20
+//3 18 12
+//4 21 19
+//5 30 9
+
+//输出
+//12354
+
+
+//201703-2 学生排队
+
+#include<cstdio>
+#include<cstring>
+#include<iostream>
+#include<cmath>
+using namespace std;
+#define MAX_N 1000
+int arr[MAX_N + 5] = {0};
+int position(int arr[MAX_N], int p, int n){
+    int index;
+    for(int i = 0; i < n; i ++){
+        if(arr[i] == p){
+            index = i;
+            return index;
+        }
+    }
+}
+int main(){
+    int n, m, p, q;
+    cin >> n >> m;
+    for(int i = 0; i < n; i ++){
+        arr[i]  =i + 1;
+    }
+    while(m --){
+        cin >> p >> q;
+        int index = position(arr, p, n);
+        int pos = index + q;
+        if(q < 0){
+            if(pos < 0){
+                pos = 0;
+            }
+            for(int i = index; i > pos; i --){
+                arr[i] = arr[i - 1];
+            }
+        }
+        if(q >= 0){
+            if(pos >= n){
+                pos = n - 1;
+            }
+            for(int i = index; i < pos; i++){
+                arr[i] =arr[i + 1];
+            }
+        }
+        arr[pos] = p;
+    }
+    int flag = 0;
+    for(int i = 0; i < n; i ++){
+        flag && cout << " ";
+        cout << arr[i];
+        flag = 1;
+    }
+    cout << endl;
+    return 0;
+}
+
+//样例输入
+//8
+//3
+//3 2
+//8 -3
+//3 -2
+//样例输出
+//1 2 4 3 5 8 6 7
+
+
+//201512-2消除类游戏
+#include<cstdio>
+#include<cstring>
+#include<iostream>
+#define SIZE1 30
+#define SIZE2 30
+int a[SIZE1+ 5][SIZE2 + 5];
+int b[SIZE1+ 5][SIZE2 + 5];
+using namespace std;
+int main(){
+    int n,m;
+    cin >> n >> m;
+    for(int i = 0; i < n; i++){
+        for(int j = 0; j < m; j ++){
+            cin >> a[i][j];
+            b[i][j] = a[i][j];
+        }
+    }
+    for(int i = 0; i < n; i ++){
+        int num = a[i][0];
+        int k = 0;
+        for(int j = 0; j < m; j ++){
+            if(a[i][j] == num){
+                k ++;
+            }
+            else{
+                num = a[i][j];
+                k = 1;
+            }
+            if(k >= 3){
+                for(int s = j + 1 - k; s <= j; s ++){
+                    b[i][s] = 0;
+                }
+            }
+        }
+
+    }
+     for(int i = 0; i < m; i ++){
+        int num = a[0][i];
+        int k = 0;
+        for(int j = 0; j < n; j ++){
+            if(a[j][i] == num){
+                k ++;
+            }
+            else{
+                num = a[j][i];
+                k = 1;
+            }
+            if(k >= 3){
+                for(int s = j + 1 - k; s <= j; s ++){
+                    b[s][i] = 0;
+                }
+            }
+        }
+    }
+    for(int i = 0; i < n; i ++){
+        int flag = 0;
+        for(int j = 0; j < m; j ++){
+            flag && cout <<" ";
+            cout << b[i][j];
+            flag = 1;
+        }
+        cout << endl;
+    }
+    return 0;
+}
+//样例输入
+//4 5
+//2 2 3 1 2
+//3 4 5 1 4
+//2 3 2 1 3
+//2 2 2 4 4
+//样例输出
+//2 2 3 0 2
+//3 4 5 0 4
+//2 3 2 0 3
+//0 0 0 4 4
+
+//201509-2日期计算
+#include<cstdio>
+#include<cstring>
+#include<iostream>
+using namespace std;
+int m[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+int main(){
+    int n, d;
+    cin >> n >> d;
+    if((n % 4 == 0 && n % 100 != 0) ||( n % 400 == 0)){
+        m[1] = 29;
+    }
+    int sum = 0;
+    for(int i = 0; i < 12; i ++){
+        if(d > m[i]){
+            d -= m[i];
+        }
+        else{
+            cout << i + 1 << endl;
+            cout << d << endl;
+            break;
+        }
+    }
+    return 0;
+}
+//样例输入
+//2015
+//80
+//样例输出
+//3
+//21
+
+
+
+//201412-2
+//Z字形扫描
+#include<cstdio>
+#include<cstring>
+#include<iostream>
+#include<cmath>
+using namespace std;
+#define SIZE 500
+int arr[SIZE + 5][SIZE + 5] = {0};
+int main(){
+    int n;
+    cin >> n;
+    for(int i = 0; i < n; i ++){
+        for(int j = 0; j < n; j++){
+            cin >> arr[i][j];
+        }
+    }
+    cout << arr[0][0];
+    int x = 0, y = 0, a = 0, b = 0 , s = -1;
+    while(!(x == n - 1 && b == n - 1)){
+        if(y < n - 1){
+            y ++;
+        }
+        else{
+            x ++;
+        }
+        if(a < n - 1){
+            a ++;
+        }
+        else{
+            b ++;
+        }
+        if(s < 0){
+            int i = x,j = y;
+            while(i <= a && j >= b){
+                cout  << " " << arr[i ++][j --];
+            }
+            s = -s;
+        }
+        else{
+            int i = a,j = b;
+            while(i >= x && j <= y){
+                cout  << " " << arr[i --][j ++];
+            }
+            s = -s;
+        }
+    }
+    cout << endl;
+}
+//样例输入
+//4
+//1 5 3 9
+//3 7 5 6
+//9 4 6 4
+//7 3 1 3
+//样例输出
+//1 5 3 9 7 3 9 5 4 7 3 6 6 4 1 3
+
+
+
+
+//201409-2
+//画图
+#include<cstdio>
+#include<cstring>
+#include<iostream>
+#include<cmath>
+using namespace std;
+#define SIZE 100
+int a[SIZE + 5][SIZE + 5] = {0};
+int main(){
+    int n, x1, y1, x2, y2;
+    cin >> n;
+    int xin = 0, yin = 0;
+    int xax = 0, yax = 0;
+    cin >> xin >> yin >> xax >> yax;
+     for(int i = xin; i < xax; i ++){
+        for(int j = yin; j < yax; j ++){
+            a[i][j] = 1;
+        }
+    }
+    for(int i = 1; i < n; i ++){
+        cin >>  x1 >> y1 >> x2 >> y2;
+        xin = xin < x1 ? xin : x1;
+        yin = yin < y1 ? yin : y1;
+        xax = xax < x2 ? x2 : xax;
+        yax = yax < y2 ? y2 : yax;
+        for(int i = x1; i < x2; i++){
+            for(int j = y1; j < y2; j ++){
+                a[i][j] = 1;
+            }
+        }
+    }
+    int sum = 0;
+    for(int i = xin; i <= xax; i ++){
+        for(int j = yin; j <= yax; j ++){
+            if(a[i][j] == 1){
+                sum ++;
+            }
+        }
+    }
+    cout << sum << endl;
+    return 0;
+}
+//样例输入
+//2
+//1 1 4 4
+//2 3 6 5
+//样例输出
+//15
+
+//201403-2
+//窗口
+#include<cstdio>
+#include<cstring>
+#include<iostream>
+using namespace std;
+#define SIZE 20
+#define MSIZE 2559
+#define NSIZE 1439
+int b[MSIZE + 5][NSIZE + 5]= {0};
+int a[SIZE + 5][SIZE + 5] = {0};
+int main(){
+    int n, m, x, y;
+    cin >> n >> m;
+    for(int i = 0; i < n; i ++){
+        for(int j = 0; j < 4; j ++){
+            cin >> a[i][j];
+        }
+        for(int j = a[i][0]; j <= a[i][2]; j ++){
+            for(int k = a[i][1]; k <= a[i][3]; k ++){
+                b[j][k] = i + 1;
+//                cout << b[j][k] << " ";
+            }
+//            cout << endl;
+        }
+    }
+    for(int i = 0; i < m; i ++){
+     cin >> x >> y;
+     if(b[x][y]){
+        int t = b[x][y];
+        for(int i = a[t - 1][0]; i <= a[t - 1][2]; i ++){
+            for(int j = a[t - 1][1]; j <= a[t - 1][3]; j ++){
+                b[i][j] = t;
+            }
+        }
+        cout << t << endl;;
+     }
+     else{
+        cout << "IGNORED" << endl;
+     }
+    }
+    return 0;
+}
+//样例输入
+//3 4
+//0 0 4 4
+//1 1 5 5
+//2 2 6 6
+//1 1
+//0 0
+//4 4
+//0 5
+//样例输出
+//2
+//1
+//1
+//IGNORED
+
+
+//201312-2
+//ISBN号码
+#include<cstdio>
+#include<cstring>
+#include<iostream>
+using namespace std;
+int main()
+{
+    string str;
+    cin >> str;
+    int k = 1;
+    int num = 0;
+    for(int i = 0; i < 12; i ++)
+    {
+        if(i == 1 || i == 5 || i == 11)
+        {
+            continue;
+        }
+        else
+        {
+            num +=(str[i] - '0') * k;
+            k++;
+        }
+    }
+    num %= 11;
+    if(num == 10)
+    {
+        if(str[12] == 'X'){
+            cout << "Right" << endl;
+        }
+        else
+        {
+            for(int i = 0; i < 12; i ++)
+            {
+                cout << str[i];
+            }
+            cout << 'X' << endl;
+        }
+    }
+    else
+    {
+        if(num == (str[12] - '0'))
+        {
+            cout << "Right"<< endl;
+        }
+        else
+        {
+            for(int i = 0; i < 12; i ++)
+            {
+                cout << str[i];
+            }
+            cout << num << endl;
+        }
+    }
+return 0;
+}
+
+//样例输入
+//0-670-82162-4
+//样例输出
+//Right
+//样例输入
+//0-670-82162-0
+//样例输出
+//0-670-82162-4
+
+
+//201712-2
+//游戏
+#include<cstdio>
+#include<cstring>
+#include<iostream>
+using namespace std;
+#define SIZE 1000
+int a[SIZE + 5] = {0};
+int main()
+{
+    int n, k;
+    cin >> n>> k;
+    for(int i = 1; i < n + 1 ; i++){
+        a[i] = i;
+    }
+    int s = 0;
+    int sum = n;
+    for(int i = 1; i < n + 1; i ++){
+        if(a[i] == 0){
+            if(i == n){
+                i = 0;
+            }
+            continue;
+        }
+        else{
+            s ++ ;
+//            cout << s << endl;
+            if(s % 10 == k || s % k == 0){
+                a[i] = 0;
+                sum --;
+                if(sum == 1){
+                    for(int j = 1; j < n + 1; j ++){
+                        if(a[j] != 0){
+                            cout << j << endl;
+                            break;
+                        }
+                    }
+                    break;
+                }
+            }
+            if(i == n){
+                i = 0;
+            }
+        }
+    }
+    return 0;
+}
+
+//样例输入
+//5 2
+//样例输出
+//3
+//样例输入
+//7 3
+//样例输出
+//4

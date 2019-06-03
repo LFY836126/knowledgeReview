@@ -1,0 +1,334 @@
+ES6   ->  ECMA  标准
+
+js
+
+ES7  ES8.....
+
+ES5.x
+
+ECMA-262       ->   ES1.0
+--------------------------------------------
+ES2015
+
+ES6  ->   2015年6月    ES6.0
+
+每年6月份，发布一个版本
+
+	2016年6月    ES6.1	ES7		ES2016
+	2017年6月    ES6.2(async await)	ES8		ES2017
+
+	ESnext
+---------------------------------------------
+ESnext	'下一代 js'语言
+----------------------------------------------
+任何人都可以向 标准委员会 (TC39), 要求更改语言标准
+
+提案变成标准，经历5个阶段
+	Stage 0	展示阶段
+	Stage 1	征求意见阶段
+	Stage 2	草案阶段
+	Stage 3	候选阶段
+	Stage 4	定案阶段(标准)
+
+babel
+----------------------------------------------
+https://github.com/tc39/ecma262
+
+----------------------------------------------
+
+react， vue, angularJs， angular
+
+chrome,    对新的语法支持，速度还挺猛
+----------------------------------------------
+ES6环境:
+	webpack3.x
+
+	Traceur
+----------------------------------------------
+关于定义(声明)变量:
+	之前:     var a=12;
+		let a=12
+
+	作用域:
+		全局
+		函数作用域
+
+	let		相当于之前的 var
+	const		常量， 定义好了不能改变
+
+	let注意:
+		1. 没有预解析，不存在变量提升
+			在代码块内，只要let定义变量，在之前使用，都是报错
+			先定义完，在使用
+		2.  同一个作用域里， 不能重复定义变量
+		3.  for循环，for循环里面是父级作用域，里面又一个
+	（TDZ：暂时性死区）
+	块级作用域:
+		{
+			//块级作用域
+		}
+		
+		{{{{let a = 12}}}}
+
+		if(){xx}
+		for(){}
+		while(){}
+
+
+	const: 特性和let一样
+		const定义变量不能修改
+
+		const定义完变量，必须有值，不能后赋值，不能修改
+		例1：
+		        const arr =['apple','banana'];
+		        arr.push('orange');
+		        console.log(arr);
+		//返回三个元素，因为，数组的地址并没有改变，只是新添了元素
+		Object.freeze(对象)
+		例2：（不能扩展，报错）
+		        const arr = Object.freeze(['apple','banana']);
+		        arr.push('orange');
+		        console.log(arr);
+
+		const config={
+			host:
+			username:
+			password:
+			version:
+		}
+
+	
+	{
+		//TODO
+	}
+
+	IIFE（立即执行函数）
+	(function(){
+		//TODO
+	})()
+
+	建议:
+		以后 就用 let  不要在使用var
+		
+		const http = require('http');
+======================================
+解构赋值:
+	*  非常有用，特别在做数据交互  ajax
+
+	let [a,b,c] =[12,5, 6];
+
+	注意: 左右两边，结构格式要保持一致
+
+	json:
+		let {name,age, job} = {
+		    name:'Strive',
+		    age:18,
+		    job:'码畜'
+		};
+	起别名：
+		let {name:n,age:g, job:a} = json;
+
+	解构时候可以给默认值：
+		let [a,b, c="默认值"] = ['aaa','bbb'];
+		let [a, b, c = '暂无...'] = ['aa' , 'b' , null];//返回null
+		let [a, b, c = '暂无...'] = ['aa' , 'b' , undefined];//返回暂无...
+	例：
+	    let a;
+
+        ({a} = {a:'apple', b:'banana'});
+        //这个大括号用不好会被当作块级作用域，所以最好用let {a} = {a:'apple',...},而不是将let a 和{a}分开
+
+        console.log(a);
+    例：交换两个数的位置
+            let a = 12;
+		    let b = 5;
+
+	        [a,b] = [b,a];
+
+	        console.log(a,b);
+
+	import {a,b,c} from './mod'
+	解构赋值在函数中的应用1：
+	        function show({a,b='默认'}){
+	            console.log(a, b);
+	        }
+
+	        show({
+	            a:1
+	        })
+	        //1 undefined
+	解构赋值在函数中的应用2：
+            function show({a='默认1',b='默认'}){
+	            console.log(a, b);
+	        }
+
+	        show({})
+
+	        function show({a='默认1',b='默认'} = {}){
+	            console.log(a, b);
+	        }
+
+	        show()
+======================================
+字符串模板:
+	``  字符串模板：
+		优点: 可以随意换行
+		`  ${变量名字}`
+	字符串连接，要死人的。
+
+			let name ='Strive';
+        	let age = 18;
+        	
+        	let str = `这个人叫${name}, 年龄是 ${age}岁`;
+
+	关于字符串一些东西:
+		字符串查找:
+			str.indexOf(要找的东西)   返回索引(位置) ，没找到返回-1
+			str.includes(要找的东西)   返回值  true/false
+
+			判断浏览器:  includes
+
+		http://www.xxx.xx
+
+		字符串是否以谁开头:
+			str.startsWith(检测东西)
+		例：
+	        let str2 ='https://www.baidu.com/';
+
+	        console.log(str2.startsWith('http'));
+			检测地址
+		字符串是否以谁结尾:
+			str.endsWith(检测东西)
+
+			.png
+		例：
+	        let str = 'aaaa.png';
+	        let str2 = 'aaaa.html';
+
+	        console.log(str2.endsWith('png'));
+		重复字符串:
+			str.repeat(次数);
+		例：
+	        let str = '牧码人';
+
+	        console.log(str.repeat(2));
+
+	填充字符串:
+		str.padStart(整个字符串长度, 填充东西)   往前填充
+		str.padEnd(整个字符串长度, 填充东西)    往后填充
+
+		str.padStart(str.length+padStr.length, padStr)，第一个参数是填充后字符串长度
+============================================
+函数变化:
+	1. 函数默认参数
+		function show({x=0,y=0}={}){
+		    console.log(x,y);
+		}
+		show()
+ 
+		function show(a='欢迎',b='mmr'){
+            console.log(a,b);
+        }
+        show('welcome' , ''); //代表传了但是是空字符串，不走默认值
+
+	2. 函数参数默认已经定义了，不能再使用let，const声明 
+		function show(a=18){
+		    let a = 101;  //错误,报错
+		    console.log(a);
+		}
+		show()
+
+扩展运算符、Rest运算符:
+	...
+
+	展开数组
+
+	... :
+		[1,2,3,4]  -> ... [1,2,3,4]  ->  1,2,3,4,5
+	...:
+		1,2,3,4,5  -> ...1,2,3,4,5  ->  [1,2,3,4,5]
+
+	剩余参数: 必须放到最后
+	例1：
+        let arr =['apple','banana','orange'];
+        console.log(arr);
+        /*Array(3)['apple' , 'banana' , 'orange']*/
+        console.log(...arr);
+        /*apple banana orange*/
+箭头函数:
+	=>
+
+	let show = () => 1;
+
+
+	() => return东西
+
+	() =>{
+		语句
+		return
+	}
+
+	注意:
+		1. this问题, 定义函数所在的对象，不在是运行时所在的对象
+		2. 箭头函数里面没有arguments, 用  ‘...’
+		3. 箭头函数不能当构造函数
+	例：
+        var id = 10;  //用var定义一个全局变量，属于window， let，const不同，不属于window
+
+        let json={
+            id:1,
+            show:function(){
+                setTimeout(function(){
+                    alert(this.id);//如果全局范围内没定义id或者用let定义id的话，返回undefined，所以这里返回9
+                },2000);
+                /* setTimeout(()=>{
+                    alert(this.id);   /*用箭头函数定义，这里的this不再是全局内的this，而是属于这个对象，所以这里的this.id为1*/
+                },2000);*/
+            }
+        };
+
+        json.show();
+	例：
+	    //ES2017  函数参数最后逗号可以有了
+        function show(a,b,c,d,){
+            console.log(a,b,c,d);
+        }
+
+        show(1 , 2 , 3 , 4 ,);//不报错
+	
+	
+	
+
+		
+		
+			
+
+	
+
+	
+
+		
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

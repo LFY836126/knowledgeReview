@@ -1,0 +1,19 @@
+1.主流浏览器：
+shell 内核
+IE ：trident
+chrome：webkit/blink
+safari：webkit
+firefox：Gecko
+opera：presto
+
+2.CSS权重(256进制)：
+!important         -->Infinity（Infinity+1就大于Infinity）
+行间样式             -->1000
+id                        -->100
+class|属性|伪类    -->10
+标签|伪元素         -->1
+通配符选择器       -->0
+
+3.
+border:width style color
+padding :top right bottom left

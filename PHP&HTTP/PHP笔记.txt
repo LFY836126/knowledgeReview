@@ -1,0 +1,1111 @@
+/09_ODg86fTO
+复习：笔记，文档，案例
+案例包括（自己的（C:\www\site1），老师的（C:\Users\LFY\Desktop\资料及软件\web学习资料\2018web\07.php基础(共105多集)\PHP后台开发资料），还有案例中的注释）
+
+1.网站是由大量的网页组成的
+2.GUI：Graphical User Interface，图形化用户界面，又称图形用户接口
+3.编程语言：就是人和计算机交流的手段
+denied：拒绝
+granted：允许
+/ ：根目录
+Root：根
+
+4.url：：https://zce.me:80/schools/students?id=18&name=zce#ph
+https         ：协议名
+zce.me:80 ：主机host
+zce.me      ：域名或者叫做主机名
+:80            ：端口
+/schools/students：路径
+?id=18&name=zce：请求的参数
+#ph          ：锚点值
+5.一个网站Hacker News，和stackoverflow
+
+
+
+
+第二天：
+1.
+<?php
+
+// 将文本文件中的内容呈现到一个表格中
+// 1. 读取文件内容                  // => 包含文本内容的字符串数据
+$contents = file_get_contents('names.txt');
+
+// 2. 按照一个特定的规则解析文件内容   // => 数组
+// 2.1. 按照换行拆分
+$lines = explode("\n", $contents);
+// 2.2. 遍历每一行分别解析每一行中的数据
+foreach ($lines as $item) {
+  if (!$item) continue;
+
+  // $item => '70 | 余娜 | 37 | q.elgjdfg@pqiv.sa | http://HKHEBUI.RO'
+  $cols = explode('|', $item);
+  // $cols => []
+  $data[] = $cols;
+  // $data => [ [], [] ]
+}
+
+// 3. 通过混编的方式将数据呈现到表格中
+// var_dump($data);
+
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>全部人员信息表</title>
+</head>
+<body>
+  <h1>全部人员信息表</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>编号</th>
+        <th>姓名</th>
+        <th>年龄</th>
+        <th>邮箱</th>
+        <th>网址</th>
+      </tr>
+    </thead>
+    <tbody>
+      <?php foreach ($data as $line): ?>
+      <tr>
+        <?php foreach ($line as $col): ?>
+        <!-- $col => ' http://XEP.VC' -->
+        <?php $col = trim($col); ?>
+        <!-- $col => 'http://XEP.VC' -->
+        <!-- 判断这里的数据是不是一个网址（看看是否是 http://） -->
+        <?php if (strpos($col, 'http://') === 0): ?>
+          <td><a href="<?php echo strtolower($col); ?>"><?php echo substr($col, 7); ?></a></td>
+        <?php else: ?>
+          <td><?php echo $col; ?></td>
+        <?php endif ?>
+        <?php endforeach ?>
+      </tr>
+      <?php endforeach ?>
+    </tbody>
+  </table>
+</body>
+</html>
+
+2.
+<?php
+
+// PHP 所有能力都是函数，内置1000多个函数
+
+$str = 'hello';
+// 获取字符串长度
+
+echo strlen($str);
+
+echo '<br>';
+
+// 获取中文字符串（宽字符）的长度
+// strlen 只能获取拉丁文的长度,
+// 内置成员函数直接使用
+echo strlen('你好');
+
+echo '<br>';
+
+// PHP 中专门为 宽字符集 添加了一套 API
+// 这一套 API 不在内置的 1000+ 里面，而是在一个模块（php_mbstring.dll）中
+// 模块成员必须通过配置文件载入模块过后再使用,内置成员直接使用
+// 所有的API 都是 mb_xxxx
+echo mb_strlen('你好');
+
+
+// 配置 PHP 扩展的步骤
+// 1. 在 PHP 的安装目录去创建一个 php.ini
+// 2. extension_dir扩展目录的意思
+// 3. ;extension=php_mbstring.dll，更改完要重启apache，不管改的是apache还是php都要重启apache，他们之间是雇佣关系
+// 4. 默认Apache加载的php.ini 是去 Windows目录找的
+// 5. 可以通过 Apache 的配置文件修改默认加载路径 PHPIniDir
+
+
+3.
+查看php哪些插件已启用
+<?php
+
+phpinfo();
+
+4.
+<?php
+
+// 类型：  1. 索引数组  2. 关联数组
+// 方式：  1. array()  2. [] (PHP 5.4)
+
+$dict = array(
+  'hello' => '你好',
+  'hello1' => '你好',
+  'hello2' => '你好',
+);
+
+// var_dump(array_keys($dict));
+// // => ['hello', 'hello1', 'hello2']
+
+// var_dump(array_values($dict));
+// // => ['你好', '你好', '你好']
+
+// var_dump(array_key_exists('hello', $dict));
+// var_dump(array_key_exists('hello4', $dict));
+
+// 只有当 php.ini 中 display_errors = On 时候
+// 才会在界面上显示 notice 错误
+// 开发阶段一定设置为 On 生产阶段（上线）设置为 Off
+
+// isset 也可判断数组中是否有指定的键
+// 这种类似于 JavaScript 的方式虽然可以达到效果，但是会有警告
+// if ($dict['foo']) {
+//   echo $dict['foo'];
+// } else {
+//   echo '没有';
+// }
+
+// isset 会吞掉 Undefined index 的警告
+if (isset($dict['foo'])) {
+  echo $dict['foo'];
+} else {
+  echo '没有';
+}
+// isset($dict['foo'])
+// $dict['foo'] =>
+// isset()
+isset：要是有这个键（不管值是什么），就返回1，如果没有就吞掉系统的警告（也就是有就返回1，没有就什么也不返回）
+empty：就是值为false或者没有这个键就返回1，否则什么也不返回
+
+// empty($dict['foo']) 相当于 !isset($dict['foo']) || $dict['foo'] == false
+if (empty($dict['foo'])) {
+  echo '没有';
+} else {
+  echo $dict['foo'];
+}
+
+
+// empty 的实现
+// function empty ($input) {
+//   return !isset($input) || $input == false
+// }
+
+5.
+<?php
+
+// 1. 通过代码设置时区，更推荐
+date_default_timezone_set('PRC');
+// 2. 通过配置文件设置时区
+// date.timezone = PRC
+
+// // time 获取到的是 秒数为单位的时间戳
+// echo time();
+
+// echo '<br>';
+// // 格式化一个时间戳
+// // 第一个参数是一个时间格式
+// // 第二个参数是一个时间戳，默认是time(),
+// // 默认时间戳获取的就是格林威治时间
+// echo date('Y-m-d H:i:s', time());
+
+$str = '2017-10-22 15:18:58';
+
+// 对已有时间做格式化
+// strtotime 可以用来将一个有格式的时间字符串 转换为一个 时间戳
+$timestamp = strtotime($str);
+
+// 注意单引号字符串问题
+echo date('Y年m月d日<b\r>H:i:s', $timestamp);
+
+6.
+<?php
+
+// PHP 中可以通过 define 函数定义 一个常量
+// 常量的特点就是：定义后不能被修改，也是临时存放数据的容器
+// 什么时候用常量：一般程序的配置信息（不会在运行过程中修改）都会在常量中定义
+// what why how where when
+
+// 变量或函数都是采用 snake_case （小写字母加下划线）命名规则
+// 常量是 SNAKE_CASE （大写字母加下划线）命名规则
+// 第一个参数常量名称
+// 第二个是常量的值
+define('SYSTEM_NAME', '阿里百秀');
+// 第三个参数是常量名称是否忽略大小写 默认为false 不忽略
+define('SYSTEM_VERSION', '1.0', true);
+
+echo SYSTEM_NAME;
+// echo system_name;
+
+
+echo SYSTEM_VERSION;
+echo system_version;
+
+7.
+<?php
+
+// // 类似 CSS 的 import 导入文件
+// require 'config.php';
+// // require 可以用于在当前脚本中载入一个别的脚本文件并且执行他
+// // require 在每一次调用时都会载入对应的文件
+
+// echo SYSTEM_NAME;
+
+// require 'config.php';
+
+// echo SYSTEM_NAME;
+
+// require_once ==================================
+// require_once 如果之前载入过，不再执行（只执行一次）
+// 由于类似于 定义常量 定义函数 这种操作不能执行多次
+// 所以 require_once 更加合适载入这种文件
+
+8.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <!-- require 特点： 一旦被载入的文件不存在就会报一个致命错误，当前文件不再往下执行 -->
+  <!-- include 特点： 载入文件不存在不会报错误（会有警告，警告不用管），当前文件继续执行 -->
+  <?php include 'aside.php'; ?>
+  <main>
+    这是主要的区域
+  </main>
+</body>
+</html>
+
+require_once 'config.php';
+
+echo SYSTEM_NAME;
+
+require_once 'config.php';
+
+echo SYSTEM_NAME;
+
+10.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>用户登录</title>
+</head>
+<body>
+  <!--客户端需要注意（from和input两个元素）：
+    1. 必须有 form 标签
+    2. form 必须指定 action 和 method
+        不设置 action 默认是当前页面 （必须设置，因为兼容）
+        不设置 method 默认是 get
+    3. 表单元素（表单域(其实就是input)）必须有 name (如果希望被提交的情况)
+    4. 表单中必须有一个提交按钮（js中表单提交：先获取dom对象利用submit方法提交）
+  -->
+  <form action="11-foo.php" method="post">
+    <table border="1">
+      <tr>
+        <td>用户名</td>
+        <td><input type="text" name="username"></td>
+      </tr>
+      <tr>
+        <td>密码</td>
+        <td><input type="text" name="password"></td>
+      </tr>
+      <tr>
+        <td></td>
+        <!-- input: submit image -->
+        <!-- button -->
+        <td><button>登录</button></td>
+      </tr>
+    </table>
+  </form>
+</body>
+</html>
+
+11.
+服务端注意：
+如何去拿到表单提交过来的数据，在php技术方案中有三种手段：
+<?php
+var_dump($_GET);
+// $_GET 用于接收 URL 地址中的提交数据（一般是 GET 参数）
+//获取到的是个关联数组，是个超全局变量，任何地方都可以访问到
+
+var_dump($_POST);
+// $_POST 用于接收 请求体 中提交的数据（一般是 POST 提交的数据）
+var_dump($_POST['username']);
+//用于取username中的数据
+
+var_dump($_REQUEST);
+// $_REQUEST = $_GET + $_POST
+
+
+
+
+第三天：
+2.
+<?php
+
+// // 将表单的处理逻辑放在HTML之前，为了更灵活的控制 HTML 的输出
+// var_dump($_POST);
+// 因为对于表单的处理逻辑不是每一次都需要执行，
+// 所以一般我们会判断请求的方式，从而决定是否执行对数据的处理
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  // 请求的方式是 POST，当前是点击按钮产生的请求
+  var_dump($_POST);
+}
+
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>登录</title>
+</head>
+<body>
+  <!-- 一般为了便于维护，我们将表单提交给当前页面本身 -->
+  <!-- <form action="02-form-action.php" method="post"> -->
+  <!-- 由于文件重命名会导致代码修改，鲁棒性不强 -->
+  <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+    <div>
+      <label for="username">用户名</label>
+      <input type="text" id="username" name="username">
+    </div>
+    <div>
+      <label for="password">密码</label>
+      <input type="password" id="password" name="password">
+    </div>
+    <button type="submit">登录</button>
+  </form>
+</body>
+</html>
+
+3.
+post和get
+// 1. 请求的方式不同
+// 2. 传参方式不同，get 用 url 传参数，post 用 请求体 传参
+
+4.
+<?php
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  var_dump($_POST);
+}
+
+// $foo[] = 1
+
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>表单</title>
+</head>
+<body>
+  <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+
+    <!-- <input type="text" name="key1" id=""> -->
+    <!-- <input type="password" name="key1" id="">
+    <input type="email" name="key1" id="">
+    <input type="number" name="key1" id="">
+    <input type="number" name="key1" id=""> -->
+    <!-- <textarea name="key2" id="" cols="30" rows="10"></textarea> -->
+
+    <!-- 当表单中使用了 radio ，一定要为相同 name 的 radio 设置不同的 value，让服务端可以辨别 -->
+    <!-- 一般在单选时候用label把input包起来，使得点击男或者女那个字的时候也可以提交数据 -->
+    性别
+    <label><input type="radio" name="gender" value="male"> 男</label>
+    <label><input type="radio" name="gender" value="female"> 女</label>
+
+    <br>
+
+    <!-- checkbox 如果没有选中则不会提交，如果选中提交 on 如果不想要on，那就用value改变值-->
+    <label><input type="checkbox" name="agree" value="true"> 同意协议</label>
+
+    <br>
+
+    <label><input type="checkbox" name="funs[]" value="football"> 足球</label>
+    <label><input type="checkbox" name="funs[]" value="basketball"> 篮球</label>
+    <label><input type="checkbox" name="funs[]" value="earth"> 地球</label>
+
+    <br>
+
+
+    <select name="status">
+      <option>激活</option>
+      <option>未激活</option>
+      <option value="1">待激活</option>
+    </select>
+
+
+    <br>
+
+    <input type="file" name="" id="">
+
+
+    <button>提交</button>
+
+  </form>
+</body>
+</html>
+
+
+5.
+config.php :
+<?php
+return array(
+ 'SYSTEM_NAME' => 'LFY',
+);
+?>
+
+<?php
+
+$config = require 'config.php';
+
+var_dump($config);
+
+
+6.
+<?php
+<!--接收文件-->
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  // 接收文件 使用一个 叫做 $_FILES 超全局成员
+  //自己的电脑既是客户端又是服务端
+  var_dump($_FILES);
+  //在很久之前，操作系统只支持三个字母的扩展名，所以.html文件有的是写成.htm，.jpeg有的是写.jpg
+}
+
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+<!--提交文件-->
+  <!-- 如果一个表单中有文件域（文件上传），必须将表单的 method 设置为 post(因为只有请求体才能传文件), enctype（encodingtype：编码类型） 设置为 multipart/form-data -->
+  <!-- enctype 默认是 urlencoded 格式 key1=value1&key2=value2 -->
+  <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" enctype="multipart/form-data">
+
+    <!-- <input type="text" name="foo">
+    <input type="text" name="bar"> -->
+    <input type="file" name="img">
+
+    <button>提交</button>
+
+  </form>
+</body>
+</html>
+总结就是：
+提交文件注意：method设置为post，enctype设置为multipart/form-data，提交文件input的type为file
+接收文件注意：$_FILES
+
+7.文件上传upload
+<?php
+/*逻辑问题
+1.if else的使用：有的条件经过取非，把正确的结果放在else中，更有逻辑性
+2.把每一步执行的结果记录下来，更有逻辑性，看着条理更清晰，
+*/
+/*注意：
+提交文件的title
+属性要加单引号或者双引号
+函数名要写对
+enctype记得要写
+点完提交才能看method是post还是get，因为最初都是get
+*/
+function upload () {
+  if (!isset($_FILES['avatar'])) {
+    $GLOBALS['message'] = '别玩我了';
+    // 客户端提交的表单内容中根本没有文件域
+    return;
+  }
+
+  $avatar = $_FILES['avatar'];
+  // $avatar => array(5) {
+  //   ["name"]=>
+  //   string(11) "icon-02.png"
+  //   ["type"]=>
+  //   string(9) "image/png"
+  //   ["tmp_name"]=>
+  //   string(27) "C:\Windows\Temp\php1138.tmp"
+  //   ["error"]=>
+  //   int(0)
+  //   ["size"]=>
+  //   int(4398)
+  // }
+/*  echo $avatar['error'];
+当 $avatar['error'] = 0 的时候，代表文件上传成功
+*/
+  if ($avatar['error'] !== UPLOAD_ERR_OK) {
+    // 服务端没有接收到上传的文件
+    $GLOBALS['message'] = '上传失败';
+    return;
+  }
+
+  // 接收到了文件
+  // 将文件从临时目录移动到网站范围之内
+  $source = $avatar['tmp_name']; // 源文件在哪
+  // => 'C:\Windows\Temp\php1138.tmp'
+
+  if(!is_dir("upload")){ //如果当前目录下upload不存在，那就新建一个文件夹
+        mkdir("upload");  //创建upload文件夹
+  }
+  $target = './upload/' . $avatar['name']; // 目标放在哪,放在当前目录下的upload文件夹中，这里这个路径是相对路径，但是一般文件上传是绝对路径
+  // => './uploads/icon-02.png'
+  // 移动的目标路径中文件夹一定是一个已经存在的目录
+  $moved = move_uploaded_file($source, $target);
+  /*$moved记录是否保存成功，true或者false*/
+  if (!$moved) {
+    $GLOBALS['message'] = '上传失败';
+    return;
+  }
+    $GLOBALS['message'] = '上传成功';
+  // 移动成功（上传整个过程OK）
+
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  // 接收文件 使用一个 叫做 $_FILES 超全局成员
+  // var_dump($_FILES);
+  upload();
+}
+
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>文件上传</title>
+</head>
+<body>
+  <!--提交文件-->
+  <!-- 如果一个表单中有文件域（文件上传），必须将表单的 method 设置为 post(因为只有请求体才能传文件), enctype（encodingtype：编码类型） 设置为 multipart/form-data -->
+  <!-- enctype 默认是 urlencoded 格式 key1=value1&key2=value2 -->
+  <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" enctype="multipart/form-data">
+    <input type="file" name="avatar">
+    <button>上传</button>
+    <?php if (isset($message)): ?>
+    <p style="color: hotpink"><?php echo $message; ?></p>
+    <?php endif ?>
+  </form>
+</body>
+</html>
+总结：
+注意：
+1.move_uploaded_file
+2.判断文件上传成功：error
+3.文件上传信息：关联数组
+4.整个上传过程中的逻辑，理清楚！
+问题：分别对应php.ini中两个配置选项
+上传文件大小限制（post_max_size）
+请求体的大小限制（upload_max_filesize）
+请求报文：我们在上传文件的过程中，客户端给服务端发的一个包，包括请求行，请求头，请求体，
+utf-8和utf-8 with bom的区别：
+打开一个文件，在文件的开始的部分有个文件头，存的是文件的附属信息
+当按照utf-8这种格式读文件的时候，会将前面的bom头的部分也读出来
+当按照utf-8 with bom这种格式读文件的时候，才会忽略文件头，将文件正常的读出来
+实例：C:\www\site1\upload(文件上传)
+
+
+第四天
+1.1
+协议：https:
+域名：www.baidu.com
+路径：s?ie=UTF-8&wd=www
+查看浏览器本地缓存：	chrome://net-internals/#dns
+https://www.baidu.com/s?ie=UTF-8&wd=www
+DNS服务器是宽带运营商给你分配的。连宽带的时候就会有。
+http://github.com   =>com是一个顶级域，github是二级域
+IP是高楼，端口号是门牌号
+apache判断是否为静态文件过程是拿着这个文件问它的内置模块什么的，看哪个能处理这种类型的文件，要是都不能处理就判断为静态文件，自己处理
+文件的扩展名：就像jpg就是文件扩展名，根据jpg到MIME_Type中找文件类型是：image/jpeg
+如果是https：端口就443，https就是一个更安全的http协议，https就是在请求报文和响应报文传输的过程中进行了加密，所以更安全，
+          http: 端口80
+三次握手作用是确保这个连接是可靠的，也降低了沟通的效率
+
+1.2
+主动发起http协议的是客户端，被请求的是服务端
+超文本：超级文本，会有用普通文本描述有格式文本的一种手段
+html页面可以说其实就是用普通文本描述超级文本一种手段
+http就像卧底传输的密码格式差不多
+
+1.3
+请求行中
+HTTP/1.1：指的是我们用的是http1.1版本的协议
+请求头中都是一个键一个值的（响应头中也一样）
+请求行和请求体之间一定要有一个空行去分割（响应报文中也一样）
+一般请求报文请求体是空的
+
+状态行中：
+HTTP/1.1：指的是我们用的是http1.1版本的协议
+200是状态码：代表一切正常
+OK是对状态码解释说明的
+响应头中：
+Content-Length：响应体的大小
+Content-Type：响应体的类型
+打个比方：我们说话：首先是中文，还有是什么主谓宾，用词正确大家才能听懂，这就像http协议一样，有很多注意的地方
+
+1.4
+访问百度，pc端和移动端访问到的页面显示不一样，因为响应报文中的user-agent不一样
+1.5
+乱码的原因就是，自己是这种编码，但是自己告诉别人的是另外一种编码
+
+1.
+（1）Content-Type：响应头类型
+<?php
+
+// PHP 中 header 函数专门用于设置响应头
+/*还有注意Content-Type与冒号之间不能有空格，要不然会报错*/
+/*Content-Type的作用就是 当页面请求的php文件中内容是css或者javascript格式的，就可以利用
+header('Content-Type: text/css');或者
+header('Content-Type: application/javascript');
+来改变响应体的内容类型
+*/
+header('Content-Type: text/html; charset=GBK');
+
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>这是一个网页内容</title>
+   <link rel="stylesheet" href="style.php">
+</head>
+<body>
+  <h1>这是一个网页内容</h1>
+</body>
+</html>
+
+（2）charset：编码
+<?php 
+/*当文件编码不是utf-8，而是ANSI的时候，要改变响应体的编码为GBK*/
+header('Content-Type: text/html;charset=GBK');
+ ?>
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+  <meta charset="utf-8">
+   <title></title>
+ </head>
+ <body>
+ <h1>这是一个页面</h1>
+ </body>
+ </html>
+
+2.Location：重定向
+<?php
+
+// 这里是在 响应头中添加一个 location 的头信息
+// header('Location: 01-content-type.php');
+// 客户端浏览器在接收到这个头信息过后会自动跳转到 指定的地址
+
+/* 切记不能循环重定向
+header('Location: 03-location2.php');
+header('Location: 02-location2.php');连个页面之间来回跳转也会产生死循环
+*/
+/*所有涉及到响应头的地方都不要加空格，会报错：Internal Server Error*/
+header('Location:demo1.php')
+
+2.1下载文件
+对于浏览器来说。点击一个链接的时候如果说链接的扩展名是它不能识别的一个名字，它会自动帮你下载
+如果说这名字它能解析或者它能识别的名字，它会自动帮你运行起来
+demo1.php
+<a href="a.php">下载</a>
+
+a.php
+<?php 
+header('Content-Type: application/octet-stream');
+// 更改默认的下载名字
+header('Content‐Disposition: attachment; filename=demo.txt');
+ ?>
+ fdjksagh
+
+结果就是点击下载，因为是不能识别的文件类型，且下载的名字是demo.txt
+
+5.
+JSON数据类型和js数据类型唯一的区别就是没有undefined
+1.JSON中属性名称必须用双引号包裹
+2.JSON中字符串必须用双引号包裹
+3.JSON中不允许使用注释
+JSON不是数据存储手段，是数据表述手段，存储还是用文件,只不过文件里的的内容我们用JSON的格式去描述
+JSON也是服务端和数据端常用的数据的传输格式
+JSON.parse(str)：转化为正常格式
+JSON.stringify(str)：转化为JSON格式
+JSON格式中，最后的属性或者大括号后面，一定不要有逗号！！！
+
+音乐列表list.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>音乐列表</title>
+  <link rel="stylesheet" href="bootstrap.css">
+</head>
+<body> 
+  <!-- container自动宽度居中版型，而且这个版型会自适应宽度，my：纵向外边距，mt：margin-top-->
+  <div class="container mt-5">
+    <!-- display-1：就是一级大小 -->
+    <h1 class="display-3">音乐列表<a href="add.html" class="btn btn-primary">添加</a></h1>
+    <hr>
+    <!-- 出现边框table-bordered，出现条纹table-striped，鼠标移上去有个样式table-hover -->
+    <table class="table table-bordered table-striped table-hover">
+      <!-- thead class加thead-dark不好用，因为手册和我们的这个bootstrap不是一个版本 -->
+      <thead class="thead-inverse">
+        <tr>
+          <th>编号</th>
+          <th>标题</th>
+          <th>歌手</th>
+          <th>海报</th>
+          <th>音乐</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <!--59d632855434e是利用php中 echo uniqid()生成唯一标识 -->
+          <td>59d632855434e</td>
+          <td>错过</td>
+          <td>窗前闵月光</td>
+          <td><img src="" alt=""></td>
+          <td><audio src="" controls></audio></td>
+          <td><button class="btn btn-danger btn-sm">删除</button></td>
+        </tr>
+        <tr>
+          <td>59d632855434e</td>
+          <td>错过</td>
+          <td>窗前闵月光</td>
+          <td><img src="" alt=""></td>
+          <td><audio src="" controls></audio></td>
+          <td><button class="btn btn-danger btn-sm">删除</button></td>
+        </tr>
+        <tr>
+          <td>59d632855434e</td>
+          <td>错过</td>
+          <td>窗前闵月光</td>
+          <td><img src="" alt=""></td>
+          <td><audio src="" controls></audio></td>
+          <td><button class="btn btn-danger btn-sm">删除</button></td>
+        </tr>
+        <tr>
+          <td>59d632855434e</td>
+          <td>错过</td>
+          <td>窗前闵月光</td>
+          <td><img src="" alt=""></td>
+          <td><audio src="" controls></audio></td>
+          <td><button class="btn btn-danger btn-sm">删除</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>
+例2：音乐列表add.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>添加音乐</title>
+  <link rel="stylesheet" href="bootstrap.css">
+</head>
+<body>
+  <div class="container mt-5">
+    <h1 class="display-3">添加音乐</h1>
+    <hr>
+    <form action="">
+      <!-- 表单组:form-group -->
+      <div class="form-group">
+        <label for="title">标题</label>
+        <!-- 
+          生成特殊样式的文本框，默认是块级元素
+          is-valid：通过，文本框变绿
+          is-invalid：不通过，文本框变红
+          要是没有is-invalid这个类的话，下面的small里的文字也会不显示
+        -->
+        <input type="text" name="title" id="title" class="form-control is-invalid">
+        <!-- 对文本框解释说明
+          class="text-muted：让字体颜色变淡一点"
+          invalid-feedback：文字变红
+        --> 
+        <small class="invalid-feedback">请输入音乐标题</small>
+      </div>
+      <div class="form-group">
+        <label for="title">标题</label>
+        <input type="text" name="title" id="title" class="form-control">
+        <small class="form-text text-muted">请输入音乐标题</small>
+      </div>
+      <!-- 
+        btn-block：块状按钮；
+        btn-primary：图标的按钮；
+       -->
+      <button class="btn btn-block btn-primary">保存</button>
+    </form>
+  </div>
+</body>
+</html>
+
+
+第6天：
+数据库：用来存储数据的手段
+数据库是个类型，mysql是个实例
+数据库就像execl一样，可以排序，可以什么的
+在控制台：
+sc delete MySOL  删除mysql服务
+net start MySQL  启动服务
+ALTER USER 'root'@'localhost' IDENTIFIED BY '123456';  修改mysql密码
+	# 定位到安装目录下的 bin 文件夹
+	cd <MySQL安装目录>/bin
+	# 初始化数据所需文件以及获取一个临时的访问密码
+
+	mysqld ‐‐initialize ‐‐user=mysql ‐‐console
+	# 将 MySQL 安装为服务 可以指定服务名称
+
+	mysqld ‐‐install MySQL
+	#通过用户名密码进入 MySQL 操作环境
+
+	mysql ‐u root ‐p
+
+卸载mysql：
+在控制台：在服务中将MySQL服务停止
+在命令行中以管理员的身份运行sc delete MySQL
+（注意这里的MySQL是服务的名称，这个服务的名称不是我们在服务中看见的名称，双击打开之后页面中的名称才是服务名称）
+然后在mysql中删除数据文件什么的
+
+mysql用户密码：123456
+有的文件，有时候用记事本打开，有时候用sublime打开，会导致编码错误，就是之前提过的utf-8和utf-8 with bom的情况
+使用navicat注意的两个小点：一个是char 和varchar的区别，还有就是中文报错的原因
+
+重点在数据库中：增删改查
+
+可视化工具：Navicat
+--新增；
+--删除；
+--修改；
+--查询；
+-- 查询数据语句得到的是一个结果集
+-- 增删改语句得到的是执行这个语句受影响的行数
+-- SQL是有一套公共的标准的，不同数据库之间都可以执行，只不过有一些大同小异
+
+例1：查询
+-- select `id` , `title` , `name` from `users`;
+-- 如果使用通配符会产生全表扫描，建议指定列名
+
+-- select * from users;
+
+-- 表里有多少个数据就有多少个1，不只是1，'foo'这种类型的也行，就出多少个foo，要是实在不懂，那就用navicat试试
+-- select语句可以选择列或者一个具体的值
+-- select 1 from users;
+
+例2：新增
+insert into users values (null, 'ceo', 'lfy', 18, 0);
+insert into users value (null, 'ceo', 'lfy', 18, 0);
+insert into users (name , title , age) value ('lfy' , 'ufo' , 20);
+
+例3：删除
+-- 删除数据一定要配合数据筛选
+-- 多个筛选条件之间用and或者or，而且大于小于 直接用>或者<;
+delete from users where title = '我';
+-- in代表id的值在1 2 3 4这四个数之间就删掉
+delete form users where id in(1,2,3,4);
+
+例4：更新数据
+-- 让id = 2 的那行数据 title = ceo，并且name为lfy
+update users set title = 'ceo' , `name` = 'lfy' where id = 2
+
+例5：常见的查询函数
+1.count
+-- 创建一个列，名为count，值为count的值
+-- select count(1) as count from users;
+
+2.max ， min ， avg
+-- select max(id) from users;
+-- select min(id) from users;
+-- select avg(id) from users;
+
+3.分页查询limit
+-- 限制取几条
+-- select * from users limit 2;
+-- 越过几条取几条
+-- select * from users limit 1 , 2;
+-- 分页：skip = （page - 1） * size
+-- 例两行为一列
+-- 1  2  3  4  页（一页两行（length））page
+-- 0  2  4  6  越过的行数skip
+
+limit <skip> , <length>
+skip = (page - 1) * length
+
+php连接数据库：
+php连接数据库时候：因为密码验证方式而产生的问题
+解决：https://blog.csdn.net/qq_36699423/article/details/81565906
+所以现在自己的密码验证方式是：mysql_native_password
+
+问题：当连接数据库失败的时候，会出现warning，若是不想出现这些信息
+1.那就将php.ini文件中的display_errors = On -->改为Off，然后重启apache就行了
+2.如果需要在调用函数时忽略错误或者警告可以在函数名之前加上 @，像@mysqli_connect('127.0.0.2' , 'root' , '123456','e');当未连接到数据库，网页就不会出现警告了
+
+例1：查询语句
+<?php
+
+// 能通过PHP代码执行一个SQL语句得到查询的结果
+// mb_strlen(str)
+// 类似于之前的宽字符集函数问题，mysqli是一个额外的扩展
+// 如果想要使用这个扩展提供的函数，必须开启扩展
+// extension_dir
+// 解除注释 extension=php_mysqli.dll
+//
+// 如果需要在调用函数时忽略错误或者警告可以在函数名之前加上 @
+
+// 1. 建立与数据库服务器之间的连接
+$connection = mysqli_connect('127.0.0.1', 'root', '123456', 'demo2');
+
+if (!$connection) {
+  // 连接数据库失败
+  exit('<h1>连接数据库失败</h1>');
+}
+
+// 基于刚刚创建的连接对象执行一次查询操作
+// 得到的是一个查询对象，这个查询对象可以用来再到数据一行一行拿数据
+/*mysqli_query增删改查都可以实现*/
+$query = mysqli_query($connection, 'select * from users;');
+// var_dump($query);
+
+// 等着三蹦子去取数据  每次只能取一行，我们可以利用循环一次一次获得数据
+// $row = mysqli_fetch_assoc($query);
+// while ($row) {
+//   var_dump($row);
+//   $row = mysqli_fetch_assoc($query);
+// }
+// var_dump($row);
+
+// while
+//
+
+while ($row = mysqli_fetch_assoc($query)) {
+  var_dump($row);
+}
+
+例2：
+<?php
+
+// 查询数据的查询语句
+
+// 1. 建立与数据库服务器之间的连接
+$connection = mysqli_connect('127.0.0.1', 'root', '123456', 'demo2');
+
+// 1. 必须在查询数据之前
+// 2. 必须传入连接对象和编码
+mysqli_set_charset($connection, 'utf8');
+// mysqli_query($connection, 'set names utf8;');
+
+if (!$connection) {
+  // 连接数据库失败
+  exit('<h1>连接数据库失败</h1>');
+}
+
+// 基于刚刚创建的连接对象执行一次查询操作
+$query = mysqli_query($connection, 'select * from users;');
+
+if (!$query) {
+  exit('<h1>查询失败</h1>');
+}
+
+// 遍历结果集
+while ($row = mysqli_fetch_assoc($query)) {
+  var_dump($row);
+}
+
+// 释放查询结果集
+mysqli_free_result($query);
+
+// 炸桥 关闭连接
+mysqli_close($connection);
+
+例3：增删改语句
+
+<?php
+
+// 增删改数据的查询语句
+
+// 1. 建立与数据库服务器之间的连接
+$connection = mysqli_connect('127.0.0.1', 'root', '123456', 'demo2');
+
+if (!$connection) {
+  // 连接数据库失败
+  exit('<h1>连接数据库失败</h1>');
+}
+
+// 基于刚刚创建的连接对象执行一次查询操作
+$query = mysqli_query($connection, 'delete from users where id = 5;');
+
+if (!$query) {
+  exit('<h1>查询失败</h1>');
+}
+
+// 如何拿到受影响行
+// 传入的一定是连接对象
+$rows = mysqli_affected_rows($connection);
+
+var_dump($rows);
+
+
+// 炸桥 关闭连接
+mysqli_close($connection);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

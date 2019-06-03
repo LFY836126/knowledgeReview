@@ -1,0 +1,13 @@
+SPA:single page application单页面应用
+
+1.pushState：添加一条历史记录
+history.pushState(state, title, url)
+state：状态，（也可以把当前状态保存起来）
+title：push进的页面的标题,
+url：push进去的历史记录的url地址
+例：window.history.pushState({name : 'lfy'} , 'hello', '#hash');
+2.replaceState() ：替换当前历史记录
+history.replaceState(state, title, url)
+例：window.history.replaceState({name: 'cheng'}, 'hello', '#hello');
+也就是a  -> b -> c
+replace :c  ->d      然后d返回到b

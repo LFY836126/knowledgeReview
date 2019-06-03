@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>音乐列表</title>
+  <link rel="stylesheet" href="bootstrap.css">
+</head>
+<body> 
+  <!-- container自动宽度居中版型，而且这个版型会自适应宽度，my：纵向外边距，mt：margin-top-->
+  <div class="container mt-5">
+    <!-- display-1：就是一级大小 -->
+    <h1 class="display-3">音乐列表<a href="add.html" class="btn btn-primary">添加</a></h1>
+    <hr>
+    <!-- 出现边框table-bordered，出现条纹table-striped，鼠标移上去有个样式table-hover -->
+    <table class="table table-bordered table-striped table-hover">
+      <!-- thead class加thead-dark不好用，因为手册和我们的这个bootstrap不是一个版本 -->
+      <thead class="thead-inverse">
+        <tr>
+          <th>编号</th>
+          <th>标题</th>
+          <th>歌手</th>
+          <th>海报</th>
+          <th>音乐</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <!--59d632855434e是利用php中 echo uniqid()生成唯一标识 -->
+          <td>59d632855434e</td>
+          <td>错过</td>
+          <td>窗前闵月光</td>
+          <td><img src="" alt=""></td>
+          <td><audio src="" controls></audio></td>
+          <td><button class="btn btn-danger btn-sm">删除</button></td>
+        </tr>
+        <tr>
+          <td>59d632855434e</td>
+          <td>错过</td>
+          <td>窗前闵月光</td>
+          <td><img src="" alt=""></td>
+          <td><audio src="" controls></audio></td>
+          <td><button class="btn btn-danger btn-sm">删除</button></td>
+        </tr>
+        <tr>
+          <td>59d632855434e</td>
+          <td>错过</td>
+          <td>窗前闵月光</td>
+          <td><img src="" alt=""></td>
+          <td><audio src="" controls></audio></td>
+          <td><button class="btn btn-danger btn-sm">删除</button></td>
+        </tr>
+        <tr>
+          <td>59d632855434e</td>
+          <td>错过</td>
+          <td>窗前闵月光</td>
+          <td><img src="" alt=""></td>
+          <td><audio src="" controls></audio></td>
+          <td><button class="btn btn-danger btn-sm">删除</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>

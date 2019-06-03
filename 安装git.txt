@@ -1,0 +1,99 @@
+访问github出问题，页面加载不出来
+原因一：DNS服务器出现问题：
+https://blog.csdn.net/u010766917/article/details/77855932
+https://zhidao.baidu.com/question/496368111690431204.html
+
+本地工作目录 -->git add -->暂存区 -- >git commit -->分支（1|2|3|4...|n）;（默认分支是master分支 ） -- >git push 远程仓库
+远程仓库（远程分支） -->git pull --> 本地仓库（本地分支）
+
+自己的用户密码：[user]
+	name = lfy
+	email = 836126515@qq.com
+
+
+查看：C:\Users\LFY.gitconfig
+统一托管网站：https://github.com/
+免密钥登录：ssh key
+
+ssh:是本地和远程关联（就是两台计算机关联）
+配置ssh 现在本地配置，发送给远程
+
+
+ssh-keygen -t rsa -C 836126515@qq.com
+
+发送给远程：
+github -setting -ssh...key
+然后title任意
+key重要：把ssd pub密钥放进去
+
+然后测试连通性
+ssh -T git@github.com
+
+本地和远程成功通信：在ssh目录发现host文件
+
+在本地新建git项目，并发送给远程
+根目录，右键 git bash        
+然后$git init ，说明这个项目就是git项目了
+然后在远程建立git项目，将二者进行关联
+远程建立项目。点击自己头像下面的Your profile 然后点击Repositories，再点击右面的new
+new 然后SSH中生成唯一标识符： git@github.com:LFY836126/myjsgit.git
+然后将本地项目-远程项目关联
+
+git remote add origin git@github.com:LFY836126/myjsgit.git
+ 。
+第一次发布项目（本地到远程）
+在想要发布的目录下 Git Bash Here
+然后三步：
+git add .                 // 本地到暂存区，.代表当前目录所有文件
+git commit -m "注释内容"   //暂存区到远程（默认master）
+git push -u origin master 本地到远程
+
+
+第一次下载项目（远程到本地）
+新建随便一个文件夹，然后在文件夹中Git Bash Here
+然后：
+在github中自己的项目右边有一个Clone or download的按钮，里面就有这个项目的唯一标示符，然后
+git clone git@github.com:LFY836126/mygitremote.git（从git@github到结尾的git是唯一标识符）
+
+更新（远程到本地）
+在文件夹中Git Bash Here
+然后：
+git pull
+
+
+提交（本地到远程）（和第一次区别 就少了个-u）
+（在当前目录工作 右键 -gitbash）
+git add . 到暂存区 
+git commit -m "提交到分支"
+git pull origin master//解决远程有README.md文件，而本地没有的问题
+git push origin master 或者 git push -u origin master -f  到远程
+
+
+
+只删除远程仓库，不删除本地仓库
+$ git pull origin master
+$ dir
+
+本地仓库和远程仓库同时删除：
+我们先在本地把两个文件删除，然后执行以下命令：
+
+$ git add * //把本地仓库的文件上传到缓存。
+
+$ git commit -m 'del' //把第一步上传到缓存的东西上传到本地仓库，其中'del'是操作标识，内容随便填，方便用户观看。
+
+$ git push origin master //把本地仓库的文件上传到远程仓库。
+
+
+
+在vscode中使用git
+1.首先.gitignore文件中写你要忽略的文件，也就是不上传到github的文件
+2.项目根目录创建README.MD文件，解释项目用到的
+3.项目根目录复制一份LISENSE协议
+4.git init
+5.git status查看文件状态
+6.git add .
+7.git status查看此时的文件状态
+8.git commit -m "注释内容"
+9.git remote add origin git@github.com:LFY836126/myjsgit.git .........
+10.git push -u origin master
+11.更改代码-->输入注释内容->打勾->点击推送

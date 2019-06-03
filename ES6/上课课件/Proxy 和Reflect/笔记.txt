@@ -1,0 +1,199 @@
+ES2018(ES9)
+--------------------------------
+proxy:  代理
+	扩展(增强)对象、方法(函数)一些功能
+
+	比如: 
+		Vue
+
+		Vue.config.keyCodes.enter=65
+
+	Proxy作用: 比如vue中拦截
+		预警、上报、扩展功能、统计、增强对象等等
+
+	proxy是设计模式一种，  代理模式
+--------------------------------
+let obj ={
+	name:'Strive'
+};
+//您访问了name
+obj.name  // Strive
+--------------------------------
+语法:
+	new Proxy(target, handler);
+	let obj = new Proxy(被代理的对象,对代理的对象做什么操作)
+
+	handler:
+
+	{
+		set(){},  //设置的时候干的事情
+		get(){},  //获取干的事情
+		deleteProperty(){},  //删除
+		has(){}  //问你有没有这个东西  ‘xxx’ in obj
+		apply()  //调用函数处理
+		.....
+	}
+例：
+        let obj = {
+            name:'Strive'
+        };
+
+        let newObj = new Proxy(obj, {
+            get(target, property){//newobj调用的是谁，这个property就是谁，target就是那个obj对象
+                return target[property];
+            }
+        });
+
+        console.log(newObj.name);
+        console.log(newObj.age);
+实现一个，访问一个对象身上属性，默认不存在的时候给了undefined，希望如果不存在错误(警告)信息：
+            get(target, property){
+                if(property in target){
+                    return target[property];
+                }else{
+                    //throw new ReferenceError(`${property}属性不在此对象上`);
+                    console.warn(`${property}属性不在此对象上`);
+                    return '^_^';
+                }
+            }
+	
+---------------------------------------------------
+实现：
+DOM.div()
+DOM.a();
+DOM.ul()
+==============
+       const DOM = new Proxy({},{
+            get(target, property){
+                //console.log(target, property);
+                //property DOM.xxx 里面的xxx
+                return function(attr={}, ...children){
+                    //console.log(attr, children);
+                    const el = document.createElement(property);
+
+                    //添加属性
+                    for(let key of Object.keys(attr)){
+                        el.setAttribute(key, attr[key]);
+                    }
+                    //添加子元素
+                    for(let child of children){
+                        if(typeof child == 'string'){
+                            child = document.createTextNode(child);
+                        }
+                        el.appendChild(child);
+                    }
+                    return el;
+                }
+            }
+        });
+
+        let oDiv = DOM.div(
+            {id:'div1',class:'aaa'},'我是div','呵呵呵',
+            DOM.a({href:'http://www.51mmr.net'}, '访问官网'),
+            DOM.ul({},
+                DOM.li({},'1111'),
+                DOM.li({},'2222'),
+                DOM.li({},'3333'),
+                DOM.li({},'4444')
+            )
+        );
+
+        window.onload=function(){
+            document.body.appendChild(oDiv);
+        };
+---------------------------------------------------
+set(), 设置，拦截:
+	设置一个年龄，保证是整数，且范围不能超过200
+例：
+        let obj =new Proxy({},{
+            set(target, prop, value){
+                if(prop == 'age'){
+                    if(!Number.isInteger(value)){
+                        throw new TypeError(`年龄必须为整数`);
+                    }
+                    if(value>200){
+                        throw new RangeError('年龄超标了，必须小于200岁');
+                    }
+                }
+                target[prop]=value; 
+            }
+        });
+
+        obj.a=123;
+        obj.name = 'Strive';
+        
+        console.log(obj);
+
+        obj.age = 201;
+
+deleteProperty(): 删除，拦截:
+例：
+        let json = {
+            a:1,
+            b:2
+        };
+
+        let newJson = new Proxy(json, {
+            deleteProperty(target, property){
+                console.log(`您要删除${property}属性`);
+                //TODO
+                delete target[property];
+            }
+        });
+
+        delete newJson.a;
+
+        console.log(newJson);
+
+	
+has(): 检测有没有
+例：
+
+---------------------------------------------------
+apply()  :拦截方法
+	
+	
+---------------------------------------------------
+Reflect.apply(调用的函数，this指向，参数数组);
+
+fn.call()
+fn.apply()  类似
+例：
+        function show(...args){
+            console.log(this);
+            console.log(args);
+        }
+
+        //show(1,2,3,4);
+
+        //show.call('abc', 1,2,3,4);
+        //show.apply('abcd',[1,2,3,4]);
+
+        Reflect.apply(show, 'aaaa', [1,2,3,4]);
+
+
+Reflect: 反射
+	Object.xxx  语言内部方法
+
+		Object.defineProperty
+
+	放到Reflect对象身上
+
+	通过Reflect对象身上直接拿到语言内部东西
+
+	'assign' in Object    ->   Reflect.has(Object, 'assign')
+
+	delete json.a	    ->   Reflect.deleteProperty(json, 'a');
+
+
+
+	
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,233 @@
+参考手册：http://www.w3school.com.cn/jsref/index.asp
+
+1.window对象
+（1）.window方法
+例1：confirm
+    console.log(window.confirm('我是小仙女'));
+点确认，返回true
+例2：open
+window.open("http://www.baidu.com","baidu")
+可以打开新的窗口
+例3：close
+window.close()
+把窗口关了
+
+（2）.window属性：
+例1：closed
+我们有的时候需要代开我们的子窗体，域名下面还有一个新的域名，也就是子域名，子网页
+var myWindow = window.open("xxx.html"); 我们打开一个子网页，
+会返回给我们一个值的，这个值代表另一个页面的window属性，可以通过myWindow.closed来查看另一个页面的是否关闭的
+例2:opener
+比如说我现在一个空页面创建一个百度，那么百度的opener就是我
+例3：
+window和docement没什么明确的所属关系，window只是存了一个document的引用而已，它俩没有关系，因为window对象除了充当控制浏览器的对象以外，还充当全局作用域，所以必须存有document的引用
+history同理，没有关系，只存了一个引用而已
+
+2.navigator对象
+javascript在1996年首次在Navigator上实现，所以这也是最先驱的浏览器的名字
+在2003年的时候网景公司将Navigator浏览器源码开源了，Navigator源码是masic，火狐公司拿了Navigator的源码建立了firefox
+（1）Navigator对象属性：
+例1：appName（现在一般浏览器除了ie(Internet explore)以外差不多打出来的appName几乎都是"Netscape"）
+navigator.appName
+返"Netscape"
+例2：online指明系统是否处于脱机状态（就是检查现在是否有网)
+要是脱机状态也就是没网返回false，有网返回true，
+例3：userAgent：返回客户端的完整信息，可以判断机型，浏览器，手机端还是PC端。
+调用这个会返回很多信息，其中有一个就是Windows NT 10.0; WOW64 代表我现在是window系统 Nt
+但是要是切换到手机版的话，就返回Linux; Android 6.0;  
+还可以调到iPhone; CPU iPhone OS;  
+
+3.Screen对象
+（1）Screen对象属性
+例1：deviceXDPI：返回显示屏幕的每英寸水平点（像素）数。返回的其实就是分辨率，而那个水平点数中的一点就是一像素	
+DPI是显示分辨率的一个比例值，DPI越高说明分辨率越高，如果安卓DPI比率分辨值为1的话，苹果必然是2，苹果的像素高
+
+4.History对象
+（1）History对象属性
+例1：length在同一个标签页，跳转了多少次，length就是多少
+例如在一个标签页内，先打开自己，length就为1，再打开百度，length就为2，再打开新浪，length就为3.
+（2）History对象方法
+例1：back()和forward()
+history.back(1),就回到了百度，history.forward(1)就又回到了新浪，然后再history还为3。通过回退和向前操作而产生的历史不记录到历史记录里
+还有history.back(2)也还是回到百度，而不是自己，所以填不填参数没什么区别，这个方法是不需要填参数的。
+（3）go()
+history.go(-2)从新浪回到自己，再history.go(2)从自己又回到新浪，history.go(-1)从新浪回到百度，这个需要填参数
+
+5.Location对象
+（1）Location对象属性
+host：设置或返回主机名和当前 URL 的端口号。
+例1：拿百度来说：location.host 返回"www.baidu.com"
+端口号：我们正常一个网页是http://www.baidu.com,但是这叫域名，不是IP地址，正常要转化为IP地址的，在转化为IP地址的时候，我们势必要给它加一个端口号
+如果域名后面没加端口号，那默认加一个80端口,也就是这样的：http://www.baidu.com:80
+那么加端口有什么用呢：一个IP地址代表一个服务器，一个服务器的功能有网页下载，FTP下载（文件下载）什么的很多功能而这些功能一个浏览器就能实现，
+那么怎么区别这些功能呢，我们就用IP地址来区分，域名，IP地址是来找到服务器的，具体让服务器实现什么功能，用端口号来提供，改变端口号是访问页面的
+hostname：设置或返回当前 URL 的主机名
+protocol：设置或返回当前 URL 的协议。（http或者https）
+search：设置或返回从问号 (?) 开始的 URL（查询部分）。
+例1：
+<form action="" method="get">
+    <input type="text" value="abc" name="bcd"/>
+    <input type="submit"/>
+</form>
+点击提交，会出现问号部分，然后location.search就返回"?bcd=abc"，
+hash：设置或返回从井号 (#) 开始的 URL（锚）。其实就相当于锚点
+例1：利用hash能找到div，在控制台打印location.hash = "only"就能找到div，还有通过改变location.hash能改变定位锚点
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>lottery</title>
+    <style>
+        #only{
+            width:100px;
+            height:100px;
+            background-color:red;
+            position:absolute;
+            top:1000px;
+        }
+    </style>
+</head>
+<body>
+<div id="only"></div>
+<script type=text/javascript></script>
+</body>
+</html>
+例2：锚点，利用a标签，点击find 就能找到div
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>lottery</title>
+    <style>
+        #only{
+            width:100px;
+            height:100px;
+            background-color:red;
+            position:absolute;
+            top:1000px;
+        }
+    </style>
+</head>
+<body>
+<div id="only"></div>
+<a href="#only">find you</a>
+<script type=text/javascript></script>
+</body>
+</html>
+例3：重点：一般location.hash都配合CSS3来使用，还有a标签href也可以改变location.hash，所以它有锚点的功能。改变的动态的其实也是location.hash
+利用location.hash来定位div然后background-color就会改变
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>lottery</title>
+    <style>
+        #only{
+            width:100px;
+            height:100px;
+            background-color:red;
+            position:absolute;
+            top:1000px;
+        }
+        #only:target{
+            background-color:pink;
+        }
+    </style>
+</head>
+<body>
+<div id="only"></div>
+<a href="#only">find you</a>
+<script type=text/javascript></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

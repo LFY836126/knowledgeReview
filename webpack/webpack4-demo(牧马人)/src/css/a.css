@@ -1,0 +1,7 @@
+body{
+	background:url('../images/大白.jpg');
+}
+#root{
+	color:red;
+	transform: rotate(45deg);
+}

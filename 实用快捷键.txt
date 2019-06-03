@@ -1,0 +1,22 @@
+ctrl + shift + esc 结束进程
+控制面板-程序功能-卸载软件
+alt+f4 关闭文件夹
+ctrl+关闭当前网页，alt+f4关闭所有网页
+win + D 最小化
+
+webstrom
+ctrl+shift+u变大写或者小写
+
+软件：
+百度文库下载文档：冰点下载
+pdf转word：
+pdf文件复制文字：2345看图王
+
+sublime：
+分屏：shift+alt+2
+取消分屏：shift+alt+1
+ctrl+左：跳一个单词
+ctrl+页首页尾：跳转页面
+
+window + x    ->   window powershell管理员
+window+d回到桌面

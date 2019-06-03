@@ -1,0 +1,78 @@
+1.common
+common：较简单，直接利用
+module.exports = value
+	value可以是函数或者对象
+	1.module.exports = {foo}    ------>>>  module1.foo();
+	2.module.exports = foo      ------>>>module2();
+或
+exports.xxx=value       ----->>>  module1.foo();
+
+2.common-browserify
+服务器端：见(js模块化.xmind)文件,也就是写好文件，不用browserify，利用node命令在cmd直接得到答案
+common-browserify:下载browserify（见教程笔记）
+因为是浏览器端，所以要准备一个index.html文件，并且将app.js文件在cmd中利用browserify命令（见教程笔记）打包在src="./js/dist/bundle.js"这个目录下，
+然后利用script标签，引入打包好的文件src="./js/dist/bundle.js"
+（app.js文件是引入所有module模块的文件（引入方式和common一样），因为浏览器端不能识别，所以要利用browserify插件）
+
+3.AMD
+定义有依赖的模块（见(js模块化.xmind)文件）
+定义无依赖的模块（见(js模块化.xmind)文件）
+浏览器端实现：main.js（利用requirejs），index.html
+(function(){
+	require.config({
+		baseUrl : 'js/',
+		paths : {
+
+		},
+		shim : {
+			
+		}
+	})
+	//暴露模块，还有上面的配置必不可少
+	require(['xxx', 'xxx'],function(){
+
+	})
+}())
+完整版：
+(function(){
+	requirejs.config({
+		baseUrl:'js/',
+		paths:{
+			dataService : './modules/dataService',
+			alerter : './modules/alerter',
+			jquery : './libs/jquery-1.10.1',
+			angular : './libs/angular'
+		},
+		shim : {
+			angular : {
+				exports : 'angular'
+			}
+		}
+	});
+	
+	requirejs(['alerter' , 'angular'], function(alerter , angular){
+		alerter.getdata();
+		console.log(angular);
+	})
+}())
+注意：jQuery必须写成jquery
+
+index.html部分注意，就是
+1.src引入require.js文件
+2.去main.js中去找数据
+<script data-main="js/main.js" src="js/libs/require.js"></script>
+
+4.CMD
+利用cmd去依赖模块，module必不可少三个参数require，exports，module，
+利用common去暴露模块
+浏览器端 index.html
+注意：
+1.引入<script type="text/javascript" src="js/libs/sea.js"></script>
+2.使用<script type="text/javascript">seajs.use('./js/modules/main.js');</script>
+
+5.es6
+利用export暴露模块：分别暴露 统一暴露 默认暴露
+利用import引入模块
+利用
+babel js/src -d js/lib  将文件编译为es5
+browserify js/lib/main.js -o js/dist/bundle.js  浏览器端实现

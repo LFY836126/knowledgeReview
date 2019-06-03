@@ -1,0 +1,7 @@
+{
+	"name": "browserify-test",
+	"version": "1.0.0",
+	"devDependencies": {
+		"browserify": "^16.2.3"
+	}
+}

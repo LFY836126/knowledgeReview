@@ -1,0 +1,41 @@
+1.两个方法parse（可以传两个参数）和stringify（可以传三个参数）
+2.toJSON
+3.没了
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script type="text/javascript">
+		var xiaoming = {
+			title:"fangyuanyuan",
+			edition:3,
+			toJSON : function(){
+				return{
+					title:'lllll',
+					edition:'wowowo'
+				}
+			}
+		}
+		var d = JSON.stringify(xiaoming);
+		console.log(d);
+		var s = JSON.stringify(xiaoming , function(key , value){
+			if(key == 'title'){
+				return value = 'lfy';
+			}
+			return value;
+		}, '   ')
+		console.log(s);
+		var a = JSON.parse(s , function(key ,value){
+			if(key == 'title'){
+				return value + 'sahxi';
+			}
+			return value;
+		})
+		console.log(a);
+	</script>
+</body>
+</html>

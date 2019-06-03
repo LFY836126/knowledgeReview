@@ -1,0 +1,35 @@
+hexo地址：
+C:\Users\83612\AppData\Roaming\npm\node_modules\hexo-cli\bin
+
+搭建博客：
+https://blog.csdn.net/Hoshea_chx/article/details/78826689
+
+https://blog.csdn.net/simba1949/article/details/79252352
+
+重要配置文件目录：
+
+C:\hexo\_config.yml
+
+hexo命令：
+
+更改主题：
+先下载
+例如：git clone https://github.com/iissnan/hexo-theme-next themes/next
+更改根目录配置：
+C:\hexo\_config.yml  ->theme: next
+然后根目录：
+hexo clean
+hexo g
+hexo s
+hexo d
+访问LFY836126.github.io
+
+发表博客：
+hexo n "名字"
+hexo g
+hexo s//在localhost:4000预览
+hexo d 保存在博客和github上
+
+markdown使用：
+https://blog.csdn.net/wsmrzx/article/details/81478945
+
